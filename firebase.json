@@ -1,0 +1,21 @@
+{
+ "hosting": {
+  "public": ".",
+  "ignore": [
+   "firebase.json",
+   "**/.*",
+   "LEIA-ME.txt"
+  ],
+  "headers": [
+   {
+    "source": "/sw.js",
+    "headers": [
+     {
+      "key": "Cache-Control",
+      "value": "no-cache"
+     }
+    ]
+   }
+  ]
+ }
+}

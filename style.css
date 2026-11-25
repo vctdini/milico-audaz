@@ -1,0 +1,265 @@
+:root{--az:#0b2a6b;--az2:#1d4fb8;--vm:#d1112b;--vm2:#a60d22;--bg:#f3f5fb;--ink:#0f1b3d;--mut:#5b6785;--bd:#dde3f0;--card:#fff;--sh:0 6px 18px rgba(11,42,107,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}[hidden]{display:none!important}
+body{margin:0;font:16px/1.6 'Inter','Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:78px}
+a{color:var(--az2)}h1,h2,h3{line-height:1.2;color:var(--az);margin:0}
+.i{width:1.35em;height:1.35em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1040px;margin:auto;padding:0 1rem}
+header.top{background:var(--az);position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+header.top:after{content:"";display:block;height:4px;background:linear-gradient(90deg,var(--vm) 0 33%,#fff 33% 66%,var(--vm) 66%)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;max-width:1040px;margin:auto;padding:.6rem 1rem}
+.logo{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.01em}
+.logo i{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--vm);font-style:normal;font-size:1.1rem}
+.dn{display:none;gap:.2rem}.dn a{color:#cdd8f5;text-decoration:none;font-weight:600;padding:.45rem .8rem;border-radius:8px}.dn a:hover,.dn a.on{background:rgba(255,255,255,.12);color:#fff}
+#instalar{background:#fff;color:var(--az);border-color:#fff;padding:.4rem .9rem;font-size:.9rem;display:flex;gap:.4rem;align-items:center}
+button,.btn{background:var(--vm);color:#fff;border:2px solid var(--vm);padding:.75rem 1.3rem;font-family:inherit;font-weight:700;font-size:1rem;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;justify-content:center}
+button:hover,.btn:hover{background:var(--vm2);border-color:var(--vm2)}
+:focus-visible{outline:3px solid var(--az2);outline-offset:2px}
+.hero{background:radial-gradient(1200px 400px at 85% -10%,#2a5fd0 0,transparent 60%),var(--az);color:#fff;padding:2rem 0 4.2rem}
+.hero h1{color:#fff;font-size:clamp(1.7rem,5vw,2.6rem);max-width:640px}.hero h1 span{color:#ff6b7f}
+.hero p{max-width:560px;color:#d5def8;margin:.7rem 0 0}
+.sbox{position:relative;max-width:640px;margin:1.2rem 0 0}.sbox .i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--mut)}
+.sbox input{width:100%;padding:1rem 1rem 1rem 3rem;border-radius:16px;border:0;font-size:1.05rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:1.2rem;margin-top:1.2rem;color:#cdd8f5;font-size:.78rem}.stats b{color:#fff;font-size:1.15rem;display:block}
+.pull{margin-top:-2.6rem;position:relative}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 0 .8rem;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{background:#fff;color:var(--az);border:1px solid var(--bd);padding:.45rem .95rem;border-radius:99px;font-size:.92rem;font-weight:700;white-space:nowrap;box-shadow:var(--sh)}
+.chip:hover{background:#fff;border-color:var(--az2)}.chip[aria-pressed=true]{background:var(--vm);color:#fff;border-color:var(--vm)}
+.sec{padding:1.6rem 0}.sec h2{font-size:1.25rem;margin:0 0 .8rem;display:flex;align-items:center;gap:.5rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.8rem}
+.tile{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;box-shadow:var(--sh);transition:transform .15s,box-shadow .15s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(11,42,107,.15)}
+.t-main{display:flex;gap:.9rem;align-items:center;padding:1rem 3rem 1rem 1rem;text-decoration:none;color:var(--ink)}
+.t-main.off{opacity:.62}
+.t-ic{display:grid;place-items:center;width:50px;height:50px;border-radius:14px;flex:none}.t-ic .i{width:26px;height:26px}
+.c-az{background:#e5edff;color:var(--az2)}.c-vm{background:#ffe6ea;color:var(--vm)}
+.t-tx{display:grid;gap:.1rem}.t-tx b{color:var(--az);font-size:1.02rem}.t-tx small{color:var(--mut);line-height:1.35}
+.bd{font-style:normal;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;width:max-content;padding:.05rem .5rem;border-radius:99px;margin-top:.25rem}
+.b-ok{background:#e3f6ea;color:#17703a}.b-parcial{background:#fff2d6;color:#8a5a00}.b-soon{background:#ffe6ea;color:var(--vm)}
+.fav{position:absolute;right:.55rem;top:.55rem;background:transparent;color:#b8c2dc;border:0;padding:.35rem;border-radius:10px}.fav:hover{background:#eef2fb;color:#e0a100}
+.fav[aria-pressed=true]{color:#e0a100}.fav[aria-pressed=true] .i{fill:#e0a100}
+.nores{padding:1.2rem;text-align:center;color:var(--mut)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}
+.step{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:1.1rem}.step i{font-style:normal;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--vm);color:#fff;font-weight:800;margin-bottom:.4rem}
+.step h3{font-size:1.02rem}.step p{margin:.2rem 0 0;color:var(--mut);font-size:.94rem}
+.norm{background:#fff;border:1px solid var(--bd);border-left:5px solid var(--az2);border-radius:14px;padding:.9rem 1rem;text-decoration:none;color:var(--ink);display:block}.norm:hover{border-left-color:var(--vm)}
+.norm b{color:var(--az);display:block}.norm small{color:var(--mut)}
+details{background:#fff;border:1px solid var(--bd);border-radius:14px;margin:.5rem 0;padding:.1rem 1rem}summary{cursor:pointer;font-weight:700;color:var(--az);padding:.7rem 0}
+.cta{background:var(--az);color:#fff;border-radius:22px;padding:1.8rem;text-align:center;margin:1.5rem 0}.cta h2{color:#fff;justify-content:center}.cta p{color:#d5def8}
+.ph{display:flex;gap:.9rem;align-items:center;margin:1.2rem 0 1rem}.ph h1{font-size:1.6rem}.ph p{margin:.1rem 0 0;color:var(--mut)}
+main.page{max-width:1040px;margin:auto;padding:0 1rem 1.5rem}
+form.calc{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:1.1rem;display:grid;gap:.85rem;max-width:620px;box-shadow:var(--sh)}
+label{display:grid;gap:.25rem;font-size:.92rem;font-weight:700;color:var(--az)}label small{font-weight:400;color:var(--mut)}
+label.chk{display:flex;gap:.6rem;align-items:center;font-weight:600;color:var(--ink)}label.chk input{width:20px;height:20px}
+input,select{width:100%;padding:.7rem;font-size:1rem;border:1px solid var(--bd);border-radius:12px;background:#fff;color:var(--ink);font-family:inherit}
+.grp{border:1px dashed var(--bd);border-radius:14px;padding:.4rem .9rem .9rem;display:grid;gap:.8rem}.grp>summary{margin:0 -.2rem}
+.res{margin-top:1rem;padding:1.1rem;background:#fff;border:2px solid var(--az2);border-radius:20px;max-width:620px}
+.res .big{font-size:1.7rem;font-weight:800;color:var(--az)}.res .neg{color:var(--vm)}
+.tbl{width:100%;border-collapse:collapse;margin:.5rem 0}.tbl td,.tbl th{padding:.4rem .2rem;border-bottom:1px solid var(--bd);text-align:right}.tbl td:first-child,.tbl th:first-child{text-align:left}.tbl tr.tot td{font-weight:800;border-top:2px solid var(--az)}
+.warn{background:#fff6e0;border-left:4px solid #e0a100;padding:.6rem .8rem;border-radius:10px;font-size:.92rem;margin-top:.6rem}
+.fonte{max-width:620px;margin-top:1.2rem;font-size:.9rem;color:var(--mut)}.fonte ul{padding-left:1.1rem;margin:.3rem 0}
+.ad{min-height:90px;margin:1.2rem 0;text-align:center}
+.aviso{font-size:.85rem;color:var(--mut);margin-top:1.2rem}
+footer.bot{background:#0a1f4a;color:#c3cfee;padding:1.6rem 1rem;font-size:.9rem}footer.bot a{color:#fff;margin-right:1rem}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--bd);display:grid;grid-template-columns:repeat(4,1fr);z-index:40;padding-bottom:env(safe-area-inset-bottom,0)}
+.tabs a{display:grid;place-items:center;gap:.1rem;padding:.55rem 0;color:var(--mut);text-decoration:none;font-size:.72rem;font-weight:700}.tabs a.on{color:var(--vm)}
+.ios-dica{position:fixed;left:.7rem;right:.7rem;bottom:84px;background:var(--az);color:#fff;padding:.9rem 1rem;border-radius:14px;border-left:6px solid var(--vm);z-index:50;font-size:.92rem}.ios-dica button{margin-top:.5rem;padding:.3rem .8rem;font-size:.85rem}
+@media(min-width:820px){.dn{display:flex}.tabs{display:none}body{padding-bottom:0}.hero{padding:2.8rem 0 5rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Acessibilidade e usabilidade — camada complementar */
+button,.btn,.chip,.tabs a,.dn a{min-height:44px}
+input,select{min-height:46px}
+input[type="checkbox"],input[type="radio"]{width:22px;height:22px;flex:none;accent-color:var(--az2)}
+label{line-height:1.45}
+label:focus-within{color:var(--az2)}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #f0a500;outline-offset:3px}
+button:disabled,.btn:disabled{opacity:.55;cursor:not-allowed}
+.profile-notice{max-width:620px;margin:0 0 .85rem;padding:1rem;background:#eaf1ff;border:1px solid #b9cafa;border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.profile-notice strong{color:var(--az)}
+.profile-notice p{margin:.2rem 0;color:var(--ink);font-size:.9rem}
+.profile-notice small{color:var(--mut)}
+.profile-notice button{background:#fff;color:var(--az);border-color:#b9cafa;padding:.5rem .75rem;font-size:.85rem;white-space:nowrap}
+@media(max-width:520px){.profile-notice{align-items:stretch;flex-direction:column}.profile-notice button{width:100%}form.calc{padding:.9rem}button,.btn{width:100%}}
+@media(forced-colors:active){button,.btn,.profile-notice{border:1px solid ButtonText}}
+
+/* Painel acessível de dependentes no contracheque */
+.dependentes-box{margin:1rem 0}
+.dependentes-toggle{width:100%;min-height:52px;display:flex;align-items:center;justify-content:flex-start;gap:.65rem;text-align:left;white-space:normal}
+.dependentes-toggle #dependentes-legenda{flex:1;line-height:1.4}
+.dependentes-seta{font-size:1.25rem;transition:transform .18s ease}
+.dependentes-toggle[aria-expanded="true"] .dependentes-seta{transform:rotate(180deg)}
+.dependentes-campos{margin-top:.75rem;padding:1rem;border:1px solid var(--borda,#d7deea);border-radius:12px;background:var(--superficie,#fff)}
+.dependentes-campos[hidden]{display:none}
+.dependentes-ajuda{margin:0 0 1rem;color:var(--texto-secundario,#536176);font-size:.92rem;line-height:1.5}
+.dependentes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.dependentes-grid label{display:flex;flex-direction:column;gap:.4rem;font-weight:600}
+.dependentes-grid input{width:100%;min-height:48px;padding:.7rem .8rem;border:1px solid var(--borda,#b9c4d5);border-radius:9px;font:inherit}
+.dependentes-grid input:focus-visible,.dependentes-toggle:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.dependentes-grid small{font-weight:400;color:var(--texto-secundario,#536176);line-height:1.4}
+@media(max-width:640px){.dependentes-grid{grid-template-columns:1fr}.dependentes-campos{padding:.85rem}.dependentes-toggle{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.dependentes-seta{transition:none}}
+
+/* Perfil funcional e avisos de auditoria remuneratória */
+.situacao-funcional{padding:1rem;border:1px solid var(--borda,#cbd5e1);border-radius:12px;background:var(--superficie,#fff)}
+.situacao-aviso{margin:.75rem 0;padding:.85rem 1rem;border-left:4px solid #b7791f;background:#fff8e6;border-radius:8px;line-height:1.5}
+.situacao-aviso[hidden]{display:none}
+.situacao-aviso.situacao-inativo{border-left-color:#b42318;background:#fff1f0}
+
+/* Linhas adicionais de receitas e descontos no contracheque */
+.calc-row-list{display:grid;gap:.65rem;margin:.4rem 0}
+.calc-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(110px,1fr) auto;gap:.55rem;align-items:end;padding:.7rem;border:1px solid var(--bd);border-radius:12px;background:#f8faff}
+.calc-row label{min-width:0}
+.calc-row input{width:100%;min-width:0}
+.remove-row{width:42px;height:42px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:#9b1c1c;font-size:1.4rem;cursor:pointer}
+.add-row{justify-self:start}
+.grp h3{margin:.5rem 0 0;color:var(--az);font-size:1rem}
+@media(max-width:520px){.calc-row{grid-template-columns:1fr 1fr}.calc-row .remove-row{grid-column:2;justify-self:end}}
+
+/* Lançamentos manuais: orientação e subtotais sempre visíveis */
+.campo-ajuda{margin:.25rem 0 .6rem;color:var(--mut);font-size:.9rem;line-height:1.45}
+.calc-subtotal{margin:.35rem 0 .85rem;padding:.65rem .8rem;border-radius:10px;background:#eef3fb;color:var(--ink);font-size:.92rem}
+.calc-subtotal strong{color:var(--az);font-variant-numeric:tabular-nums}
+.calc-row input:focus-visible,.remove-row:focus-visible,.add-row:focus-visible{outline:3px solid #6b9cff;outline-offset:2px}
+
+/* Contracheque — demonstrativo inspirado nos relatórios de referência */
+.cc-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin:1rem 0}
+.cc-summary>div{padding:.85rem;border:1px solid var(--bd);border-radius:12px;background:var(--superficie,#fff);display:flex;flex-direction:column;gap:.25rem}
+.cc-summary small{color:var(--mut);font-size:.82rem}
+.cc-summary strong{font-size:1.18rem;font-variant-numeric:tabular-nums}
+.cc-summary>div:last-child strong{color:#16803c}
+.cc-report{padding:1rem;border:1px solid var(--bd);border-radius:14px;background:var(--superficie,#fff);margin:.8rem 0}
+.cc-report h3{margin:1.15rem 0 .35rem;color:var(--az);font-size:1rem}
+.cc-report h3:first-child{margin-top:0}
+.cc-report .tbl{margin:.3rem 0 1rem}
+.cc-report .tbl td{padding:.5rem .35rem}
+.cc-report .tbl tr.tot{background:#f1f5fb}
+.calc-row{grid-template-columns:minmax(0,2fr) minmax(110px,1fr) auto}
+.calc-row label.chk{display:flex;align-items:center;gap:.45rem;font-size:.85rem;font-weight:500}
+@media(max-width:640px){.cc-summary{grid-template-columns:1fr}.cc-summary strong{font-size:1.05rem}.cc-report{padding:.8rem}}
+@media print{header.top,footer.bot,.tabs,.ad,form.calc,.profile-notice{display:none!important}.cc-report,.cc-summary>div{break-inside:avoid;border:1px solid #999}.page{max-width:none;padding:0}.warn{background:#fff;border:1px solid #aaa}}
+
+/* Redesign do contracheque: preenchimento simples, sem recolhimento automático */
+form.calc.cc-form{max-width:980px;padding:1.25rem;gap:1rem;box-shadow:0 8px 28px rgba(21,43,78,.07)}
+.cc-setup,.cc-defaults{border:1px solid var(--bd);border-radius:18px;padding:1.1rem;background:#fff}
+.cc-section-heading{display:flex;align-items:flex-start;gap:.8rem;margin:0 0 1rem}
+.cc-section-heading h2{margin:0;color:var(--az);font-size:1.15rem}
+.cc-section-heading p{margin:.2rem 0 0;color:var(--mut);font-size:.9rem}
+.cc-step{display:grid;place-items:center;flex:0 0 32px;height:32px;border-radius:50%;background:#e9f0fb;color:var(--az);font-weight:800}
+.cc-fields-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem 1rem}
+.cc-fields-grid label{min-width:0}
+.cc-check{margin-top:.6rem}
+.cc-person-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e8f1e6;color:#38613a;font-size:1.2rem}
+.cc-default-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.cc-default-card{border:1px solid var(--bd);border-radius:14px;padding:.9rem 1rem;min-width:0}
+.cc-default-card h3{margin:0 0 .5rem;font-size:1rem}
+.cc-receitas{background:#f3f7fd;border-color:#d7e3f2}
+.cc-receitas h3{color:#315c83}
+.cc-descontos{background:#fff5f5;border-color:#f0dddd}
+.cc-descontos h3{color:#925050}
+.cc-preview-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.58rem 0;border-bottom:1px solid rgba(110,125,145,.16)}
+.cc-preview-row:last-child{border-bottom:0}
+.cc-preview-row>div{display:grid;gap:.08rem;min-width:0}
+.cc-preview-row strong{font-size:.9rem;color:var(--ink)}
+.cc-preview-row small{font-size:.8rem;color:var(--mut)}
+.cc-preview-row>b{font-size:.92rem;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--az)}
+.cc-descontos .cc-preview-row>b{color:#925050}
+.cc-placeholder{padding:.8rem 0;color:var(--mut);font-size:.88rem}
+.cc-hint{margin:.8rem 0 0;color:var(--mut);font-size:.85rem;line-height:1.5}
+.cc-advanced{padding:.2rem 1rem .9rem;border:1px solid var(--bd);background:#fbfcfe}
+.cc-advanced>summary{padding:.85rem 0;color:var(--az);font-size:.96rem}
+.cc-submit{width:100%;min-height:52px;font-size:1rem}
+.cc-report{max-width:980px}
+.cc-summary{max-width:980px}
+@media(max-width:700px){form.calc.cc-form{padding:.75rem}.cc-fields-grid,.cc-default-grid{grid-template-columns:1fr}.cc-setup,.cc-defaults{padding:.85rem}.cc-preview-row{align-items:flex-start}.cc-preview-row>b{padding-top:.1rem}}
+
+/* Catálogo de rubricas pré-definidas para o contracheque */
+.cc-catalog-backdrop{position:fixed;inset:0;z-index:10000;background:rgba(20,30,22,.48);display:flex;align-items:center;justify-content:center;padding:18px}
+.cc-catalog-backdrop[hidden]{display:none}
+.cc-catalog-panel{width:min(760px,100%);max-height:min(82vh,820px);background:#fff;border:1px solid #dfe4d8;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.24);display:flex;flex-direction:column;overflow:hidden}
+.cc-catalog-panel header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid #e7eadf}
+.cc-catalog-panel h2{font-size:1.2rem;margin:0;color:#315b39}
+.cc-catalog-close{border:0;border-radius:50%;width:38px;height:38px;background:#eef5e9;color:#315b39;font-size:1.6rem;line-height:1;cursor:pointer}
+.cc-catalog-search{margin:14px 18px 8px;border:1px solid #d8dfd2;border-radius:15px;background:#f8faf6;display:flex;align-items:center;gap:10px;padding:0 14px}
+.cc-catalog-search span{font-size:1.5rem;color:#496b48}
+.cc-catalog-search input{border:0!important;outline:none!important;background:transparent!important;box-shadow:none!important;width:100%;min-height:48px}
+.cc-catalog-grid{padding:4px 18px 12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;overflow:auto}
+.cc-catalog-item{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:6px;padding:13px 14px;border:1px solid #dfe3d8;border-radius:16px;background:#fcfcfa;color:#27342a;cursor:pointer;min-height:82px}
+.cc-catalog-item:hover,.cc-catalog-item:focus-visible{border-color:#7a9d70;background:#f2f7ee;outline:2px solid #dcebd4}
+.cc-catalog-item strong{font-size:.96rem;line-height:1.25}
+.cc-catalog-item span{font-size:.84rem;line-height:1.35;color:#667064}
+.cc-catalog-empty{grid-column:1/-1;color:#6b7568;padding:20px}
+.cc-catalog-note{margin:0;padding:10px 20px 16px;border-top:1px solid #edf0e9;color:#687265;font-size:.78rem;line-height:1.4}
+@media(max-width:600px){.cc-catalog-backdrop{padding:8px}.cc-catalog-panel{max-height:90vh;border-radius:17px}.cc-catalog-grid{grid-template-columns:1fr;padding:4px 12px 10px}.cc-catalog-panel header{padding:14px 16px}.cc-catalog-search{margin:12px 12px 8px}}
+
+.cc-catalog-item small{font-size:.75rem;color:#315b39;font-weight:600;margin-top:auto}.cc-catalog-backdrop[hidden]{display:none!important}
+
+
+/* Contracheque etapa 12: inclusão direta de rubricas e eventos automáticos */
+.cc-card-title{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.5rem;flex-wrap:wrap}
+.cc-card-title h3{margin:0!important}
+.cc-add-rubrica{min-height:38px;padding:.45rem .75rem;font-size:.84rem;white-space:nowrap}
+.cc-extra-inline{display:grid;gap:.55rem;margin-top:.6rem}
+.cc-extra-inline:empty{display:none}
+.cc-eventos{display:grid;gap:.75rem;margin-top:.85rem}
+.cc-event-control{padding:1rem;border:1px solid var(--bd);border-radius:14px;background:#fbfcff}
+.cc-event-control[hidden]{display:none!important}
+.cc-event-heading{display:flex;align-items:center;justify-content:space-between;gap:.6rem;color:var(--az);font-size:1rem}
+.cc-event-control p,.cc-event-control small{display:block;color:var(--mut);font-size:.86rem;line-height:1.45;margin:.45rem 0}
+.cc-event-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-top:.7rem}
+.cc-event-values label{display:flex;flex-direction:column;gap:.35rem;font-weight:600}
+.cc-event-values input,.cc-event-values select{width:100%;min-width:0}
+@media(max-width:620px){.cc-card-title{align-items:flex-start}.cc-add-rubrica{width:100%}.cc-event-values{grid-template-columns:1fr}}
+
+/* Configurações opcionais surgem dentro do quadro de receitas/descontos após a escolha no catálogo. */
+.cc-parametros-inline{display:grid;gap:.65rem;margin-top:.7rem}
+.cc-param-card{padding:.8rem;border:1px solid var(--bd);border-radius:12px;background:#fbfcff;display:grid;gap:.55rem}
+.cc-param-heading{display:flex;align-items:center;justify-content:space-between;gap:.5rem;color:var(--az)}
+.cc-param-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+.cc-param-fields label{display:flex;flex-direction:column;gap:.3rem;font-weight:600}
+.cc-param-fields small{grid-column:1/-1;color:var(--mut);font-weight:400;line-height:1.4}
+.cc-param-fields .chk{flex-direction:row;align-items:center}
+@media(max-width:620px){.cc-param-fields{grid-template-columns:1fr}}
+
+/* Etapa 16 — lançamentos compactos com edição sob demanda */
+.calc-row{display:block;padding:.65rem .75rem;border:1px solid var(--bd);border-radius:12px;background:#fff}
+.calc-row-summary,.cc-param-summary,.cc-event-summary{display:flex;align-items:center;justify-content:space-between;gap:.75rem;min-width:0}
+.calc-row-summary>div:first-child,.cc-param-summary>div:first-child,.cc-event-summary>div:first-child{display:grid;gap:.12rem;min-width:0}
+.calc-row-summary strong,.cc-param-summary strong,.cc-event-summary strong{font-size:.9rem;color:var(--ink)}
+.calc-row-summary small,.cc-param-summary small,.cc-event-summary small{font-size:.82rem;color:var(--mut)}
+.cc-row-actions{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+.cc-icon-action{display:grid;place-items:center;width:34px;height:34px;border:1px solid #d8e0e8;border-radius:9px;background:#f7f9fc;color:#315c83;font-size:1.1rem;cursor:pointer}
+.cc-icon-action:hover,.cc-icon-action:focus-visible{background:#eaf1fa;border-color:#8aa8ca;outline:2px solid #d6e4f4}
+.calc-row-editor,.cc-param-editor,.cc-event-editor{display:none;margin-top:.7rem;padding-top:.7rem;border-top:1px solid rgba(110,125,145,.18)}
+.calc-row.is-editing .calc-row-editor,.cc-param-card.is-editing .cc-param-editor,.cc-event-control.is-editing .cc-event-editor{display:grid;gap:.65rem}
+.calc-row:not(.is-editing) .calc-row-summary,.cc-param-card:not(.is-editing) .cc-param-summary,.cc-event-control:not(.is-editing) .cc-event-summary{display:flex}
+.cc-row-done{justify-self:end;min-height:36px;padding:.4rem .75rem;font-size:.82rem}
+.cc-param-card{display:block}
+.cc-param-card .cc-param-summary{min-height:38px}
+.cc-param-card .cc-param-fields{margin:0}
+.cc-event-control{display:block}
+.cc-event-control .cc-event-summary{min-height:38px;color:var(--az)}
+.cc-event-control .cc-event-editor{grid-template-columns:1fr}
+@media(max-width:520px){.cc-icon-action{width:36px;height:36px}.calc-row-editor label,.cc-param-fields label{min-width:0}}
+
+/* Resumo do contracheque: atualização automática no topo */
+.cc-live-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:0 0 1rem}
+.cc-live-summary>div{padding:.85rem 1rem;border:1px solid var(--bd);border-radius:14px;background:#f2f7fc;display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.cc-live-summary>div:nth-child(2){background:#fff4f4}
+.cc-live-summary>div:nth-child(3){background:#edf6e9}
+.cc-live-summary>div:nth-child(4){background:#f3f5f8}
+.cc-live-summary small{color:var(--mut);font-size:.84rem}
+.cc-live-summary strong{font-size:clamp(1.05rem,2.1vw,1.45rem);font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.cc-live-summary>div:first-child strong{color:#315c83}
+.cc-live-summary>div:nth-child(2) strong{color:#925050}
+.cc-live-summary>div:nth-child(3) strong{color:#285d32}
+.cc-live-summary>div:nth-child(4) strong{color:#34445a}
+@media(max-width:700px){.cc-live-summary{grid-template-columns:1fr 1fr}.cc-live-summary>div:last-child{grid-column:auto}}
+@media print{.cc-live-summary{break-inside:avoid;grid-template-columns:repeat(4,1fr)}.cc-form{display:none!important}.cc-pdf-button{display:none!important}.cc-report-receitas h3,.cc-report-receitas .tbl td:last-child{color:#315c83}.cc-report-descontos h3,.cc-report-descontos .tbl td:last-child{color:#925050}}
+
+/* Identidade visual por natureza da rubrica */
+.cc-receitas .cc-preview-row>b,.cc-report-receitas .tbl td:last-child{color:#315c83}
+.cc-descontos .cc-preview-row>b,.cc-report-descontos .tbl td:last-child{color:#925050}
+.cc-report-receitas h3{color:#315c83}.cc-report-descontos h3{color:#925050}
+.cc-report-receitas .tbl tr.tot{background:#eef5fc}.cc-report-descontos .tbl tr.tot{background:#fff1f1}
+.cc-margin-highlight strong{font-variant-numeric:tabular-nums}
+@media print{body{background:#fff!important;color:#111!important}.cc-live-summary{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;margin-bottom:12px}.cc-live-summary>div{break-inside:avoid}.cc-report{box-shadow:none!important;break-inside:avoid}.cc-report-receitas h3,.cc-report-receitas .tbl td:last-child{color:#315c83!important}.cc-report-descontos h3,.cc-report-descontos .tbl td:last-child{color:#925050!important}#res{display:block!important}.cc-pdf-button{display:none!important}.fonte,.aviso{font-size:9pt}}
