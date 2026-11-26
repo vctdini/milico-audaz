@@ -486,7 +486,10 @@ restaurarParametrosSalvos();
 Object.keys(PARAM_CONFIG).forEach(k=>{const card=document.querySelector(`[data-param-card="${k}"]`);atualizarResumoParametro(k,card);if(card)card.classList.remove('is-editing');});
 ['ferias','natalino'].forEach(k=>{const panel=$(`cc-evento-${k}`);if(panel&&!panel.hidden)panel.classList.remove('is-editing');});
 atualizarDescontosPreview();
-if (typeof window !== 'undefined') window.MilicoAudazCore = Object.freeze({ dados: D, comp, formatarMoeda: R, adicionarLinha: addRow, normalizarLancamentos, somarLancamentos, calcularIRRF, calcularDescontosObrigatorios, calcularAssistenciaPreEscolar, calcularAdicionalFerias, calcularAdicionalNatalino, lerLancamentos: readRows, calcularTotaisSimulacao, calcularMargemConsignavel, validarParametrosFerramenta, calcularAuxilioTransporte, calcularAuxilioAlimentacao, calcularDiarias, calcularGratificacaoRepresentacao, calcularPensaoAlimenticia, calcularDiasLocalidadeEspecial, calcularFaixaComissao, calcularTransporteBagagemMov, calcularTransportePessoalMov });
+if (typeof window !== 'undefined') {
+ window.MilicoAudazCore = Object.freeze({ dados: D, comp, formatarMoeda: R, adicionarLinha: addRow, normalizarLancamentos, somarLancamentos, calcularIRRF, calcularDescontosObrigatorios, calcularAssistenciaPreEscolar, calcularAdicionalFerias, calcularAdicionalNatalino, lerLancamentos: readRows, calcularTotaisSimulacao, calcularMargemConsignavel, validarParametrosFerramenta, calcularAuxilioTransporte, calcularAuxilioAlimentacao, calcularDiarias, calcularGratificacaoRepresentacao, calcularPensaoAlimenticia, calcularDiasLocalidadeEspecial, calcularFaixaComissao, calcularTransporteBagagemMov, calcularTransportePessoalMov });
+ window.MilicoAudazPerfil?.refresh?.();
+}
 // ----- home: busca, filtros e favoritos -----
 const tiles=[...document.querySelectorAll('.tile')];
 if(tiles.length){let cat='all',q='',favs=[];try{favs=JSON.parse(localStorage.getItem('milico-fav')||'[]')}catch(e){}

@@ -60,6 +60,27 @@
         irDedutivel: !!row.querySelector('[data-row-ir-deduction]')?.checked
       })) : [];
     });
+    const core = window.MilicoAudazCore;
+    const posto = core?.dados?.POSTOS?.find((item) => item.id === data.posto);
+    if (posto && typeof core.comp === 'function') {
+      const percent = (id) => Number(String(data[id] ?? '0').replace(',', '.')) || 0;
+      const disp = data['acdm-percentual'] === 'auto' ? null : percent('acdm-percentual');
+      const remuneracao = core.comp(posto, {
+        hab: percent('hab'), ats: percent('ats'), dispPercent: disp,
+        co: percent('co'), coPosto: data['co-posto'] || data.posto,
+        pm: percent('pm'), gle: percent('gle'), gr: 0
+      });
+      const money = (value) => Math.round((Number(value) || 0) * 100) / 100;
+      data['compensacao-rubricas'] = [
+        { nome: 'Soldo', valor: money(remuneracao.s) },
+        { nome: 'Adicional militar', valor: money(remuneracao.am) },
+        { nome: 'Adicional de habilitação', valor: money(remuneracao.hab) },
+        { nome: remuneracao.atsMaior ? 'Adicional de tempo de serviço' : 'Adicional de disponibilidade', valor: money(remuneracao.dd) },
+        ...(remuneracao.co > 0 ? [{ nome: 'Compensação orgânica', valor: money(remuneracao.co) }] : []),
+        ...(remuneracao.pm > 0 ? [{ nome: 'Adicional de permanência', valor: money(remuneracao.pm) }] : []),
+        ...(remuneracao.gle > 0 ? [{ nome: 'Gratificação de localidade especial', valor: money(remuneracao.gle) }] : [])
+      ];
+    }
     return data;
   };
 
@@ -375,6 +396,12 @@
   createNotice(read());
   window.MilicoAudazPerfil = Object.freeze({
     get: () => read() || {},
+    refresh: () => {
+      const form = document.querySelector(SOURCE_FORM);
+      if (!form) return false;
+      const data = collect(form);
+      return data.posto && data.situacao ? write(data) : false;
+    },
     clear: () => { try { localStorage.removeItem(STORAGE_KEY); return true; } catch (_) { return false; } }
   });
 })();
