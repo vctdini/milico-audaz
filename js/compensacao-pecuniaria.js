@@ -29,9 +29,10 @@
     });
     $('base-total').textContent = money(base);
     const ready = remuneration.length > 0;
-    $('perfil-status').innerHTML = ready
-      ? `Remuneração carregada automaticamente do contracheque de <strong>${String(profile.data.posto || 'posto não identificado').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</strong>. A base é somente leitura e será atualizada quando o contracheque for salvo. <a class="btn btn-secundario" href="contracheque.html?retorno=compensacao-pecuniaria.html">Editar contracheque</a>`
-      : 'Preencha e salve primeiro o contracheque para carregar a remuneração. <a class="btn btn-secundario" href="contracheque.html?retorno=compensacao-pecuniaria.html">Preencher contracheque</a>.';
+    $('perfil-status').textContent = ready
+      ? `Remuneração carregada do contracheque de ${profile.data.posto || 'posto não identificado'}. A base é somente leitura e será atualizada quando você salvar alterações no contracheque.`
+      : 'Preencha o contracheque para carregar automaticamente sua remuneração nesta simulação.';
+    $('perfil-link').textContent = ready ? 'Editar meu contracheque' : 'Preencher meu contracheque';
     $('calcular').disabled = !ready;
     $('sem-perfil').hidden = ready;
   }

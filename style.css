@@ -1210,6 +1210,8 @@ html[data-theme="dark"] .calc-row-editor .chk,html[data-theme="dark"] .cc-param-
 .cp-form .cp-remuneration-row strong{min-width:0;overflow-wrap:anywhere}
 .cp-form .cp-remuneration-row span{flex:0 0 auto;font-variant-numeric:tabular-nums}
 .cp-form .cp-indemnity-row{grid-template-columns:minmax(0,1.35fr) minmax(145px,.7fr) auto}
+.cp-profile-actions{display:flex;justify-content:flex-start;margin:.4rem 0 1rem}
+.cp-profile-actions .btn{width:auto;min-width:260px;min-height:48px;display:inline-flex;align-items:center;justify-content:center;white-space:normal;text-align:center}
 .cp-form-errors{padding:.8rem 1rem;border:1px solid #b53a3a;border-left-width:4px;border-radius:10px;background:#fff2f2;color:#712c2c;line-height:1.5}
 .cp-form-errors[hidden]{display:none}
 .cp-form-errors ul{margin:.35rem 0 0;padding-left:1.25rem}
@@ -1218,3 +1220,4 @@ html[data-theme="dark"] .cp-form .cp-row[data-excluded="true"] label.chk{color:#
 html[data-theme="dark"] .cp-form-errors{background:#3d2226;color:#ffdede;border-color:#a94b52}
 @media(max-width:760px){.cp-form .cp-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cp-form .cp-row label:first-child{grid-column:1/-1}.cp-form .cp-row label.chk{grid-column:1/-1}.cp-form .cp-row .remove-row{grid-column:2;justify-self:end}.cp-form .cp-actions .btn{width:100%}}
 @media(max-width:760px){.cp-form .cp-indemnity-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cp-form .cp-indemnity-row label:first-child{grid-column:1/-1}.cp-form .cp-indemnity-row .remove-row{grid-column:2;justify-self:end}}
+@media(max-width:760px){.cp-profile-actions .btn{width:100%;min-width:0}}
