@@ -146,22 +146,36 @@
     notice.setAttribute('aria-label', 'Perfil compartilhado');
     const fn = form.dataset.fn || (form.id === 'taf' ? 'taf' : '');
     const independente = ['alimentacao','imc','juros','taf'].includes(fn);
+    const returnPages = {
+      'ajuda-custo-cursos.html': 'ajuda de custo para cursos',
+      'auxilio-transporte.html': 'auxílio-transporte',
+      'diarias.html': 'diárias',
+      'gratificacao-representacao.html': 'gratificação de representação',
+      'movimentacao.html': 'movimentação',
+      'pensao-alimenticia.html': 'pensão alimentícia',
+      'compensacao-pecuniaria.html': 'compensação pecuniária'
+    };
+    const currentPage = window.location.pathname.split('/').pop();
+    const currentReturn = Object.prototype.hasOwnProperty.call(returnPages, currentPage) ? currentPage : '';
+    const requestedReturn = new URLSearchParams(window.location.search).get('retorno') || '';
+    const safeReturn = Object.prototype.hasOwnProperty.call(returnPages, requestedReturn) ? requestedReturn : '';
     const status = data ? 'Perfil carregado.' : (independente
       ? 'Ferramenta independente: preencha os próprios campos; não depende do contracheque.'
       : 'Sem perfil salvo. Você pode preencher esta ferramenta do zero ou abrir o contracheque para importar os campos compatíveis.');
     const formIsSource = form.matches(SOURCE_FORM);
-    const returnToMovement = formIsSource && new URLSearchParams(window.location.search).get('retorno') === 'movimentacao.html';
+    const returnLabel = returnPages[safeReturn] || '';
     notice.innerHTML = `
       <div><strong>Perfil remuneratório neste dispositivo</strong>
       <p>Os dados do contracheque preenchem automaticamente os campos compatíveis das demais calculadoras.</p>
       <small>${status} Os dados ficam somente neste navegador.</small></div>
-      ${returnToMovement ? `<a class="btn btn-sec profile-return" href="movimentacao.html" ${data?.posto && data?.situacao ? '' : 'hidden'}>Voltar para movimentação</a>` : ''}
+      ${formIsSource && safeReturn ? `<a class="btn btn-sec profile-return" href="${safeReturn}" ${data?.posto && data?.situacao ? '' : 'hidden'}>Voltar para ${returnLabel}</a>` : ''}
+      ${!formIsSource && !independente && currentReturn ? `<a class="btn btn-sec" href="contracheque.html?retorno=${encodeURIComponent(currentReturn)}">Preencher ou editar contracheque</a>` : ''}
       <button type="button" class="profile-clear">${formIsSource ? 'Limpar dados' : 'Limpar perfil'}</button>`;
     const returnLink = notice.querySelector('.profile-return');
     returnLink?.addEventListener('click', (event) => {
       try {
         const previousPage = new URL(document.referrer);
-        if (previousPage.origin === window.location.origin && previousPage.pathname.endsWith('/movimentacao.html') && window.history.length > 1) {
+        if (previousPage.origin === window.location.origin && previousPage.pathname.endsWith(`/${safeReturn}`) && window.history.length > 1) {
           event.preventDefault();
           window.history.back();
         }
