@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "escopo": "Exército Brasileiro — auditoria do Milico Audaz, referência 2026-01 em diante",
+  "divergencias": [
+    {
+      "id": "AUD-001",
+      "titulo": "Contribuição extraordinária de 1,5% aplicada ao militar ativo",
+      "modulo": "Contracheque / pensão militar",
+      "status": "documentada_correcao_pendente",
+      "prioridade": "alta",
+      "arquivo": "app.js",
+      "fundamento": "Lei 3.765/1960, art. 3º-A, § 3º, II, com redação da Lei 13.954/2019",
+      "observacao": "A hipótese de contribuição extraordinária de 1,5% refere-se a determinados pensionistas, não a um adicional genérico do desconto do militar ativo. Consultar relatório AUD-001 antes de qualquer implementação."
+    },
+    {
+      "id": "AUD-002",
+      "titulo": "FuSEx e quota complementar abatidos como deduções legais do IRRF mensal",
+      "modulo": "Contracheque / IRRF mensal e férias",
+      "status": "documentada_correcao_pendente",
+      "prioridade": "alta",
+      "arquivo": "app.js",
+      "fundamento": "IN RFB 1.500/2014, art. 52; art. 94 para análise distinta de despesas médicas no ajuste anual",
+      "observacao": "O art. 52 não inclui contribuições ao FuSEx nem quota complementar na lista de deduções mensais do IRRF. Não confundir eventual dedução de despesas médicas no ajuste anual com dedução mensal automática."
+    },
+    {
+      "id": "AUD-003",
+      "titulo": "Desconto simplificado forçado no IR do 13º salário",
+      "modulo": "Contracheque / IRRF do adicional natalino",
+      "status": "documentada_correcao_pendente",
+      "prioridade": "alta",
+      "arquivo": "app.js",
+      "fundamento": "IN RFB 1.500/2014, art. 13, § 6º e § 8º",
+      "observacao": "O código força modo simplificado no 13º sem comparar com deduções legais admissíveis e correspondentes ao evento, embora o § 8º condicione o simplificado a ser mais benéfico. Não alterar antes de modelar deduções específicas do 13º."
+    },
+    {
+      "id": "AUD-004",
+      "titulo": "Enquadramento tributário da contribuição militar de 10,5% ainda não homologado",
+      "modulo": "Contracheque / IRRF mensal, férias e 13º",
+      "status": "questao_juridica_em_aberto",
+      "prioridade": "alta",
+      "arquivo": "app.js",
+      "fundamento": "Lei 3.765/1960, art. 3º-A; Lei 13.954/2019; IN RFB 1.500/2014; Perguntas e Respostas IRPF 2026, pergunta 336",
+      "observacao": "A RFB admite dedução de contribuições de montepio militar destinadas a benefícios complementares, mas ainda não foi demonstrado que a contribuição obrigatória de 10,5% do SPSMFA se enquadre nessa hipótese. Não tratar como regra validada."
+    },
+    {
+      "id": "AUD-008",
+      "titulo": "FuSEx: cadeia normativa, base e quotas",
+      "prioridade": "alta",
+      "status": "parcialmente confirmado; base e cadeia de alterações pendentes",
+      "arquivo": "AUD-008-FUSEX-NORMAS-BASE-E-QUOTAS.md",
+      "impacto": "A base única compartilhada e a quota manual não estão homologadas por categoria; PLOA não comprova alteração de alíquota."
+    },
+    {
+      "id": "AUD-009",
+      "titulo": "Revisão da dedutibilidade de FuSEx e pensão militar no IRRF",
+      "prioridade": "alta",
+      "status": "pendente de validação jurídico-tributária final; novas evidências oficiais",
+      "arquivo": "AUD-009-IRRF-FUSEX-E-PENSAO-REVISAO-EVIDENCIAS.md",
+      "impacto": "A função inclui FuSEx, quota e pensão como deduções legais; Receita reconhece dedução de montepio militar sob condição e CPEx agrega FuSEx/pensão no CRP."
+    },
+    {
+      "id": "AUD-010",
+      "titulo": "Compensação pecuniária de temporário ainda não implementada; elegibilidade e base exigem formulário estruturado",
+      "modulo": "Ferramentas / compensação pecuniária",
+      "status": "especificacao_juridica_inicial_concluida",
+      "prioridade": "alta",
+      "arquivo": "ferramentas.html; futuro modulo compensacao",
+      "fundamento": "Lei 7.963/1989, arts. 1º a 3º; Decreto 99.425/1990, arts. 1º a 4º",
+      "observacao": "Benefício restrito ao licenciamento ex officio por término de prorrogação; 1 remuneração por ano; fração >=180 dias conta como ano; serviço obrigatório excluído; exclusões de base e impedimentos documentados em AUD-010."
+    },
+    {
+      "id": "AUD-011",
+      "titulo": "Ajuda de custo/movimentação: elegibilidade e base remuneratória ainda não homologadas",
+      "modulo": "Movimentação / ajuda de custo para cursos",
+      "status": "multiplicadores_conferidos; elegibilidade_e_base_pendentes",
+      "prioridade": "alta",
+      "arquivo": "app.js; movimentacao.html; ajuda-custo-cursos.html",
+      "fundamento": "Lei 13.954/2019, art. 15 e Anexo V; Decreto 2.040/1996 (R-50), especialmente arts. 13 a 16 e 32",
+      "observacao": "Multiplicadores implementados em FN.ajuda coincidem em grande parte com Anexo V; pendências: movimento por interesse próprio, desligamento/localidade especial A, duração exata de comissões e remuneração de referência; conferir Suboficial/Subtenente na hipótese f."
+    },
+    {
+      "id": "AUD-012",
+      "titulo": "Tempo de serviço, transição para reserva e adicional de permanência sem validação automática",
+      "modulo": "Tempo de serviço / Contracheque",
+      "status": "ferramenta_sem_implementacao; adicional_permanencia_manual; ats_disponibilidade_parcial",
+      "prioridade": "alta",
+      "arquivo": "ferramentas.html; app.js; contracheque.html",
+      "fundamento": "Lei 6.880/1980, arts. 50, 56, 97, 98 e 134 a 139; Lei 13.954/2019, art. 22; MP 2.215-10/2001, art. 3º, VI e Anexo II, Tabela VI; Decreto 10.471/2020, art. 3º",
+      "observacao": "A ferramenta Tempo de serviço está marcada Em breve e não há motor de contagem. O adicional de permanência é informado manualmente sem validação dos 720 dias excedentes e promoções. A comparação ATS/disponibilidade aplica o maior, mas elegibilidade e percentuais históricos ainda dependem de reconhecimento/assentamentos."
+    },
+    {
+      "id": "AUD-015",
+      "titulo": "Auxílio-transporte: campo dias não representa explicitamente dias com transporte custeado pela União e faltam dados de menor custo/modal/elegibilidade",
+      "modulo": "Auxílio-transporte",
+      "status": "nao_validada_para_calculo_final",
+      "prioridade": "alta",
+      "arquivo": "auxilio-transporte.html; app.js",
+      "fundamento": "Decreto 12.117/2024, arts. 3º, 5º a 10 e 12",
+      "observacao": "A cota-parte 6% sobre soldo proporcional a 22 dias está alinhada. A despesa deve usar tarifa de menor custo × 22, reduzida apenas pelos dias com transporte custeado pela União; a tela usa campo genérico dias e não coleta rota, integração modal, status funcional nem transporte oficial."
+    },
+    {
+      "id": "AUD-016",
+      "titulo": "Auxílio-alimentação: multiplicadores corretos, mas elegibilidade das hipóteses da Tabela III não é validada",
+      "modulo": "Auxílio-alimentação",
+      "status": "nao_validada_para_calculo_final",
+      "prioridade": "alta",
+      "arquivo": "auxilio-alimentacao.html; app.js",
+      "fundamento": "MP 2.215-10/2001, art. 3º, XIII e Anexo IV, Tabela III; Portaria Normativa 19/MD/2017 alterada pela Portaria GM-MD 2.774/2025",
+      "observacao": "Os fatores 10, 5 e 1 reproduzem os valores representativos. O campo genérico outras situações mistura hipóteses legais distintas e não verifica falta de rancho/arranchamento, praça abaixo de 3º sargento, férias, localidade especial A, dependente ou alimentação fornecida."
+    },
+    {
+      "id": "AUD-017",
+      "titulo": "Ajuda de custo para cursos: faixa temporal manual e campo GR sem efeito no cálculo",
+      "modulo": "Ajuda de custo para cursos",
+      "status": "parcialmente_validada; elegibilidade_e_base_pendentes",
+      "prioridade": "alta",
+      "arquivo": "ajuda-custo-cursos.html; app.js",
+      "fundamento": "Lei 13.954/2019, art. 15 e Anexo V, situações b, c e e; MP 2.215-10/2001, art. 1º; Portaria 290-DGP/2013",
+      "observacao": "Multiplicadores 3 e 2 conferem para comissões nas faixas legais e metade sem dependentes. Não são coletadas datas reais; composição da remuneração de referência ainda pendente. Checkbox de GR 10% não é lido pelo motor e perfil() zera GR; não inferir inclusão da GR na base sem validação jurídica."
+    },
+    {
+      "id": "AUD-018",
+      "titulo": "Pensão alimentícia: simulador não valida parâmetros do título judicial",
+      "modulo": "Pensão alimentícia / integração IRRF",
+      "status": "parcialmente_validada_como_simulador; regras do título não inferidas",
+      "prioridade": "media",
+      "arquivo": "pensao-alimenticia.html; app.js",
+      "fundamento": "Lei 13.954/2019, art. 13, VI; IN RFB 1.500/2014, arts. 52, I, 101 e 102; Decreto 9.580/2018, art. 72",
+      "observacao": "A lei militar classifica o desconto como obrigatório, mas não define percentual/base universal. O simulador multiplica base e percentual livres; exigir transcrição fiel do título e separar obrigação alimentar de dedução tributária."
+    },
+    {
+      "id": "AUD-019",
+      "titulo": "TAF: resultado global pode declarar suficiência com provas obrigatórias ausentes ou erros",
+      "modulo": "Calculadora de TAF",
+      "status": "divergencia_funcional_documentada; tabelas numericas ainda em validacao",
+      "prioridade": "alta",
+      "arquivo": "taf.js; calculadora-taf.html; taf-dados.js",
+      "fundamento": "Portaria EME/C Ex 850/2022, EB20-D-03.053, itens 2.1.4-2.1.6, 3.1.6-3.2.14, 3.4.1-3.4.2 e 3.9.4/3.9.11",
+      "observacao": "A lista de provas inclui somente campos preenchidos; o resultado global usa every() sobre lista que pode estar vazia, e erros são excluídos. Padrão e PPM são escolhidos manualmente sem todos os dados de enquadramento. Não usar para resultado oficial."
+    },
+    {
+      "id": "AUD-020",
+      "titulo": "IMC e juros compostos: validação de limites e explicitação de premissas",
+      "modulo": "IMC / Juros compostos",
+      "status": "parcialmente_validada_matematicamente",
+      "prioridade": "baixa",
+      "arquivo": "app.js; calculadora-imc.html; juros-compostos.html",
+      "fundamento": "Fórmula antropométrica de IMC adulto e matemática de capitalização composta; não há norma remuneratória militar",
+      "observacao": "IMC não distingue adultos de crianças/adolescentes e carece de validação de entradas. Juros compostos presume aporte no fim do mês, arredonda prazo e não valida taxas/prazos negativos."
+    },
+    {
+      "id": "AUD-021",
+      "titulo": "Ajuste de contas sem ferramenta de simulação; procedimento SIPPES não equivale a fórmula única",
+      "modulo": "Ajuste de contas",
+      "status": "sem_implementacao; especificacao_simulador_inicial",
+      "prioridade": "alta",
+      "arquivo": "ferramentas.html; legislacao/auditoria/AUD-021-AJUSTE-DE-CONTAS-SIMULADOR.md",
+      "fundamento": "Decreto 4.307/2002, arts. 80 e 81; Portaria Normativa MD 28/2019; Lei 7.963/1989; Decreto 99.425/1990; material operacional EAD SIPPES/CPEx",
+      "observacao": "O ajuste de contas é um fluxo de processamento/ratificação de rubricas no SIPPES, e não um benefício único. O simulador futuro deve somar rubricas informadas e calcular parcelas proporcionais com premissas explícitas; não decidir direito ou reproduzir automaticamente o sistema administrativo."
+    },
+    {
+      "id": "AUD-022",
+      "titulo": "Compensação pecuniária temporário: fórmula central mapeada; base remuneratória precisa ser discriminada",
+      "modulo": "Compensação pecuniária",
+      "status": "sem_implementacao; regra_aritmetica_mapeada; base_por_rubrica_pendente",
+      "prioridade": "alta",
+      "arquivo": "ferramentas.html; legislacao/auditoria/AUD-022-COMPENSACAO-PECUNIARIA-SIMULADOR.md",
+      "fundamento": "Lei 7.963/1989, arts. 1º a 3º; Decreto 99.425/1990, arts. 1º a 4º",
+      "observacao": "Uma remuneração mensal por ano computável, fração >=180 dias considerada ano; serviço militar obrigatório excluído; Decreto 99.425 exclui parcelas da base. Simulador deverá aceitar remuneração informada por rubrica e calcular cenários sem bloquear por elegibilidade."
+    },
+    {
+      "id": "AUD-023",
+      "titulo": "Tempo de serviço: ausência de calculadora que separe efetivo serviço e anos de serviço/acréscimos",
+      "modulo": "Tempo de serviço",
+      "status": "sem_implementacao; especificacao_funcional_inicial",
+      "prioridade": "alta",
+      "arquivo": "ferramentas.html; legislacao/auditoria/AUD-023-TEMPO-DE-SERVICO-CALCULADORA.md",
+      "fundamento": "Lei 6.880/1980, arts. 134 a 143; Decreto 4.307/2002, art. 93",
+      "observacao": "A futura calculadora deve somar períodos informados, evitar sobreposição e apresentar separadamente tempo de efetivo serviço e acréscimos/anos de serviço. Não deve verificar requisitos para reserva nem reconhecimento administrativo."
+    }
+  ]
+}

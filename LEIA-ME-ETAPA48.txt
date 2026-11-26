@@ -1,0 +1,13 @@
+MILICO AUDAZ — ETAPA 48
+Auditoria integrada da calculadora de movimentação
+
+Correção principal:
+Os destinos cadastrados são cenários alternativos. O demonstrativo agora apresenta os subtotais por destino e informa expressamente que esses totais não devem ser somados entre si.
+
+Também foram revisados os vínculos das passagens por destino, a identificação de parcelas pendentes, a seleção declaratória dos itens e a condição para impressão do relatório.
+
+Não foram alteradas as fórmulas legais de ajuda de custo, bagagem ou passagens.
+
+Testes automatizados: 170 aprovados, 0 reprovados.
+
+Atenção: a aprovação dos testes não substitui homologação normativa/administrativa nem testes visuais em dispositivos reais. Os resultados continuam sendo simulações.

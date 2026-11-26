@@ -1,0 +1,10 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');
+const js=fs.readFileSync('js/compensacao-pecuniaria.js','utf8');const html=fs.readFileSync('compensacao-pecuniaria.html','utf8');const index=fs.readFileSync('index.html','utf8');const sw=fs.readFileSync('sw.js','utf8');
+test('calculadora aplica limite legal de 180 dias',()=>{assert.match(js,/fraction>=180\?1:0/)});
+test('serviço obrigatório é subtraído antes de apurar os anos',()=>{assert.match(js,/years\*365\+days-\(obY\*365\+obD\)/)});
+test('base depende de rubricas marcadas pelo usuário',()=>{assert.match(js,/if\(r\.querySelector\('\[data-include\]'\)\.checked\)total\+=num/)});
+test('importação não transforma percentuais em valores monetários',()=>{assert.match(js,/não são valores em reais/)});
+test('rubricas excluídas do decreto estão listadas',()=>{for(const x of ['Diárias','Ajuda de custo','Indenização de transporte','13º salário','Adicional de férias'])assert.ok(js.includes(x))});
+test('página inicial abre a calculadora',()=>{assert.match(index,/href="compensacao-pecuniaria\.html"/)});
+test('service worker inclui página e script e altera cache',()=>{assert.match(sw,/compensacao-pecuniaria\.html/);assert.match(sw,/js\/compensacao-pecuniaria\.js/);assert.match(sw,/etapa72/) });
+test('interface informa que não decide elegibilidade',()=>{assert.match(html,/Não decide elegibilidade/)});

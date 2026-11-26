@@ -1,0 +1,15 @@
+MILICO AUDAZ — ETAPA 49
+
+Objetivo: melhorar a navegação e a clareza do preenchimento da calculadora de movimentação.
+
+Alterações:
+- Atalhos para Dados do militar, Origem e destinos, Itens da movimentação e Passagens.
+- Orientação inicial de preenchimento.
+- Estilos responsivos para celular e foco visível para navegação por teclado.
+- Correção de inicialização do acumulador local de passagens no demonstrativo por destino.
+- Nenhuma fórmula ou tabela normativa foi alterada.
+
+Testes: executar `node --test tests/*.test.js`.
+O relatório de execução está em `test-results-etapa49.txt`.
+
+Atenção: os testes automatizados não equivalem a homologação jurídica ou validação visual em todos os navegadores/dispositivos. Antes de publicar, revisar as fórmulas e parâmetros legais em auditoria própria e testar a tela em celular real.

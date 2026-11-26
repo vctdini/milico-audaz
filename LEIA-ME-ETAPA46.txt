@@ -1,0 +1,14 @@
+MILICO AUDAZ — ETAPA 46
+DEMONSTRATIVO FINANCEIRO POR DESTINO
+
+O que mudou:
+- A comparação agora apresenta ajuda de custo, bagagem/veículos, passagens informadas e total estimado por destino.
+- Passagens são vinculadas ao destino pelo texto informado, com comparação sem diferenciar acentos e caixa.
+- Passagens sem correspondência ficam explicitamente fora dos subtotais por destino.
+- Distância de ida ausente mantém a bagagem como pendente e não a soma silenciosamente.
+- A memória ressalta que a consolidação não reconhece direito nem garante pagamento.
+
+Importante:
+Este demonstrativo é uma soma matemática de parcelas calculadas ou declaradas. Não substitui conferência normativa, autorização administrativa, análise do processo ou validação das tarifas e limites aplicáveis.
+
+Testes: execute `node --test tests/*.test.js` nesta pasta.

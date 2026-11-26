@@ -1,0 +1,16 @@
+ETAPA 57 — RESULTADOS DOS TESTES
+
+Testes automatizados: 200
+Aprovados: 200
+Reprovados: 0
+
+Verificações adicionais:
+- node --check app.js: aprovado
+- node --check js/movimentacao-distancias.js: aprovado
+- node --check js/movimentacao-ui.js: aprovado
+- node --check sw.js: aprovado
+- Referência do novo módulo na página: aprovada
+- Referência do novo módulo no service worker: aprovada
+- Integridade do pacote ZIP: pendente de verificação final
+
+Observação: os testes automatizados não substituem teste visual em navegador real nem conferência de rota/localidade pelo usuário.

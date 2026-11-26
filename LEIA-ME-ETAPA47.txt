@@ -1,0 +1,16 @@
+MILICO AUDAZ — ETAPA 47
+RELATÓRIO DE MOVIMENTAÇÃO PARA IMPRESSÃO/PDF
+
+O que mudou:
+- A ação do relatório foi renomeada para “Gerar PDF / Imprimir”.
+- A impressão agora prioriza o resultado calculado, o título do relatório, as fontes legais e o aviso de simulação.
+- Formulários, navegação, publicidade e controles de edição ficam ocultos na impressão.
+- Tabelas e blocos de memória de cálculo recebem regras para melhorar a leitura e reduzir quebras de página.
+- O usuário pode escolher “Salvar como PDF” no diálogo de impressão do navegador.
+
+Limite desta etapa:
+- A geração usa o mecanismo de impressão do navegador; não cria arquivo PDF silenciosamente nem substitui validação dos dados.
+- Os cálculos e seus fundamentos não foram alterados nesta etapa.
+
+Teste:
+Execute `node --test tests/*.test.js` nesta pasta.

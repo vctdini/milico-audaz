@@ -1,0 +1,30 @@
+MILICO AUDAZ — ETAPA 50
+Auditoria normativa e correção de ajuda de custo em movimentação por interesse próprio
+
+ALTERAÇÃO IMPLEMENTADA
+- Quando a natureza informada é “Por interesse próprio”, a ajuda de custo deixa de compor o resultado financeiro por destino.
+- A interface identifica a parcela como “Não incluída” e explica o fundamento: Decreto nº 4.307/2002, art. 57, I, “a”.
+- As demais parcelas de transporte permanecem separadas e dependem do enquadramento próprio; não são automaticamente excluídas pela regra da ajuda de custo.
+- Cache do service worker atualizado para a versão QA-50.
+
+AUDITORIA DAS REGRAS DE BAGAGEM
+- A tabela de cubagem foi conferida com o Anexo I do Decreto nº 4.307/2002: 2º/3º Sargento = 45 m³; automóvel = 12 m³; motocicleta = 3 m³.
+- A tabela de tarifas por faixa do Anexo II corresponde aos valores transcritos no texto consolidado consultado.
+- O Decreto nº 11.020/2022 alterou o art. 38, §4º, para prever tabela anual por ato do Ministro da Defesa e determinou, no art. 2º, que o Anexo II permaneceria em vigor até a edição desse ato. Nesta pesquisa não foi localizado ato substitutivo específico. Portanto, os valores do Anexo II devem ser tratados como referência legal de transição, com confirmação administrativa antes de uso operacional.
+- O art. 47, I e parágrafo único, vincula o cálculo em espécie à cubagem do Anexo I e à tarifa por faixa aplicável ao trecho. A calculadora usa distância rodoviária de ida entre origem e destino.
+
+PENDÊNCIAS QUE NÃO FORAM HOMOLOGADAS NESTA ETAPA
+- Base remuneratória exata da ajuda de custo: a própria tela já informa que composição de rubricas exige conferência normativa e homologação pelo CPEx. Não declarar como valor oficial.
+- Regras completas de elegibilidade, prazos, modais, execução por conta da União, comprovação e autorização de transporte.
+- Revisão integral de todos os cenários do Anexo V e dos atos administrativos específicos do Exército.
+- Verificação de eventual ato ministerial posterior que substitua a tabela do Anexo II, antes de liberar cálculo como definitivo.
+
+FONTES OFICIAIS CONSULTADAS
+- Decreto nº 4.307/2002, texto atualizado, especialmente arts. 23, 37, 38, 47, 55 a 60 e Anexos I e II: https://www2.camara.leg.br/legin/fed/decret/2002/decreto-4307-18-julho-2002-472328-normaatualizada-pe.html
+- Decreto nº 11.020/2022, especialmente art. 2º: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/d11020.htm
+- Lei nº 13.954/2019, art. 15 e Anexo V: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13954.htm
+
+TESTES
+- Executar: node --test tests/*.test.js
+- Resultado desta etapa: 175 testes aprovados, 0 reprovados.
+- Testes automatizados não substituem homologação jurídica, conferência de ato ministerial vigente nem teste visual em dispositivos reais.

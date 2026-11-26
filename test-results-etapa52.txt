@@ -1,0 +1,1095 @@
+TAP version 13
+# Subtest: layout do contracheque centraliza e amplia formulário, resumo e resultado
+ok 1 - layout do contracheque centraliza e amplia formulário, resumo e resultado
+  ---
+  duration_ms: 1.186109
+  type: 'test'
+  ...
+# Subtest: rubricas e tabelas alinham valores à direita sem ultrapassar os cartões
+ok 2 - rubricas e tabelas alinham valores à direita sem ultrapassar os cartões
+  ---
+  duration_ms: 0.271147
+  type: 'test'
+  ...
+# Subtest: layout do contracheque mantém adaptação para telas menores
+ok 3 - layout do contracheque mantém adaptação para telas menores
+  ---
+  duration_ms: 0.149329
+  type: 'test'
+  ...
+# Subtest: cache do aplicativo identifica a etapa 50
+ok 4 - cache do aplicativo identifica a etapa 50
+  ---
+  duration_ms: 0.171051
+  type: 'test'
+  ...
+# Subtest: tabela legal de diárias mantém os valores do Anexo III vigente desde 2025
+ok 5 - tabela legal de diárias mantém os valores do Anexo III vigente desde 2025
+  ---
+  duration_ms: 1.423707
+  type: 'test'
+  ...
+# Subtest: simula dias integrais e meias diárias separadamente
+ok 6 - simula dias integrais e meias diárias separadamente
+  ---
+  duration_ms: 0.49091
+  type: 'test'
+  ...
+# Subtest: não concede diária em afastamento inferior a oito horas
+ok 7 - não concede diária em afastamento inferior a oito horas
+  ---
+  duration_ms: 1.121453
+  type: 'test'
+  ...
+# Subtest: não concede diária quando alimentação, pousada e locomoção urbana são garantidas
+ok 8 - não concede diária quando alimentação, pousada e locomoção urbana são garantidas
+  ---
+  duration_ms: 0.321341
+  type: 'test'
+  ...
+# Subtest: não concede diária em movimentação com mudança de sede e desligamento
+ok 9 - não concede diária em movimentação com mudança de sede e desligamento
+  ---
+  duration_ms: 0.131893
+  type: 'test'
+  ...
+# Subtest: uso de veículo oficial afasta somente o acréscimo de embarque/desembarque
+ok 10 - uso de veículo oficial afasta somente o acréscimo de embarque/desembarque
+  ---
+  duration_ms: 0.205921
+  type: 'test'
+  ...
+# Subtest: valores negativos e dias fracionados são rejeitados pela validação da ferramenta
+ok 11 - valores negativos e dias fracionados são rejeitados pela validação da ferramenta
+  ---
+  duration_ms: 0.501235
+  type: 'test'
+  ...
+# Subtest: soma de dias integrais e meias diárias não pode ultrapassar o limite técnico de 366
+ok 12 - soma de dias integrais e meias diárias não pode ultrapassar o limite técnico de 366
+  ---
+  duration_ms: 0.425013
+  type: 'test'
+  ...
+# Subtest: formulário explica os critérios legais e não desconta auxílio-transporte automaticamente
+ok 13 - formulário explica os critérios legais e não desconta auxílio-transporte automaticamente
+  ---
+  duration_ms: 0.301642
+  type: 'test'
+  ...
+# Subtest: resultado não repete a afirmação incorreta de vedação automática com gratificação de representação
+ok 14 - resultado não repete a afirmação incorreta de vedação automática com gratificação de representação
+  ---
+  duration_ms: 0.645857
+  type: 'test'
+  ...
+# Subtest: não calcula acréscimo de embarque/desembarque sem diária devida na simulação
+ok 15 - não calcula acréscimo de embarque/desembarque sem diária devida na simulação
+  ---
+  duration_ms: 0.185792
+  type: 'test'
+  ...
+# Subtest: Etapa 49: atalhos da movimentação apontam para seções existentes
+ok 16 - Etapa 49: atalhos da movimentação apontam para seções existentes
+  ---
+  duration_ms: 0.90046
+  type: 'test'
+  ...
+# Subtest: Etapa 49: navegação e formulário possuem tratamento responsivo e foco visível
+ok 17 - Etapa 49: navegação e formulário possuem tratamento responsivo e foco visível
+  ---
+  duration_ms: 0.22478
+  type: 'test'
+  ...
+# Subtest: Etapa 49: acumulador de passagens por destino é inicializado localmente
+ok 18 - Etapa 49: acumulador de passagens por destino é inicializado localmente
+  ---
+  duration_ms: 0.203018
+  type: 'test'
+  ...
+# Subtest: GR mensal de comando integra o total remuneratório quando informada
+ok 19 - GR mensal de comando integra o total remuneratório quando informada
+  ---
+  duration_ms: 0.965996
+  type: 'test'
+  ...
+# Subtest: GR não é adicionada automaticamente quando não informada
+ok 20 - GR não é adicionada automaticamente quando não informada
+  ---
+  duration_ms: 0.202016
+  type: 'test'
+  ...
+# Subtest: a interface identifica a GR como mensal e diferencia gratificações eventuais
+ok 21 - a interface identifica a GR como mensal e diferencia gratificações eventuais
+  ---
+  duration_ms: 0.210829
+  type: 'test'
+  ...
+# Subtest: a GR declarada é aplicada somente na calculadora de movimentação
+ok 22 - a GR declarada é aplicada somente na calculadora de movimentação
+  ---
+  duration_ms: 0.204249
+  type: 'test'
+  ...
+# Subtest: gratificação mensal de oficial-general corresponde a 10% do soldo
+ok 23 - gratificação mensal de oficial-general corresponde a 10% do soldo
+  ---
+  duration_ms: 0.991634
+  type: 'test'
+  ...
+# Subtest: gratificação de comando é proporcional aos dias informados
+ok 24 - gratificação de comando é proporcional aos dias informados
+  ---
+  duration_ms: 0.130661
+  type: 'test'
+  ...
+# Subtest: atividade eventual corresponde a 2% do soldo por dia
+ok 25 - atividade eventual corresponde a 2% do soldo por dia
+  ---
+  duration_ms: 0.106846
+  type: 'test'
+  ...
+# Subtest: atividade eventual não é paga cumulativamente com diárias
+ok 26 - atividade eventual não é paga cumulativamente com diárias
+  ---
+  duration_ms: 0.861813
+  type: 'test'
+  ...
+# Subtest: parcela mensal de comando permanece quando a eventual é excluída por diárias
+ok 27 - parcela mensal de comando permanece quando a eventual é excluída por diárias
+  ---
+  duration_ms: 0.202988
+  type: 'test'
+  ...
+# Subtest: valores negativos não geram gratificação
+ok 28 - valores negativos não geram gratificação
+  ---
+  duration_ms: 0.098875
+  type: 'test'
+  ...
+# Subtest: dias de atividade eventual são limitados a inteiros não negativos na validação
+ok 29 - dias de atividade eventual são limitados a inteiros não negativos na validação
+  ---
+  duration_ms: 0.454517
+  type: 'test'
+  ...
+# Subtest: atividade eventual exige hipótese selecionada e hipótese selecionada exige dias
+ok 30 - atividade eventual exige hipótese selecionada e hipótese selecionada exige dias
+  ---
+  duration_ms: 0.128468
+  type: 'test'
+  ...
+# Subtest: formulário apresenta hipóteses legais, conflito com diárias e regra de 8h a menos de 24h
+ok 31 - formulário apresenta hipóteses legais, conflito com diárias e regra de 8h a menos de 24h
+  ---
+  duration_ms: 0.364694
+  type: 'test'
+  ...
+# Subtest: relatório documenta autorização formal e divisor de 30 dias como pendência
+ok 32 - relatório documenta autorização formal e divisor de 30 dias como pendência
+  ---
+  duration_ms: 0.406095
+  type: 'test'
+  ...
+# Subtest: as cinco calculadoras auditadas expõem motores de cálculo independentes
+ok 33 - as cinco calculadoras auditadas expõem motores de cálculo independentes
+  ---
+  duration_ms: 1.073063
+  type: 'test'
+  ...
+# Subtest: auxílio-transporte mantém resultado não negativo e memória coerente em cenário de tarifa zero
+ok 34 - auxílio-transporte mantém resultado não negativo e memória coerente em cenário de tarifa zero
+  ---
+  duration_ms: 0.333058
+  type: 'test'
+  ...
+# Subtest: auxílio-alimentação soma parcelas arredondadas sem ultrapassar o limite combinado do art. 67
+ok 35 - auxílio-alimentação soma parcelas arredondadas sem ultrapassar o limite combinado do art. 67
+  ---
+  duration_ms: 0.237648
+  type: 'test'
+  ...
+# Subtest: diárias mantém soma integral + meia diária + acréscimo igual ao total apresentado
+ok 36 - diárias mantém soma integral + meia diária + acréscimo igual ao total apresentado
+  ---
+  duration_ms: 0.311086
+  type: 'test'
+  ...
+# Subtest: gratificação eventual e diárias não são somadas no mesmo período
+ok 37 - gratificação eventual e diárias não são somadas no mesmo período
+  ---
+  duration_ms: 1.600577
+  type: 'test'
+  ...
+# Subtest: pensão alimentícia percentual e fixa entregam valores monetários em centavos
+ok 38 - pensão alimentícia percentual e fixa entregam valores monetários em centavos
+  ---
+  duration_ms: 0.319038
+  type: 'test'
+  ...
+# Subtest: as validações da interface continuam rejeitando entradas negativas nas cinco ferramentas
+ok 39 - as validações da interface continuam rejeitando entradas negativas nas cinco ferramentas
+  ---
+  duration_ms: 0.767264
+  type: 'test'
+  ...
+# Subtest: Anexo V: comissão superior a 15 dias e até 3 meses é faixa c
+ok 40 - Anexo V: comissão superior a 15 dias e até 3 meses é faixa c
+  ---
+  duration_ms: 1.134543
+  type: 'test'
+  ...
+# Subtest: Anexo V: comissão superior a 3 e até 12 meses é faixa b
+ok 41 - Anexo V: comissão superior a 3 e até 12 meses é faixa b
+  ---
+  duration_ms: 0.147436
+  type: 'test'
+  ...
+# Subtest: fronteiras da comissão: 15 dias não alcançam faixa c; acima de 12 meses não alcança faixa b
+ok 42 - fronteiras da comissão: 15 dias não alcançam faixa c; acima de 12 meses não alcança faixa b
+  ---
+  duration_ms: 1.538926
+  type: 'test'
+  ...
+# Subtest: mês final é ajustado ao último dia válido em início no fim do mês
+ok 43 - mês final é ajustado ao último dia válido em início no fim do mês
+  ---
+  duration_ms: 0.153094
+  type: 'test'
+  ...
+# Subtest: datas inválidas ou invertidas são rejeitadas
+ok 44 - datas inválidas ou invertidas são rejeitadas
+  ---
+  duration_ms: 0.265539
+  type: 'test'
+  ...
+# Subtest: interface contém natureza da movimentação e cenários de comissão sem desligamento
+ok 45 - interface contém natureza da movimentação e cenários de comissão sem desligamento
+  ---
+  duration_ms: 0.137852
+  type: 'test'
+  ...
+# Subtest: interface preserva aviso de que ajuda de custo não inclui passagens e bagagem
+ok 46 - interface preserva aviso de que ajuda de custo não inclui passagens e bagagem
+  ---
+  duration_ms: 0.140355
+  type: 'test'
+  ...
+# Subtest: Anexo I: 2º sargento tem limite de 45 m³ para móveis e utensílios
+ok 47 - Anexo I: 2º sargento tem limite de 45 m³ para móveis e utensílios
+  ---
+  duration_ms: 1.05015
+  type: 'test'
+  ...
+# Subtest: Anexo I: automóvel e motocicleta acrescentam 12 m³ e 3 m³ quando selecionados
+ok 48 - Anexo I: automóvel e motocicleta acrescentam 12 m³ e 3 m³ quando selecionados
+  ---
+  duration_ms: 0.113256
+  type: 'test'
+  ...
+# Subtest: Anexo II: aplica tarifa por faixa de distância e calcula valor em reais
+ok 49 - Anexo II: aplica tarifa por faixa de distância e calcula valor em reais
+  ---
+  duration_ms: 1.217114
+  type: 'test'
+  ...
+# Subtest: Anexo I: tabela de cubagem varia conforme posto ou graduação
+ok 50 - Anexo I: tabela de cubagem varia conforme posto ou graduação
+  ---
+  duration_ms: 0.195827
+  type: 'test'
+  ...
+# Subtest: não calcula quando distância rodoviária de ida não foi informada
+ok 51 - não calcula quando distância rodoviária de ida não foi informada
+  ---
+  duration_ms: 0.348891
+  type: 'test'
+  ...
+# Subtest: nenhum item marcado não cria cubagem ou valor indenizatório
+ok 52 - nenhum item marcado não cria cubagem ou valor indenizatório
+  ---
+  duration_ms: 0.112675
+  type: 'test'
+  ...
+# Subtest: interface separa distância de ida para bagagem da distância total ida e volta
+ok 53 - interface separa distância de ida para bagagem da distância total ida e volta
+  ---
+  duration_ms: 0.137582
+  type: 'test'
+  ...
+# Subtest: resultado mantém natureza declaratória e ressalva que estimativa não confirma concessão
+ok 54 - resultado mantém natureza declaratória e ressalva que estimativa não confirma concessão
+  ---
+  duration_ms: 0.122159
+  type: 'test'
+  ...
+# Subtest: tela oferece busca de localidade e explica o limite da classificação por lista
+ok 55 - tela oferece busca de localidade e explica o limite da classificação por lista
+  ---
+  duration_ms: 1.201061
+  type: 'test'
+  ...
+# Subtest: cadastro contém localidades das Tabelas I, II e III
+ok 56 - cadastro contém localidades das Tabelas I, II e III
+  ---
+  duration_ms: 2.007553
+  type: 'test'
+  ...
+# Subtest: pesquisa normaliza acentos e identifica Vicente de Carvalho como categoria B
+ok 57 - pesquisa normaliza acentos e identifica Vicente de Carvalho como categoria B
+  ---
+  duration_ms: 3.876873
+  type: 'test'
+  ...
+# Subtest: Aquidauana é sinalizada como conflito entre tabelas, sem classificação automática
+ok 58 - Aquidauana é sinalizada como conflito entre tabelas, sem classificação automática
+  ---
+  duration_ms: 2.040201
+  type: 'test'
+  ...
+# Subtest: localidade fora das tabelas não é presumida como não especial
+ok 59 - localidade fora das tabelas não é presumida como não especial
+  ---
+  duration_ms: 2.44201
+  type: 'test'
+  ...
+# PASS formulário amplo de movimentação
+# PASS campo de guarnição de origem
+# PASS lista dinâmica de destinos
+# PASS distância total de ida e volta
+# PASS distância rodoviária de ida para bagagem
+# PASS botão para adicionar destino
+# PASS comparação de resultados por destino
+# PASS passagens calculadas pela soma das tarifas informadas
+# PASS ajuda de custo permanece separada do transporte
+# PASS validação de destino vazio sem quebrar cálculo
+# 10 testes aprovados
+# Subtest: tests/movimentacao-comparacao-destinos.test.js
+ok 10 - tests/movimentacao-comparacao-destinos.test.js
+  ---
+  duration_ms: 32.313416
+  type: 'test'
+  ...
+# Subtest: demonstrativo consolida ajuda de custo, bagagem e passagens por destino
+ok 61 - demonstrativo consolida ajuda de custo, bagagem e passagens por destino
+  ---
+  duration_ms: 0.96844
+  type: 'test'
+  ...
+# Subtest: passagens são vinculadas ao destino informado sem misturar destinos diferentes
+ok 62 - passagens são vinculadas ao destino informado sem misturar destinos diferentes
+  ---
+  duration_ms: 0.215316
+  type: 'test'
+  ...
+# Subtest: parcelas sem dados necessários permanecem identificadas como pendentes
+ok 63 - parcelas sem dados necessários permanecem identificadas como pendentes
+  ---
+  duration_ms: 0.148177
+  type: 'test'
+  ...
+# Subtest: demonstrativo deixa claro que não reconhece direito nem garante pagamento
+ok 64 - demonstrativo deixa claro que não reconhece direito nem garante pagamento
+  ---
+  duration_ms: 0.14333
+  type: 'test'
+  ...
+# Subtest: empregado doméstico: opção é simples e sem formulário de comprovação
+ok 65 - empregado doméstico: opção é simples e sem formulário de comprovação
+  ---
+  duration_ms: 0.929572
+  type: 'test'
+  ...
+# Subtest: empregado doméstico: a marcação é o único controle de inclusão no cálculo
+ok 66 - empregado doméstico: a marcação é o único controle de inclusão no cálculo
+  ---
+  duration_ms: 0.124583
+  type: 'test'
+  ...
+# Subtest: empregado doméstico: tarifa só entra quando a opção estiver marcada
+ok 67 - empregado doméstico: tarifa só entra quando a opção estiver marcada
+  ---
+  duration_ms: 0.10236
+  type: 'test'
+  ...
+# Subtest: memória de cálculo lista somente os itens selecionados
+ok 68 - memória de cálculo lista somente os itens selecionados
+  ---
+  duration_ms: 0.101979
+  type: 'test'
+  ...
+# Subtest: movimentação por interesse próprio exclui a ajuda de custo do total estimado
+ok 69 - movimentação por interesse próprio exclui a ajuda de custo do total estimado
+  ---
+  duration_ms: 0.879229
+  type: 'test'
+  ...
+# Subtest: a exclusão da ajuda de custo por interesse próprio não desmarca nem elimina as parcelas de transporte
+ok 70 - a exclusão da ajuda de custo por interesse próprio não desmarca nem elimina as parcelas de transporte
+  ---
+  duration_ms: 0.183218
+  type: 'test'
+  ...
+# Subtest: itens da movimentação são declarados pelo usuário em checkboxes visíveis
+ok 71 - itens da movimentação são declarados pelo usuário em checkboxes visíveis
+  ---
+  duration_ms: 1.011412
+  type: 'test'
+  ...
+# Subtest: resultado lista os itens marcados sem presumir seleção automática
+ok 72 - resultado lista os itens marcados sem presumir seleção automática
+  ---
+  duration_ms: 0.273631
+  type: 'test'
+  ...
+# Subtest: seleções são limpas pelo comando limpar cálculo e têm feedback acessível
+ok 73 - seleções são limpas pelo comando limpar cálculo e têm feedback acessível
+  ---
+  duration_ms: 0.182998
+  type: 'test'
+  ...
+# Subtest: interface esclarece que marcar não confirma concessão nem pagamento
+ok 74 - interface esclarece que marcar não confirma concessão nem pagamento
+  ---
+  duration_ms: 0.191361
+  type: 'test'
+  ...
+# Subtest: conta intervalo residual de 8 horas como um dia
+ok 75 - conta intervalo residual de 8 horas como um dia
+  ---
+  duration_ms: 0.909333
+  type: 'test'
+  ...
+# Subtest: não conta período residual inferior a 8 horas
+ok 76 - não conta período residual inferior a 8 horas
+  ---
+  duration_ms: 0.112304
+  type: 'test'
+  ...
+# Subtest: conta 24 horas completas como um dia
+ok 77 - conta 24 horas completas como um dia
+  ---
+  duration_ms: 0.901691
+  type: 'test'
+  ...
+# Subtest: soma dias completos e período residual de pelo menos 8 horas
+ok 78 - soma dias completos e período residual de pelo menos 8 horas
+  ---
+  duration_ms: 0.15663
+  type: 'test'
+  ...
+# Subtest: não arredonda período de 24 horas mais 7h59 para o dia seguinte
+ok 79 - não arredonda período de 24 horas mais 7h59 para o dia seguinte
+  ---
+  duration_ms: 0.115359
+  type: 'test'
+  ...
+# Subtest: rejeita datas inválidas e partida anterior ou igual à apresentação
+ok 80 - rejeita datas inválidas e partida anterior ou igual à apresentação
+  ---
+  duration_ms: 0.185992
+  type: 'test'
+  ...
+# Subtest: formulário distingue categoria, tipo de atividade e período entre apresentação e partida
+ok 81 - formulário distingue categoria, tipo de atividade e período entre apresentação e partida
+  ---
+  duration_ms: 0.10918
+  type: 'test'
+  ...
+# Subtest: a interface não afirma que as portarias 379 e 4.965 fixam os percentuais da GLE
+ok 82 - a interface não afirma que as portarias 379 e 4.965 fixam os percentuais da GLE
+  ---
+  duration_ms: 0.136139
+  type: 'test'
+  ...
+# Subtest: passagens: soma tarifas de ida e volta de cada passageiro informado
+ok 83 - passagens: soma tarifas de ida e volta de cada passageiro informado
+  ---
+  duration_ms: 1.127272
+  type: 'test'
+  ...
+# Subtest: passagens: aceita somente ida ou somente volta quando informado
+ok 84 - passagens: aceita somente ida ou somente volta quando informado
+  ---
+  duration_ms: 0.169388
+  type: 'test'
+  ...
+# Subtest: passagens: ignora linha totalmente vazia sem presumir passageiro
+ok 85 - passagens: ignora linha totalmente vazia sem presumir passageiro
+  ---
+  duration_ms: 0.111834
+  type: 'test'
+  ...
+# Subtest: passagens: exige destino e categoria quando há tarifa
+ok 86 - passagens: exige destino e categoria quando há tarifa
+  ---
+  duration_ms: 0.206893
+  type: 'test'
+  ...
+# Subtest: passagens: rejeita tarifa negativa ou inválida
+ok 87 - passagens: rejeita tarifa negativa ou inválida
+  ---
+  duration_ms: 0.284718
+  type: 'test'
+  ...
+# Subtest: passagens: interface só abre quando checkbox é marcado e permite adicionar passageiros
+ok 88 - passagens: interface só abre quando checkbox é marcado e permite adicionar passageiros
+  ---
+  duration_ms: 0.158192
+  type: 'test'
+  ...
+# Subtest: não usa mais estimativa arbitrária por quilômetro para transporte de pessoal
+ok 89 - não usa mais estimativa arbitrária por quilômetro para transporte de pessoal
+  ---
+  duration_ms: 0.169678
+  type: 'test'
+  ...
+# Subtest: botão do relatório indica impressão ou PDF
+ok 90 - botão do relatório indica impressão ou PDF
+  ---
+  duration_ms: 1.060474
+  type: 'test'
+  ...
+# Subtest: folha de estilos possui layout de impressão focado no resultado
+ok 91 - folha de estilos possui layout de impressão focado no resultado
+  ---
+  duration_ms: 0.313189
+  type: 'test'
+  ...
+# Subtest: links e recursos locais das páginas apontam para arquivos existentes
+ok 92 - links e recursos locais das páginas apontam para arquivos existentes
+  ---
+  duration_ms: 9.957626
+  type: 'test'
+  ...
+# Subtest: âncoras internas e âncoras para outras páginas existem
+ok 93 - âncoras internas e âncoras para outras páginas existem
+  ---
+  duration_ms: 3.434764
+  type: 'test'
+  ...
+# Subtest: identificadores HTML são únicos em cada página
+ok 94 - identificadores HTML são únicos em cada página
+  ---
+  duration_ms: 2.467767
+  type: 'test'
+  ...
+# Subtest: arquivos pré-carregados pelo Service Worker existem
+ok 95 - arquivos pré-carregados pelo Service Worker existem
+  ---
+  duration_ms: 0.435879
+  type: 'test'
+  ...
+# Subtest: catálogo de postos: identificadores únicos e soldos positivos
+ok 96 - catálogo de postos: identificadores únicos e soldos positivos
+  ---
+  duration_ms: 1.145259
+  type: 'test'
+  ...
+# Subtest: composição da remuneração: 2º Sargento sem QE, sem adicionais informados
+ok 97 - composição da remuneração: 2º Sargento sem QE, sem adicionais informados
+  ---
+  duration_ms: 0.256766
+  type: 'test'
+  ...
+# Subtest: prévia informa o percentual do adicional militar conforme o posto ou graduação
+ok 98 - prévia informa o percentual do adicional militar conforme o posto ou graduação
+  ---
+  duration_ms: 0.433445
+  type: 'test'
+  ...
+# Subtest: tempo de serviço e disponibilidade não são somados: prevalece o maior
+ok 99 - tempo de serviço e disponibilidade não são somados: prevalece o maior
+  ---
+  duration_ms: 0.192502
+  type: 'test'
+  ...
+# Subtest: QE aplica percentual específico apenas às graduações com percentual cadastrado
+ok 100 - QE aplica percentual específico apenas às graduações com percentual cadastrado
+  ---
+  duration_ms: 0.141037
+  type: 'test'
+  ...
+# Subtest: serviço militar inicial zera adicional militar no motor legado
+ok 101 - serviço militar inicial zera adicional militar no motor legado
+  ---
+  duration_ms: 0.101008
+  type: 'test'
+  ...
+# Subtest: perfil persiste os novos campos de dependentes e adicionais
+ok 102 - perfil persiste os novos campos de dependentes e adicionais
+  ---
+  duration_ms: 0.151091
+  type: 'test'
+  ...
+# Subtest: contracheque automatiza pensão, FuSEx, IR mensal e eventos separados
+ok 103 - contracheque automatiza pensão, FuSEx, IR mensal e eventos separados
+  ---
+  duration_ms: 0.126335
+  type: 'test'
+  ...
+# Subtest: dependentes pré-escolar, compensação orgânica de 1 a 20% e opções não aplicáveis
+ok 104 - dependentes pré-escolar, compensação orgânica de 1 a 20% e opções não aplicáveis
+  ---
+  duration_ms: 0.597095
+  type: 'test'
+  ...
+# Subtest: base remuneratória usada pela estimativa de pensão está definida no motor
+ok 105 - base remuneratória usada pela estimativa de pensão está definida no motor
+  ---
+  duration_ms: 0.322903
+  type: 'test'
+  ...
+# Subtest: auxílio pré-escolar e linhas dinâmicas estão presentes no contracheque
+ok 106 - auxílio pré-escolar e linhas dinâmicas estão presentes no contracheque
+  ---
+  duration_ms: 0.419165
+  type: 'test'
+  ...
+# Subtest: catálogo normativo declara escopo e competência inicial
+ok 107 - catálogo normativo declara escopo e competência inicial
+  ---
+  duration_ms: 0.08847
+  type: 'test'
+  ...
+# Subtest: catálogo histórico não é ativado automaticamente
+ok 108 - catálogo histórico não é ativado automaticamente
+  ---
+  duration_ms: 0.167716
+  type: 'test'
+  ...
+# Subtest: formulários apontam para funções existentes no motor
+ok 109 - formulários apontam para funções existentes no motor
+  ---
+  duration_ms: 4.610237
+  type: 'test'
+  ...
+# Subtest: cache PWA referencia somente arquivos existentes
+ok 110 - cache PWA referencia somente arquivos existentes
+  ---
+  duration_ms: 0.664634
+  type: 'test'
+  ...
+# Subtest: lançamentos manuais: soma apenas valores positivos com descrição
+ok 111 - lançamentos manuais: soma apenas valores positivos com descrição
+  ---
+  duration_ms: 0.713255
+  type: 'test'
+  ...
+# Subtest: lançamentos manuais têm subtotal acessível e validação de descrição
+ok 112 - lançamentos manuais têm subtotal acessível e validação de descrição
+  ---
+  duration_ms: 0.453084
+  type: 'test'
+  ...
+# Subtest: perfil salva descrição e valor das linhas extras
+ok 113 - perfil salva descrição e valor das linhas extras
+  ---
+  duration_ms: 0.084905
+  type: 'test'
+  ...
+# Subtest: compensação orgânica usa o soldo do posto de referência selecionado
+ok 114 - compensação orgânica usa o soldo do posto de referência selecionado
+  ---
+  duration_ms: 0.110192
+  type: 'test'
+  ...
+# Subtest: IRRF mensal reproduz o exemplo do Planilha Bizurada (nov/2026)
+ok 115 - IRRF mensal reproduz o exemplo do Planilha Bizurada (nov/2026)
+  ---
+  duration_ms: 0.207304
+  type: 'test'
+  ...
+# Subtest: IRRF mensal reproduz as rubricas do contracheque CPEx enviado
+ok 116 - IRRF mensal reproduz as rubricas do contracheque CPEx enviado
+  ---
+  duration_ms: 0.097723
+  type: 'test'
+  ...
+# Subtest: IR do adicional natalino é calculado em separado com desconto simplificado
+ok 117 - IR do adicional natalino é calculado em separado com desconto simplificado
+  ---
+  duration_ms: 0.077874
+  type: 'test'
+  ...
+# Subtest: IRRF 2026 aplica a redução para rendimentos até R$ 7.350
+ok 118 - IRRF 2026 aplica a redução para rendimentos até R$ 7.350
+  ---
+  duration_ms: 0.077914
+  type: 'test'
+  ...
+# Subtest: cota complementar FuSEx e opção histórica de 1,5% estão documentadas na interface
+ok 119 - cota complementar FuSEx e opção histórica de 1,5% estão documentadas na interface
+  ---
+  duration_ms: 0.456959
+  type: 'test'
+  ...
+# Subtest: campos do perfil incluem novas bases e eventos tributáveis
+ok 120 - campos do perfil incluem novas bases e eventos tributáveis
+  ---
+  duration_ms: 0.100968
+  type: 'test'
+  ...
+# Subtest: descontos obrigatórios calculam 10,5%, opção histórica de 1,5%, FuSEx 3% e quotas
+ok 121 - descontos obrigatórios calculam 10,5%, opção histórica de 1,5%, FuSEx 3% e quotas
+  ---
+  duration_ms: 0.158232
+  type: 'test'
+  ...
+# Subtest: auxílio pré-escolar aplica cota-parte de acordo com múltiplos do VB
+ok 122 - auxílio pré-escolar aplica cota-parte de acordo com múltiplos do VB
+  ---
+  duration_ms: 0.151072
+  type: 'test'
+  ...
+# Subtest: integração: exemplo CPEx 2º Sgt confere adicionais, descontos e benefícios
+ok 123 - integração: exemplo CPEx 2º Sgt confere adicionais, descontos e benefícios
+  ---
+  duration_ms: 0.240162
+  type: 'test'
+  ...
+# Subtest: prévia automática do contracheque é atualizada ao preencher os campos e ao abrir a página
+ok 124 - prévia automática do contracheque é atualizada ao preencher os campos e ao abrir a página
+  ---
+  duration_ms: 0.745312
+  type: 'test'
+  ...
+# Subtest: catálogo de rubricas pré-definidas está disponível para receitas e descontos
+ok 125 - catálogo de rubricas pré-definidas está disponível para receitas e descontos
+  ---
+  duration_ms: 0.57266
+  type: 'test'
+  ...
+# Subtest: catálogo usa delegação de eventos e modal fica fora do formulário
+ok 126 - catálogo usa delegação de eventos e modal fica fora do formulário
+  ---
+  duration_ms: 0.861713
+  type: 'test'
+  ...
+# Subtest: adicional de férias é calculado automaticamente em um terço da remuneração
+ok 127 - adicional de férias é calculado automaticamente em um terço da remuneração
+  ---
+  duration_ms: 0.091374
+  type: 'test'
+  ...
+# Subtest: 13º calcula valor proporcional, primeira parcela sem IR e segunda com abatimento
+ok 128 - 13º calcula valor proporcional, primeira parcela sem IR e segunda com abatimento
+  ---
+  duration_ms: 0.151632
+  type: 'test'
+  ...
+# Subtest: botões de inclusão estão dentro dos quadros da segunda parte do contracheque
+ok 129 - botões de inclusão estão dentro dos quadros da segunda parte do contracheque
+  ---
+  duration_ms: 0.083452
+  type: 'test'
+  ...
+# Subtest: eventos de férias e 13º possuem controles e regras separadas
+ok 130 - eventos de férias e 13º possuem controles e regras separadas
+  ---
+  duration_ms: 0.317876
+  type: 'test'
+  ...
+# Subtest: atualizar demonstrativo consolida receitas e descontos adicionados pelo catálogo
+ok 131 - atualizar demonstrativo consolida receitas e descontos adicionados pelo catálogo
+  ---
+  duration_ms: 0.210689
+  type: 'test'
+  ...
+# Subtest: rubricas de desconto selecionadas no catálogo viram lançamentos no quadro Descontos
+ok 132 - rubricas de desconto selecionadas no catálogo viram lançamentos no quadro Descontos
+  ---
+  duration_ms: 0.526973
+  type: 'test'
+  ...
+# Subtest: lançamentos de desconto entram no total final uma única vez
+ok 133 - lançamentos de desconto entram no total final uma única vez
+  ---
+  duration_ms: 0.216237
+  type: 'test'
+  ...
+# Subtest: férias preenchem automaticamente remuneração de referência e calculam IR separado
+ok 134 - férias preenchem automaticamente remuneração de referência e calculam IR separado
+  ---
+  duration_ms: 0.340319
+  type: 'test'
+  ...
+# Subtest: IR do 13º é separado, sem retenção na 1ª parcela e com retenção integral na 2ª
+ok 135 - IR do 13º é separado, sem retenção na 1ª parcela e com retenção integral na 2ª
+  ---
+  duration_ms: 0.413246
+  type: 'test'
+  ...
+# Subtest: controles duplicados de descontos e eventos foram removidos da seção avançada
+ok 136 - controles duplicados de descontos e eventos foram removidos da seção avançada
+  ---
+  duration_ms: 0.221165
+  type: 'test'
+  ...
+# Subtest: IR de férias compara deduções legais informadas com o simplificado
+ok 137 - IR de férias compara deduções legais informadas com o simplificado
+  ---
+  duration_ms: 0.112344
+  type: 'test'
+  ...
+# Subtest: remove os dois painéis inferiores redundantes e mantém seus estados internos ocultos
+ok 138 - remove os dois painéis inferiores redundantes e mantém seus estados internos ocultos
+  ---
+  duration_ms: 0.175577
+  type: 'test'
+  ...
+# Subtest: catálogo configura ATS, compensação orgânica, permanência, localidade e quota FuSEx dentro dos quadros
+ok 139 - catálogo configura ATS, compensação orgânica, permanência, localidade e quota FuSEx dentro dos quadros
+  ---
+  duration_ms: 0.631796
+  type: 'test'
+  ...
+# Subtest: modelo do relatório acompanha o Planilha Bizurada com quadro de margem consignável
+ok 140 - modelo do relatório acompanha o Planilha Bizurada com quadro de margem consignável
+  ---
+  duration_ms: 0.325086
+  type: 'test'
+  ...
+# Subtest: lançamentos extras exibem resumo compacto e botão de editar lápis
+ok 141 - lançamentos extras exibem resumo compacto e botão de editar lápis
+  ---
+  duration_ms: 1.019514
+  type: 'test'
+  ...
+# Subtest: parâmetros de adicionais têm resumo compacto, editar e concluir edição
+ok 142 - parâmetros de adicionais têm resumo compacto, editar e concluir edição
+  ---
+  duration_ms: 0.486444
+  type: 'test'
+  ...
+# Subtest: perfil restaura lançamentos no novo formato compacto e editável
+ok 143 - perfil restaura lançamentos no novo formato compacto e editável
+  ---
+  duration_ms: 0.32016
+  type: 'test'
+  ...
+# Subtest: CSS mantém os detalhes recolhidos e abre apenas ao editar
+ok 144 - CSS mantém os detalhes recolhidos e abre apenas ao editar
+  ---
+  duration_ms: 0.183399
+  type: 'test'
+  ...
+# Subtest: resumo automático no topo substitui o botão de atualização manual
+ok 145 - resumo automático no topo substitui o botão de atualização manual
+  ---
+  duration_ms: 0.373317
+  type: 'test'
+  ...
+# Subtest: remoção de receita ou desconto recalcula imediatamente a prévia
+ok 146 - remoção de receita ou desconto recalcula imediatamente a prévia
+  ---
+  duration_ms: 0.413917
+  type: 'test'
+  ...
+# Subtest: recalcula o demonstrativo automaticamente sem deslocar a rolagem durante a digitação
+ok 147 - recalcula o demonstrativo automaticamente sem deslocar a rolagem durante a digitação
+  ---
+  duration_ms: 0.441637
+  type: 'test'
+  ...
+# Subtest: margem consignável aplica fórmula CPEx e admite resultado negativo
+ok 148 - margem consignável aplica fórmula CPEx e admite resultado negativo
+  ---
+  duration_ms: 0.144903
+  type: 'test'
+  ...
+# Subtest: resumo superior possui quatro indicadores, incluindo margem consignável
+ok 149 - resumo superior possui quatro indicadores, incluindo margem consignável
+  ---
+  duration_ms: 0.281743
+  type: 'test'
+  ...
+# Subtest: PDF usa impressão do navegador e mantém resumo e demonstrativo na versão impressa
+ok 150 - PDF usa impressão do navegador e mantém resumo e demonstrativo na versão impressa
+  ---
+  duration_ms: 0.389611
+  type: 'test'
+  ...
+# Subtest: lançamentos extras podem ser classificados como rendimentos permanentes para margem
+ok 151 - lançamentos extras podem ser classificados como rendimentos permanentes para margem
+  ---
+  duration_ms: 0.284507
+  type: 'test'
+  ...
+# Subtest: perfil compartilhado é salvo mesmo quando o usuário navega sem alterar os padrões iniciais
+ok 152 - perfil compartilhado é salvo mesmo quando o usuário navega sem alterar os padrões iniciais
+  ---
+  duration_ms: 0.138563
+  type: 'test'
+  ...
+# Subtest: ferramentas remuneratórias importam posto e parâmetros do perfil compartilhado
+ok 153 - ferramentas remuneratórias importam posto e parâmetros do perfil compartilhado
+  ---
+  duration_ms: 0.077233
+  type: 'test'
+  ...
+# Subtest: ajuda de custo e movimentação aceitam compensação orgânica de 1% a 20% e posto de referência
+ok 154 - ajuda de custo e movimentação aceitam compensação orgânica de 1% a 20% e posto de referência
+  ---
+  duration_ms: 0.280871
+  type: 'test'
+  ...
+# Subtest: ferramentas sem parâmetros remuneratórios continuam independentes
+ok 155 - ferramentas sem parâmetros remuneratórios continuam independentes
+  ---
+  duration_ms: 0.257667
+  type: 'test'
+  ...
+# Subtest: integração respeita os campos “não faço jus” ao importar percentuais
+ok 156 - integração respeita os campos “não faço jus” ao importar percentuais
+  ---
+  duration_ms: 0.140345
+  type: 'test'
+  ...
+# Subtest: ATS nas calculadoras de ajuda de custo usa percentual reconhecido, compatível com o perfil
+ok 157 - ATS nas calculadoras de ajuda de custo usa percentual reconhecido, compatível com o perfil
+  ---
+  duration_ms: 0.21832
+  type: 'test'
+  ...
+# Subtest: resultados possuem hierarquia visual e ação para retornar ao formulário
+ok 158 - resultados possuem hierarquia visual e ação para retornar ao formulário
+  ---
+  duration_ms: 0.401979
+  type: 'test'
+  ...
+# Subtest: TAF exige todas as provas obrigatórias antes de informar suficiência global
+ok 159 - TAF exige todas as provas obrigatórias antes de informar suficiência global
+  ---
+  duration_ms: 0.111183
+  type: 'test'
+  ...
+# Subtest: TAF valida resultados numéricos não negativos e exige PPM quando selecionado
+ok 160 - TAF valida resultados numéricos não negativos e exige PPM quando selecionado
+  ---
+  duration_ms: 0.098254
+  type: 'test'
+  ...
+# Subtest: validação de entradas: transporte rejeita valores negativos, dias fracionados e tarifa ausente
+ok 161 - validação de entradas: transporte rejeita valores negativos, dias fracionados e tarifa ausente
+  ---
+  duration_ms: 0.358336
+  type: 'test'
+  ...
+# Subtest: validação de entradas: alimentação exige etapa positiva e quantidades inteiras não negativas
+ok 162 - validação de entradas: alimentação exige etapa positiva e quantidades inteiras não negativas
+  ---
+  duration_ms: 0.219181
+  type: 'test'
+  ...
+# Subtest: validação de entradas: diárias aceita zero ou mais dias inteiros e rejeita frações e acréscimos negativos
+ok 163 - validação de entradas: diárias aceita zero ou mais dias inteiros e rejeita frações e acréscimos negativos
+  ---
+  duration_ms: 0.193834
+  type: 'test'
+  ...
+# Subtest: validação de entradas: gratificação limita dias de comando a 30 e rejeita dias fracionados
+ok 164 - validação de entradas: gratificação limita dias de comando a 30 e rejeita dias fracionados
+  ---
+  duration_ms: 0.123832
+  type: 'test'
+  ...
+# Subtest: validação de entradas: pensão aceita percentual de 0 a 100 e rejeita limites inválidos
+ok 165 - validação de entradas: pensão aceita percentual de 0 a 100 e rejeita limites inválidos
+  ---
+  duration_ms: 0.100718
+  type: 'test'
+  ...
+# Subtest: pensão alimentícia: permite simular percentual sobre base judicial informada
+ok 166 - pensão alimentícia: permite simular percentual sobre base judicial informada
+  ---
+  duration_ms: 1.403958
+  type: 'test'
+  ...
+# Subtest: pensão alimentícia: permite valor mensal fixo e arredonda em centavos
+ok 167 - pensão alimentícia: permite valor mensal fixo e arredonda em centavos
+  ---
+  duration_ms: 1.959993
+  type: 'test'
+  ...
+# Subtest: pensão alimentícia: documenta que base e incidências vêm do título e que o limite de 50% é contextual
+ok 168 - pensão alimentícia: documenta que base e incidências vêm do título e que o limite de 50% é contextual
+  ---
+  duration_ms: 0.228195
+  type: 'test'
+  ...
+# Subtest: auxílio-transporte: cálculo detalha custo diário, dias considerados e cota-parte sem decidir elegibilidade
+ok 169 - auxílio-transporte: cálculo detalha custo diário, dias considerados e cota-parte sem decidir elegibilidade
+  ---
+  duration_ms: 0.220012
+  type: 'test'
+  ...
+# Subtest: auxílio-transporte: interface esclarece menor custo, transporte da União e não faz declaração automática de direito
+ok 170 - auxílio-transporte: interface esclarece menor custo, transporte da União e não faz declaração automática de direito
+  ---
+  duration_ms: 0.892408
+  type: 'test'
+  ...
+# Subtest: auxílio-alimentação: aplica etapa comum, multiplicadores e arredondamento em centavos
+ok 171 - auxílio-alimentação: aplica etapa comum, multiplicadores e arredondamento em centavos
+  ---
+  duration_ms: 0.208085
+  type: 'test'
+  ...
+# Subtest: auxílio-alimentação: valida limite conjunto de 10 dias nas hipóteses do art. 67
+ok 172 - auxílio-alimentação: valida limite conjunto de 10 dias nas hipóteses do art. 67
+  ---
+  duration_ms: 0.199312
+  type: 'test'
+  ...
+# Subtest: auxílio-alimentação: outras situações limitadas a 30 dias e quantidades inteiras
+ok 173 - auxílio-alimentação: outras situações limitadas a 30 dias e quantidades inteiras
+  ---
+  duration_ms: 0.172262
+  type: 'test'
+  ...
+# Subtest: auxílio-alimentação: interface informa limite legal e ressalva que não verifica arranchamento ou datas
+ok 174 - auxílio-alimentação: interface informa limite legal e ressalva que não verifica arranchamento ou datas
+  ---
+  duration_ms: 1.061386
+  type: 'test'
+  ...
+# Subtest: as cinco ferramentas mantêm resultado anunciado por região aria-live
+ok 175 - as cinco ferramentas mantêm resultado anunciado por região aria-live
+  ---
+  duration_ms: 1.017482
+  type: 'test'
+  ...
+# Subtest: as cinco ferramentas mantêm formulário calc com botão submit identificado
+ok 176 - as cinco ferramentas mantêm formulário calc com botão submit identificado
+  ---
+  duration_ms: 0.396031
+  type: 'test'
+  ...
+# Subtest: os cinco resultados usam o mesmo contêiner e ação de edição definidos pelo núcleo
+ok 177 - os cinco resultados usam o mesmo contêiner e ação de edição definidos pelo núcleo
+  ---
+  duration_ms: 2.444954
+  type: 'test'
+  ...
+# Subtest: memória de cálculo da pensão usa tabela padronizada com total
+ok 178 - memória de cálculo da pensão usa tabela padronizada com total
+  ---
+  duration_ms: 0.605257
+  type: 'test'
+  ...
+# Subtest: camada visual da etapa 37 padroniza ajuda, botão e memória sem alterar largura do contracheque
+ok 179 - camada visual da etapa 37 padroniza ajuda, botão e memória sem alterar largura do contracheque
+  ---
+  duration_ms: 0.273391
+  type: 'test'
+  ...
+1..179
+# tests 179
+# suites 0
+# pass 179
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 388.049121

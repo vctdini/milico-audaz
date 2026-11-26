@@ -1,0 +1,12 @@
+MILICO AUDAZ — ETAPA 53
+Auditoria e ajuste do ACDM versus ATS
+
+O formulário da movimentação agora permite informar o maior percentual de ACDM alcançado durante a carreira na ativa. A opção automática utiliza o percentual associado ao posto/graduação atual e, para 2º/3º sargento QE, considera a linha específica do Anexo II da Lei 13.954/2019 quando a opção QE está marcada.
+
+O percentual de ACDM informado incide sobre o soldo atual. A memória de cálculo compara o ACDM com o ATS reconhecido até 29/12/2000 e utiliza somente o mais vantajoso, sem acumulação. O campo de ATS permanece declaratório e deve refletir percentual efetivamente reconhecido.
+
+Fundamentos:
+- Lei 13.954/2019, art. 8º, §§ 1º a 4º e Anexo II: vedação de acumulação ATS/ACDM; percentual não cumulativo; maior percentual alcançado na ativa; incidência sobre soldo atual; não consideração de posto superior concedido como benefício na inatividade.
+- MP 2.215-10/2001, art. 30: preservação do percentual de ATS a que fazia jus em 29/12/2000.
+
+Limite: a ferramenta não valida assentamentos, histórico de promoções, enquadramento QE ou percentual de ATS. O usuário deve informar os dados reconhecidos em seus registros funcionais. Esta etapa não declara homologada a base integral da ajuda de custo; outras rubricas e critérios ainda exigem conferência normativa.

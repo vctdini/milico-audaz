@@ -1,0 +1,72 @@
+MILICO AUDAZ - COMO COLOCAR NO AR E INSTALAR
+1) Troque e-mail, ID do AdSense e [SEU NOME] em milico.py (ou direto nos HTML) e rode 'python3 milico.py' para regerar.
+2) Hospede com HTTPS (obrigatorio para instalar): Firebase Hosting (gratis), Netlify, Cloudflare Pages ou GitHub Pages.
+   Firebase: 'firebase login', 'firebase init hosting' (pasta publica = esta pasta) e 'firebase deploy'.
+3) Instalar: Android/Chrome e computador: botao 'Instalar app' no topo. iPhone/iPad (Safari): Compartilhar > Adicionar a Tela de Inicio.
+4) Ao atualizar valores (soldo, diarias, etapa), edite os dados em milico.py e regere: o sw.js muda de versao e renova o cache.
+5) AdSense: aprove o dominio e descomente o script no <head> e os blocos .ad.
+Abrir direto do disco (file://) nao instala o app: use HTTPS ou localhost.
+
+
+Testes de regressão (Node.js 18 ou superior):
+  node --test tests/regression.test.js
+
+As regras históricas em js/data/regras-historicas.json são apenas documentais e não alimentam automaticamente os cálculos atuais.
+
+
+Etapa 5 (25/11/2026): contracheque com dependentes para auxílio pré-escolar, crédito mensal por dependente habilitado (R$ 526,64 desde maio/2026), compensação orgânica de 1% a 20%, controles “Não faço jus”, linhas dinâmicas para receitas e descontos extras e estimativa automática de pensão militar a 10,5% sobre base provisória. FuSEx e IRRF seguem manuais até a validação completa das respectivas incidências.
+
+
+Etapa 6 (25/11/2026): consolidação dos lançamentos manuais do contracheque. Receitas e descontos extras permitem descrição e valor, remoção individual, subtotais dinâmicos e persistência local no perfil. Lançamentos sem descrição e com valor positivo são recusados no cálculo. Descontos e receitas ainda sem regra validada devem ser informados manualmente; não recebem incidência automática sobre bases tributárias/previdenciárias. A contribuição para pensão militar mantém a opção de estimativa automática; quando ela não se aplicar ao caso, desmarque e lance o valor como desconto manual.
+
+ETAPA 7 — CONTRACHEQUE
+- A simulação passou a calcular pensão militar (10,5% padrão), FuSEx (3% padrão), quota complementar (0,4%/0,5%) e IRRF mensal.
+- Há campo de opção histórica de 1,5% (MP 2.215-10/2001, art. 31), que só deve ser marcado se formalizada no prazo legal.
+- Férias e adicional natalino possuem campos separados para apuração de IR.
+- Receitas manuais podem ser marcadas como tributáveis no IR mensal.
+- A compensação orgânica permite selecionar o soldo de referência.
+- O demonstrativo pode ser impresso ou salvo como PDF.
+
+Conferência dos exemplos enviados: 2º Sgt, base de contribuição R$ 9.053,34; pensão 10,5% = R$ 950,60; FuSEx 3% = R$ 271,60; quota 0,4% = R$ 36,21; IR mensal = R$ 1.182,74; IR 13º sobre R$ 9.053,34 = R$ 1.413,96; auxílio pré-escolar líquido com cota-parte de 5% = R$ 500,31.
+
+
+Etapa 8 — USABILIDADE DO CONTRACHEQUE
+- Redesenho da tela para priorizar posto/graduação, mês de referência, habilitação e dependentes.
+- Removido o recolhimento automático de etapas ao sair dos campos. As opções complementares ficam em seções expansíveis, abertas somente por ação do usuário.
+- Prévia dinâmica das quatro receitas principais e dos descontos padrão (pensão militar, FuSEx e IR), atualizada conforme os dados são preenchidos.
+- Adicionais opcionais continuam disponíveis em área complementar e entram automaticamente no demonstrativo quando informados.
+- Mês de referência incluído no perfil local e no relatório final.
+- Layout responsivo com cartões separados para receitas e descontos, cores discretas e melhor legibilidade em celular.
+
+
+Etapa 11 — Catálogo de rubricas: os botões Adicionar receita e Adicionar desconto abrem um catálogo pesquisável de lançamentos predefinidos. Rubricas com campo ou parâmetro próprio direcionam o usuário ao controle correspondente; lançamentos sem fórmula automática validada criam uma linha identificada para informar valor e incidências. A opção genérica permanece disponível.
+
+
+Etapa 12 — Contracheque
+Os botões de inclusão de receitas e descontos ficam diretamente nos respectivos quadros da seção “Seu contracheque”. Adicional de férias e 13º possuem cálculo próprio: férias = 1/3 da remuneração do mês de início; 13º = base de dezembro proporcional aos meses de serviço, com 1ª parcela de metade da remuneração do mês anterior sem IRRF e 2ª parcela com abatimento da antecipação e IR exclusivo sobre o total. A remuneração de férias paga antecipadamente, se houver, deve ser informada para a estimativa separada do IR.
+
+
+Etapa 13: consolidação dos lançamentos do catálogo na simulação final, remoção de campos redundantes de descontos, eventos de férias/13º dentro do quadro Receitas e persistência da dedutibilidade de pensão alimentícia. Consulte docs/ETAPA13_CORRECOES_CONTRACHEQUE.md.
+
+ETAPA 17 — O resumo de receitas, descontos e líquido agora fica no topo e é atualizado automaticamente a cada alteração. O botão “Atualizar demonstrativo do contracheque” foi removido; o demonstrativo detalhado também acompanha as alterações.
+
+ETAPA 17 — Totais principais no topo, atualizados automaticamente. O demonstrativo detalhado também acompanha as alterações sem botão e sem deslocar a rolagem da página.
+
+ETAPA 19 — PERFIL COMPARTILHADO NAS FERRAMENTAS
+O simulador do contracheque salva localmente o perfil remuneratório. As ferramentas compatíveis importam automaticamente os dados disponíveis ao serem abertas. Se não houver perfil salvo, o usuário pode iniciar diretamente pela ferramenta e preencher tudo do zero. Ferramentas independentes (IMC, TAF, juros compostos e auxílio-alimentação por etapas) não recebem dados remuneratórios que não se aplicam. Consulte docs/ETAPA19_INTEGRACAO_PERFIL_FERRAMENTAS.md.
+
+
+Etapa 36 — AUDITORIA INTEGRADA DAS CINCO CALCULADORAS (25/11/2026)
+- Auditoria integrada de auxílio-transporte, auxílio-alimentação, diárias, gratificação de representação e pensão alimentícia.
+- Corrigida expectativa de teste do identificador do cache; Service Worker atualizado para milico-20261125-qa-36.
+- Incluídos testes integrados de consistência dos motores, validações negativas e arredondamento monetário.
+- Suíte completa: 120 testes aprovados, 0 reprovados.
+- Nenhuma fórmula, percentual, tabela ou critério normativo alterado nesta etapa.
+- Consulte docs/ETAPA36_AUDITORIA_INTEGRADA_CINCO_CALCULADORAS.md.
+
+ETAPA 43 — TRANSPORTE DE BAGAGEM
+- A calculadora passou a estimar o transporte rodoviário nacional de móveis/utensílios, automóvel e motocicleta quando o usuário marcar cada item.
+- Informe a distância rodoviária de ida separadamente da distância total de ida e volta usada na estimativa simples de transporte pessoal.
+- A cubagem segue o Anexo I do Decreto nº 4.307/2002; a tarifa por faixa segue o Anexo II, mantido em vigor pelo art. 2º do Decreto nº 11.020/2022 até substituição por ato ministerial.
+- O resultado é estimativo, não decide elegibilidade ou concessão e não cobre outros modais. Consulte docs/ETAPA43_TRANSPORTE_BAGAGEM.md.
+- Suíte completa de testes: 153 aprovados.

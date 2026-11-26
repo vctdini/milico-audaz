@@ -1,0 +1,14 @@
+'use strict';
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const html=fs.readFileSync(path.join(root,'movimentacao.html'),'utf8');
+const catalog=fs.readFileSync(path.join(root,'js/data/guarnicoes-movimentacao.js'),'utf8');
+const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
+test('catálogo pesquisável é carregado na tela de movimentação',()=>{assert.match(html,/js\/data\/guarnicoes-movimentacao\.js/);assert.match(html,/id="mov-guarnicoes-lista"/);});
+test('origem, destino e passageiros compartilham o mesmo catálogo',()=>{assert.equal((html.match(/list="mov-guarnicoes-lista"/g)||[]).length,3);});
+test('catálogo permite pesquisa normalizada e inclui cidades/UF de referência',()=>{assert.match(catalog,/const normalizar/);assert.match(catalog,/Boa Vista/);assert.match(catalog,/Manaus/);assert.match(catalog,/Porto Velho/);assert.match(catalog,/MilicoAudazLocalidadesGLE/);});
+test('interface informa que o usuário pode digitar localidades não listadas',()=>{assert.match(html,/cidade e a UF manualmente/i);});
+test('service worker inclui o catálogo e atualiza a versão do cache',()=>{assert.match(sw,/js\/data\/guarnicoes-movimentacao\.js/);assert.match(sw,/milico-20261126-etapa60/);});

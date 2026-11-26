@@ -1,0 +1,46 @@
+{
+ "name": "Milico Audaz",
+ "short_name": "Milico Audaz",
+ "description": "Simuladores gratuitos para militares do Exército.",
+ "lang": "pt-BR",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#ffffff",
+ "theme_color": "#0b2a6b",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Contracheque",
+   "url": "contracheque.html"
+  },
+  {
+   "name": "TAF",
+   "url": "calculadora-taf.html"
+  },
+  {
+   "name": "Diárias",
+   "url": "diarias.html"
+  }
+ ]
+}

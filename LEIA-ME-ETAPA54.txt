@@ -1,0 +1,22 @@
+MILICO AUDAZ — ETAPA 54
+Auditoria e ajustes da Gratificação de Localidade Especial (GLE)
+
+ALTERAÇÕES
+1. A interface agora informa corretamente os percentuais legais da GLE: Categoria A = 20% e Categoria B = 10%, sobre o soldo, conforme Tabela I do Anexo III da MP 2.215-10/2001.
+2. A composição remuneratória já contemplava a GLE informada; a memória da ajuda de custo agora discrimina o valor incluído e a categoria selecionada.
+3. O usuário deve informar a GLE efetivamente percebida na data de referência do ajuste de contas. O destino não é usado para presumir a categoria.
+4. O cadastro auxiliar da Tabela II foi completado com Jaguari/RS.
+5. Ambiguidades do cadastro, como Aquidauana constar em duas categorias nas tabelas publicadas, continuam sinalizadas sem classificação automática.
+
+FUNDAMENTAÇÃO
+- MP nº 2.215-10/2001, art. 1º e Anexo III, Tabela I.
+- Decreto nº 4.307/2002, arts. 11 a 13.
+- Portaria GM-MD nº 379/2022, arts. 2º a 8º e Anexo II.
+- Portaria GM-MD nº 4.965/2025 (alteração da Portaria GM-MD nº 379/2022).
+
+VALIDAÇÃO
+- node --check app.js: aprovado.
+- node --test tests/*.test.js: 188 aprovados, 0 reprovados.
+
+LIMITAÇÕES
+O cadastro de localidades é auxiliar. A classificação pode depender das linhas geográficas Alfa/Beta, áreas delimitadas e atos posteriores. A ferramenta não confirma direito individual, pagamento nem registro em contracheque. A composição da ajuda de custo permanece estimativa sujeita à validação administrativa/CPEx.
