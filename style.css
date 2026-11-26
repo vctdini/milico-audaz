@@ -1111,3 +1111,85 @@ html[data-theme="dark"] .cc-live-summary>div:nth-child(4){background:#263044}
 html[data-theme="dark"] .profile-notice button,html[data-theme="dark"] .res-edit{background:#26354c;color:#e7edf8;border-color:#526987}
 html[data-theme="dark"] .cc-catalog-item:focus-visible{background:#2b3c53}
 html[data-theme="dark"] .cc-icon-action{color:#d9e5f7}
+
+/* Etapa 79 — espaçamento e acomodação de texto em cartões, diálogos e resultados */
+.profile-notice{align-items:flex-start;flex-wrap:wrap}
+.profile-notice>div{flex:1 1 100%;min-width:0}
+.profile-notice .profile-return,.profile-notice .profile-clear{flex:0 1 auto;min-width:0;white-space:normal;text-align:center}
+.profile-notice .profile-return[hidden]{display:none!important}
+.profile-notice .profile-return{margin:0}
+.cc-margin-highlight{display:grid;gap:.4rem}
+.cc-margin-highlight h3{margin:0}
+.cc-margin-highlight strong{display:block;margin:.1rem 0 .2rem;font-size:clamp(1.45rem,3vw,1.9rem);line-height:1.2}
+.cc-margin-highlight small{display:block;max-width:72ch;line-height:1.55;margin-top:.15rem}
+.cc-preview-row{gap:.85rem;padding:.72rem 0}
+.cc-preview-row>div{gap:.22rem;line-height:1.4}
+.cc-preview-row>div strong{line-height:1.35}
+.cc-preview-row>div small{line-height:1.45}
+.calc-row-summary,.cc-param-summary,.cc-event-summary{align-items:flex-start;gap:.85rem}
+.calc-row-summary>div:first-child,.cc-param-summary>div:first-child,.cc-event-summary>div:first-child{flex:1 1 auto;gap:.25rem;line-height:1.4}
+.calc-row-summary small,.cc-param-summary small,.cc-event-summary small{line-height:1.45}
+.cc-row-actions{align-self:center}
+.cc-event-control p,.cc-event-control small{line-height:1.55}
+.cc-param-card,.cc-event-control,.calc-row{padding:.85rem}
+.cc-param-fields,.cc-event-values{gap:.85rem}
+.cc-param-fields label,.cc-event-values label,.calc-row-editor label{line-height:1.45}
+.cc-param-fields small{line-height:1.5}
+.cc-catalog-panel{min-width:0}
+.cc-catalog-panel header{gap:.75rem}
+.cc-catalog-panel header h2{min-width:0;overflow-wrap:anywhere;line-height:1.3}
+.cc-catalog-grid,.cc-catalog-grid>*{min-width:0}
+.cc-catalog-item{line-height:1.45;overflow-wrap:anywhere}
+.cc-catalog-item strong,.cc-catalog-item span,.cc-catalog-item small{max-width:100%;line-height:1.45}
+.cc-catalog-note{line-height:1.55}
+.res-ready>*+*{margin-block-start:.7rem}
+.res-ready .res-title{margin-block-start:0}
+.res-ready .cc-report{margin-block:.8rem}
+.res-ready .cc-report h3{line-height:1.35}
+.res-ready .warn,.res-ready .note{line-height:1.6}
+.mov-profile-heading{min-width:0;flex-wrap:wrap}
+.mov-profile-heading>div{min-width:0;flex:1 1 14rem}
+.mov-profile-grid{gap:.8rem}
+.mov-profile-grid>div{display:flex;flex-direction:column;gap:.25rem;line-height:1.4}
+.mov-profile-grid strong{line-height:1.4}
+.mov-profile-feedback{line-height:1.55}
+@media(max-width:520px){
+  .profile-notice .profile-return,.profile-notice .profile-clear{width:100%;flex-basis:100%}
+  .cc-preview-row{grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:.6rem}
+  .cc-preview-row>b{align-self:start;padding:.1rem 0 0 .25rem;line-height:1.35}
+  body.pagina-contracheque .cc-preview-row>b{white-space:normal;max-width:44vw}
+  .cc-catalog-backdrop{padding:max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom))}
+  .cc-catalog-panel{width:100%;max-height:calc(100dvh - 16px)}
+  .cc-catalog-panel header{padding:12px 14px}
+  .cc-catalog-note{padding:10px 14px 14px}
+  .mov-profile-grid{grid-template-columns:minmax(0,1fr)}
+  .mov-profile-grid>div:last-child{grid-column:auto}
+  .mov-profile-actions{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:380px){
+  .cc-preview-row{grid-template-columns:minmax(0,1fr);gap:.25rem}
+  .cc-preview-row>b{justify-self:start;padding-left:0}
+  body.pagina-contracheque .cc-preview-row{grid-template-columns:minmax(0,1fr)}
+  body.pagina-contracheque .cc-preview-row>b{justify-self:start;padding-left:0}
+}
+
+/* Controles de parâmetros: manter rótulos e opções longas legíveis em cartões estreitos. */
+.cc-param-card,.cc-param-editor,.cc-param-fields{width:100%;max-width:100%;min-width:0}
+.cc-param-fields{grid-template-columns:minmax(0,1fr)}
+.cc-param-fields>*{min-width:0;max-width:100%}
+.cc-param-fields label{width:100%;min-width:0;overflow-wrap:anywhere}
+.cc-param-fields input:not([type="checkbox"]),.cc-param-fields select{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.cc-param-fields select{appearance:none;color-scheme:light;background-color:#fff;color:#0f1b3d;padding-right:2.25rem;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+html[data-theme="dark"] .cc-param-fields select{color-scheme:dark;background-color:#111c2d;color:#e7edf8}
+.cc-param-fields small{display:block;width:100%;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.55}
+.cc-param-fields .chk{width:100%;min-width:0;align-items:flex-start;line-height:1.5}
+.cc-param-fields .chk input{margin-top:.12rem;flex:0 0 auto}
+.calc-row-editor,.cc-event-editor,.cc-event-values{min-width:0;max-width:100%}
+.calc-row-editor>*,.cc-event-editor>*,.cc-event-values>*{min-width:0;max-width:100%}
+.calc-row-editor label,.cc-event-values label{width:100%;min-width:0;overflow-wrap:anywhere}
+.calc-row-editor input:not([type="checkbox"]),.cc-event-values input,.cc-event-values select{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+.calc-row-editor .chk,.cc-event-editor .chk{align-items:flex-start;line-height:1.5}
+.calc-row-editor .chk input,.cc-event-editor .chk input{margin-top:.12rem;flex:0 0 auto}
+html[data-theme="dark"] .calc-row-editor input:not([type="checkbox"]),html[data-theme="dark"] .cc-param-fields input:not([type="checkbox"]),html[data-theme="dark"] .cc-event-editor input:not([type="checkbox"]),html[data-theme="dark"] .cc-event-editor select{color-scheme:dark;background-color:#111c2d;color:#e7edf8;border-color:#455873}
+html[data-theme="dark"] .calc-row-editor .chk,html[data-theme="dark"] .cc-param-fields .chk,html[data-theme="dark"] .cc-event-editor .chk{padding:.55rem .65rem;border:1px solid #344258;border-radius:10px;background:#243249;color:#e7edf8}
+@media(max-width:820px){body.pagina-contracheque .cc-default-grid{grid-template-columns:minmax(0,1fr)}}

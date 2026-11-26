@@ -4,7 +4,11 @@
   "ignore": [
    "firebase.json",
    "**/.*",
-   "LEIA-ME.txt"
+    "docs/**",
+    "tests/**",
+    "legislacao/auditoria/**",
+    "**/*.md",
+    "**/*.txt"
   ],
   "headers": [
    {

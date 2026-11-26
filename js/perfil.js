@@ -10,7 +10,7 @@
   const STORAGE_KEY = 'milico-audaz:perfil:v1';
   const SOURCE_FORM = '[data-fn="contracheque"]';
   const PROFILE_FIELDS = [
-    'situacao', 'posto', 'mes-ref', 'qe', 'smi', 'hab', 'ats', 'co', 'co-posto', 'pm', 'gle', 'cmd',
+    'situacao', 'posto', 'mes-ref', 'hab', 'ats', 'acdm-percentual', 'co', 'co-posto', 'pm', 'gle', 'cmd',
     'pensao-auto', 'pensao-15', 'fusex-quota', 'fusex-nao', 'ferias-valor', 'ferias-ativo', 'natalino-valor', 'natalino-ativo', 'natalino-parcela', 'natalino-meses', 'natalino-base', 'natalino-adiantamento', 'ats-nao', 'co-nao', 'pm-nao', 'gle-nao',
     'dep-total', 'dep-fusex', 'dep-ir', 'dep-salario-familia', 'dep-pre-escolar'
   ];
@@ -18,9 +18,15 @@
   const read = () => {
     try {
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-      return value && value.version === 1 && value.data && typeof value.data === 'object'
-        ? value.data
-        : null;
+      if (!value || value.version !== 1 || !value.data || typeof value.data !== 'object') return null;
+      const data = { ...value.data };
+      if (data.posto === 'cabo_e' || data.posto === 'cabo_n') data.posto = 'cabo';
+      if (data.qe && data.posto === 'sgt2') data.posto = 'sgt2_qe';
+      if (data.qe && data.posto === 'sgt3') data.posto = 'sgt3_qe';
+      if (data.situacao === 'ativa-carreira' || data.situacao === 'ativa-temporario') data.situacao = 'ativa';
+      delete data.qe;
+      delete data.smi;
+      return data;
     } catch (error) {
       console.warn('[Milico Audaz] Não foi possível ler o perfil local.', error);
       return null;
@@ -67,6 +73,14 @@
         field.value = data[id];
       }
     });
+    if (form.matches(SOURCE_FORM) && (!data.posto || !data.situacao)) {
+      ['ferias','natalino'].forEach((name) => {
+        const active = form.querySelector(`#${name}-ativo`);
+        const panel = form.querySelector(`#cc-evento-${name}`);
+        if (active) active.checked = false;
+        if (panel) panel.hidden = true;
+      });
+    }
     [['ats-nao','ats'],['co-nao','co'],['pm-nao','pm'],['gle-nao','gle']].forEach(([checkId, fieldId]) => {
       const check = document.getElementById(checkId), field = document.getElementById(fieldId);
       if (check && field && data[fieldId] != null) check.checked = !(Number(String(data[fieldId]).replace(',','.')) > 0);
@@ -114,17 +128,85 @@
     const status = data ? 'Perfil carregado.' : (independente
       ? 'Ferramenta independente: preencha os próprios campos; não depende do contracheque.'
       : 'Sem perfil salvo. Você pode preencher esta ferramenta do zero ou abrir o contracheque para importar os campos compatíveis.');
+    const formIsSource = form.matches(SOURCE_FORM);
+    const returnToMovement = formIsSource && new URLSearchParams(window.location.search).get('retorno') === 'movimentacao.html';
     notice.innerHTML = `
       <div><strong>Perfil remuneratório neste dispositivo</strong>
       <p>Os dados do contracheque preenchem automaticamente os campos compatíveis das demais calculadoras.</p>
       <small>${status} Os dados ficam somente neste navegador.</small></div>
-      <button type="button" class="profile-clear">Limpar perfil</button>`;
+      ${returnToMovement ? `<a class="btn btn-sec profile-return" href="movimentacao.html" ${data?.posto && data?.situacao ? '' : 'hidden'}>Voltar para movimentação</a>` : ''}
+      <button type="button" class="profile-clear">${formIsSource ? 'Limpar dados' : 'Limpar perfil'}</button>`;
+    const returnLink = notice.querySelector('.profile-return');
+    returnLink?.addEventListener('click', (event) => {
+      try {
+        const previousPage = new URL(document.referrer);
+        if (previousPage.origin === window.location.origin && previousPage.pathname.endsWith('/movimentacao.html') && window.history.length > 1) {
+          event.preventDefault();
+          window.history.back();
+        }
+      } catch (_) { /* Mantém o link local de retorno como fallback. */ }
+    });
     form.parentNode.insertBefore(notice, form);
     notice.querySelector('.profile-clear').addEventListener('click', () => {
-      const confirmed = window.confirm('Deseja apagar os dados remuneratórios salvos neste dispositivo?');
+      const confirmed = window.confirm(formIsSource
+        ? 'Deseja apagar os dados salvos e limpar toda a simulação de contracheque neste dispositivo?'
+        : 'Deseja apagar os dados remuneratórios salvos neste dispositivo?');
       if (!confirmed) return;
-      try { localStorage.removeItem(STORAGE_KEY); } catch (error) { console.warn(error); }
-      notice.querySelector('small').textContent = 'Perfil apagado deste dispositivo.';
+      let storageCleared = true;
+      try { localStorage.removeItem(STORAGE_KEY); } catch (error) { storageCleared = false; console.warn(error); }
+      if (formIsSource) {
+        form.reset();
+        form.querySelectorAll('#receitas-extras .calc-row, #descontos-extras .calc-row').forEach(row => row.remove());
+        form.querySelectorAll('.cc-param-card').forEach(card => card.remove());
+        form.querySelectorAll('details').forEach(details => { details.open = false; });
+        ['ferias','natalino'].forEach(name => {
+          const panel = document.getElementById(`cc-evento-${name}`);
+          if (panel) { panel.hidden = true; panel.classList.remove('is-editing'); }
+          const active = document.getElementById(`${name}-ativo`);
+          if (active) active.checked = false;
+        });
+        ['natalino-base','natalino-adiantamento','natalino-parcela'].forEach(id => {
+          const field = document.getElementById(id);
+          if (field) { delete field.dataset.userEdited; delete field.dataset.userSelected; }
+        });
+        const dependentesToggle = document.getElementById('dependentes-toggle');
+        const dependentesCampos = document.getElementById('dependentes-campos');
+        if (dependentesToggle) dependentesToggle.setAttribute('aria-expanded','false');
+        if (dependentesCampos) dependentesCampos.hidden = true;
+        const situacaoAviso = document.getElementById('situacao-aviso');
+        if (situacaoAviso) { situacaoAviso.hidden = true; situacaoAviso.textContent = ''; }
+        const dependentesLegenda = document.getElementById('dependentes-legenda');
+        if (dependentesLegenda) dependentesLegenda.textContent = 'Dependentes · Total: 0 | FuSEx: 0 | IR: 0 | Salário-família: 0 | Pré-escolar: 0';
+        const receitas = document.getElementById('cc-preview-receitas');
+        const descontos = document.getElementById('cc-preview-descontos');
+        if (receitas) receitas.innerHTML = '<div class="cc-placeholder">Preencha os dados acima para visualizar as receitas.</div>';
+        if (descontos) descontos.innerHTML = '<div class="cc-placeholder">Pensão militar, FuSEx e IR serão estimados automaticamente.</div>';
+        ['receitas-extras-total','descontos-extras-total'].forEach(id => {
+          const field = document.getElementById(id);
+          if (field) field.textContent = 'R$ 0,00';
+        });
+        ['cc-live-receitas','cc-live-descontos','cc-live-liquido','cc-live-margem'].forEach(id => {
+          const field = document.getElementById(id);
+          if (field) field.textContent = 'R$ 0,00';
+        });
+        const resultado = document.getElementById('res');
+        if (resultado) {
+          resultado.hidden = true;
+          resultado.innerHTML = '';
+          resultado.classList.remove('res-ready','res-contracheque');
+        }
+        const returnLink = notice.querySelector('.profile-return');
+        if (returnLink) returnLink.hidden = true;
+        document.dispatchEvent(new CustomEvent('milico:perfil-limpo'));
+        notice.querySelector('small').textContent = storageCleared
+          ? 'Dados apagados. Preencha a simulação para criar um novo perfil neste dispositivo.'
+          : 'A tela foi limpa, mas o navegador não permitiu apagar os dados salvos neste dispositivo.';
+        form.querySelector('#situacao')?.focus();
+        return;
+      }
+      notice.querySelector('small').textContent = storageCleared
+        ? 'Perfil apagado deste dispositivo. Os campos já preenchidos nesta calculadora não foram alterados.'
+        : 'O navegador não permitiu apagar o perfil salvo neste dispositivo.';
       document.dispatchEvent(new CustomEvent('milico:perfil-limpo'));
     });
   };
@@ -198,16 +280,25 @@
     apply(existing, sourceForm);
     updateDependentesResumo();
     const save = () => {
-      const ok = write(collect(sourceForm));
+      const data = collect(sourceForm);
+      if (!data.posto || !data.situacao) {
+        try { localStorage.removeItem(STORAGE_KEY); } catch (error) { console.warn(error); }
+        const status = document.querySelector('[data-profile-notice] small');
+        if (status) status.textContent = 'Selecione situação funcional e posto ou graduação para salvar o perfil neste dispositivo.';
+        const returnLink = document.querySelector('[data-profile-notice] .profile-return');
+        if (returnLink) returnLink.hidden = true;
+        return;
+      }
+      const ok = write(data);
       const status = document.querySelector('[data-profile-notice] small');
       if (status && ok) status.textContent = 'Perfil atualizado e salvo neste dispositivo.';
+      const returnLink = document.querySelector('[data-profile-notice] .profile-return');
+      if (returnLink) returnLink.hidden = !ok;
     };
     sourceForm.addEventListener('input', save);
     sourceForm.addEventListener('change', save);
     sourceForm.addEventListener('submit', save);
     sourceForm.addEventListener('click', (event) => { if (event.target.closest('[data-add-row], .remove-row, [data-remove-event], [data-add-event]')) setTimeout(save, 0); });
-    // Cria o perfil inicial mesmo se o usuário apenas abrir o simulador e depois navegar.
-    save();
   } else if (existing) {
     // As calculadoras secundárias recebem apenas os dados compatíveis do perfil.
     // Se não existir perfil, permanecem em branco/com seus padrões originais.
@@ -227,7 +318,10 @@
     };
     const core = window.MilicoAudazCore;
     const postos = core?.dados?.POSTOS || [];
-    const posto = postos.find(item => item.id === String(existing.posto || ''));
+    const idPostoSalvo = String(existing.posto || '');
+    const idPostoMigrado = idPostoSalvo === 'cabo_e' || idPostoSalvo === 'cabo_n' ? 'cabo' :
+      (existing.qe && idPostoSalvo === 'sgt2' ? 'sgt2_qe' : existing.qe && idPostoSalvo === 'sgt3' ? 'sgt3_qe' : idPostoSalvo);
+    const posto = postos.find(item => item.id === idPostoMigrado);
     const fn = targetForm?.dataset?.fn || '';
     if (posto) {
       setValue('posto', posto.id);
@@ -235,7 +329,7 @@
       // Parâmetros comuns do simulador: QE, serviço inicial, habilitação,
       // ATS reconhecido, compensação orgânica, permanência e localidade.
       if (!perfilInativo) {
-        ['qe','smi','hab'].forEach(id => { if (id in existing) setValue(id, existing[id]); });
+        ['hab'].forEach(id => { if (id in existing) setValue(id, existing[id]); });
         // Respeita as opções “não faço jus” marcadas no contracheque: não
         // transfere percentuais residuais para uma ferramenta secundária.
         const percentuais = {
@@ -247,20 +341,12 @@
         Object.entries(percentuais).forEach(([id, value]) => setValue(id, value));
         if ('hab' in existing) setValue('habsel', existing.hab);
         setValue('co-posto', existing['co-posto'] || posto.id);
-        setChecked('qe', existing.qe);
-        setChecked('smi', existing.smi);
       }
+      document.getElementById('posto')?.dispatchEvent(new Event('change', { bubbles: true }));
       setChecked('cmd', existing.cmd);
       const depCount = Math.max(0, Number(existing['dep-total']) || 0);
       setChecked('dep', depCount > 0);
 
-      if (fn === 'transporte') {
-        // O posto importado já fornece o soldo da tabela; mantemos o campo
-        // de soldo personalizado vazio para não congelar o soldo se o usuário
-        // mudar o posto nesta calculadora.
-        const soldoField = document.getElementById('soldoc');
-        if (soldoField) soldoField.value = '';
-      }
       if (fn === 'diarias') {
         const circleIndex = ['al1','al2'].includes(posto.id) ? 5 :
           ({OG:1, SUP:2, INT:3, SUB:3, SGT:4, PRA:6}[posto.circ] ?? 6);
@@ -268,7 +354,6 @@
       }
       if (fn === 'pensao' && !perfilInativo) {
         const opts = {
-          qe: !!existing.qe, smi: !!existing.smi,
           hab: Number(existing.hab)||0, ats: existing['ats-nao'] ? 0 : Number(existing.ats)||0,
           co: existing['co-nao'] ? 0 : Number(existing.co)||0, coPosto: existing['co-posto'] || posto.id,
           pm: existing['pm-nao'] ? 0 : Number(existing.pm)||0, gle: existing['gle-nao'] ? 0 : Number(existing.gle)||0, gr: 0

@@ -67,7 +67,6 @@
     if (!posto) return null;
     const inactive = ['reserva', 'reformado'].includes(String(data.situacao || ''));
     const options = {
-      qe: !!data.qe, smi: !!data.smi,
       hab: inactive ? 0 : Number(data.hab) || 0,
       ats: inactive || data['ats-nao'] ? 0 : Number(data.ats) || 0,
       co: inactive || data['co-nao'] ? 0 : Number(data.co) || 0,
@@ -95,6 +94,7 @@
       state.textContent = 'Contracheque encontrado';
       state.classList.add('is-ready');
       button.disabled = false;
+      form.querySelector('.mov-edit-profile').textContent = 'Editar contracheque';
       feedback.textContent = 'Os dados do contracheque foram carregados neste navegador. Se precisar alterar algo, edite e retorne para confirmar.';
     } else {
       posto.textContent = 'Não informado';
@@ -103,7 +103,8 @@
       state.textContent = 'Sem contracheque salvo';
       state.classList.remove('is-ready');
       button.disabled = true;
-      feedback.textContent = 'Abra o contracheque, preencha seus dados e retorne a esta calculadora.';
+      form.querySelector('.mov-edit-profile').textContent = 'Preencher contracheque';
+      feedback.textContent = 'Preencha primeiro seu contracheque para continuar. Ao concluir, use “Voltar para movimentação” para retornar a esta calculadora.';
     }
     return result;
   };
