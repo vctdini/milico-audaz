@@ -64,7 +64,11 @@
     const posto = core?.dados?.POSTOS?.find((item) => item.id === data.posto);
     if (posto && typeof core.comp === 'function') {
       const percent = (id) => Number(String(data[id] ?? '0').replace(',', '.')) || 0;
-      const disp = data['acdm-percentual'] === 'auto' ? null : percent('acdm-percentual');
+      // O contracheque não possui seletor para o maior percentual histórico de ACDM.
+      // Ausência do campo deve usar o percentual automático do posto; somente uma
+      // seleção explícita em outra ferramenta pode substituir esse valor.
+      const disp = !('acdm-percentual' in data) || data['acdm-percentual'] === 'auto'
+        ? null : percent('acdm-percentual');
       const remuneracao = core.comp(posto, {
         hab: percent('hab'), ats: percent('ats'), dispPercent: disp,
         co: percent('co'), coPosto: data['co-posto'] || data.posto,
