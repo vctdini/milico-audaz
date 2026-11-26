@@ -1061,6 +1061,42 @@ html[data-theme="dark"] .mov-calc .mov-demonstrativo .mov-financial-table th,
 html[data-theme="dark"] .mov-calc .mov-demonstrativo .mov-financial-table td:last-child{background:#243249;color:var(--ink)}
 @media(prefers-color-scheme:dark){html[data-theme="system"]{color-scheme:dark}}
 @media(max-width:640px){.pull>.chips .chip{width:auto}}
+
+/* Etapa 78 — contenção consistente de conteúdo e alinhamento responsivo */
+html,body{max-width:100%;min-width:320px}
+body{overflow-x:clip}
+header.top,.bar,main.page,.wrap,footer.bot{min-width:0}
+main.page{box-sizing:border-box}
+main.page>*,.page section,.page form,.page fieldset,.page article,
+.page .grid,.page .grp,.page .res,.page .fonte{min-width:0}
+.page :where(.grid,.tiles,.steps,.cc-fields-grid,.cc-default-grid,.cc-event-values)>*{min-width:0}
+.page :where(h1,h2,h3,p,li,label,small,strong,span,a,summary,button,output){max-width:100%;overflow-wrap:break-word}
+.page :where(input,select,textarea){display:block;width:100%;min-width:0;max-width:100%}
+.page :where(button,.btn){min-width:0}
+.page :where(img,svg,video,canvas){max-width:100%}
+.page table{width:100%;max-width:100%;border-collapse:collapse}
+.page :where(.tbl-wrap,.table-wrap,.table-responsive){max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-inline:contain}
+.page .ph{width:100%;max-width:var(--layout-form);margin-inline:auto}
+.page .ph>div{min-width:0}
+.page .ph p{overflow-wrap:anywhere}
+.page .res,.page .fonte,.page .profile-notice{margin-inline:auto}
+@media(max-width:760px){
+  main.page{width:calc(100% - 1.5rem);padding-inline:0}
+  .page .ph{align-items:flex-start}
+  .page .cc-live-summary,.page .cc-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .page .cc-preview-row{grid-template-columns:minmax(0,1fr) auto}
+}
+@media(max-width:520px){
+  main.page{width:calc(100% - 1rem)}
+  .page .ph{gap:.55rem}
+  .page .cc-live-summary,.page .cc-summary{grid-template-columns:minmax(0,1fr)}
+  .page .cc-section-heading{gap:.6rem}
+  .page .cc-section-heading>div{min-width:0}
+  .page .cc-preview-row{gap:.45rem}
+  .page .cc-preview-row>b{max-width:44vw;white-space:normal;overflow-wrap:anywhere}
+  .page .cc-card-title{align-items:stretch}
+  .page .cc-card-title .cc-add-rubrica{width:100%}
+}
 html[data-theme="dark"] .cc-defaults,html[data-theme="dark"] .cc-catalog-panel,
 html[data-theme="dark"] .cc-event-control,html[data-theme="dark"] .cc-param-card,
 html[data-theme="dark"] .cc-advanced,html[data-theme="dark"] .tool-search input,
