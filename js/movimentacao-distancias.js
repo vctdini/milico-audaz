@@ -57,7 +57,6 @@
     const origin = $('#mov-origem')?.value.trim();
     const destination = $('.mov-destino-nome', row)?.value.trim();
     const ida = $('.mov-destino-km-ida', row);
-    const total = $('.mov-destino-km', row);
     if (!origin || !destination) {
       setStatus(row, 'Preencha a guarnição de origem e o destino.', 'is-error');
       return;
@@ -68,13 +67,11 @@
     try {
       const kmIda = await routeKm(origin, destination);
       if (!(kmIda > 0)) throw new Error('A rota retornou uma distância inválida.');
-      const kmTotal = Math.round(kmIda * 2);
       if (ida) ida.value = String(Math.round(kmIda));
-      if (total) total.value = String(Math.round(kmTotal));
-      [ida,total].forEach(input => input?.dispatchEvent(new Event('input',{bubbles:true})));
-      [ida,total].forEach(input => input?.dispatchEvent(new Event('change',{bubbles:true})));
+      [ida].forEach(input => input?.dispatchEvent(new Event('input',{bubbles:true})));
+      [ida].forEach(input => input?.dispatchEvent(new Event('change',{bubbles:true})));
       document.querySelector('#mov-passagens-lista')?.dispatchEvent(new Event('input',{bubbles:true}));
-      setStatus(row, `Estimativa: ${kmIda.toLocaleString('pt-BR')} km por trecho · ${kmTotal.toLocaleString('pt-BR')} km ida e volta. Confira antes de usar.`, 'is-success');
+      setStatus(row, `Estimativa de ida: ${kmIda.toLocaleString('pt-BR')} km. Confira antes de usar.`, 'is-success');
     } catch (error) {
       setStatus(row, error.message || 'Falha ao consultar a rota. Informe a distância manualmente.', 'is-error');
     } finally {
@@ -97,7 +94,7 @@
   // arredondamos para o quilômetro inteiro mais próximo para uso consistente nos cálculos.
   document.addEventListener('blur', event => {
     const input = event.target;
-    if (!input.matches?.('.mov-destino-km, .mov-destino-km-ida')) return;
+    if (!input.matches?.('.mov-destino-km-ida')) return;
     const raw = String(input.value || '').trim().replace(',', '.');
     if (!raw) return;
     const value = Number(raw);
@@ -116,7 +113,7 @@
   // arredondamos para o quilômetro inteiro mais próximo para uso consistente nos cálculos.
   document.addEventListener('blur', event => {
     const input = event.target;
-    if (!input.matches?.('.mov-destino-km, .mov-destino-km-ida')) return;
+    if (!input.matches?.('.mov-destino-km-ida')) return;
     const raw = String(input.value || '').trim().replace(',', '.');
     if (!raw) return;
     const value = Number(raw);

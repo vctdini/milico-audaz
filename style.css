@@ -991,3 +991,87 @@ footer.bot .wrap{width:min(100% - 2rem,var(--layout-content))}
   .chips{gap:.45rem;padding-bottom:.75rem}
   .chip{font-size:.84rem;padding:.48rem .72rem}
 }
+
+/* Etapa 77 — categorias organizadas e preferência global de aparência */
+.pull{margin-top:-2.15rem;z-index:2}
+.pull>.chips{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
+  width:100%;min-width:0;overflow:visible;
+  padding:.85rem;background:var(--card);border:1px solid var(--bd);
+  border-radius:18px;box-shadow:var(--sh);
+}
+.pull>.chips .chip{flex:0 1 auto;max-width:100%;white-space:normal;text-align:center;line-height:1.25;min-height:42px;padding:.55rem .9rem;box-shadow:none}
+@media(max-width:640px){
+  .pull{margin-top:-1.8rem}
+  .pull>.chips{gap:.45rem;padding:.65rem;border-radius:15px}
+  .pull>.chips .chip{flex:1 1 calc(50% - .45rem);font-size:.82rem;padding:.5rem .55rem}
+  .pull>.chips .chip:first-child{flex:1 1 100%}
+}
+.theme-control{display:flex;align-items:center;gap:.35rem;flex:none;margin-left:auto;color:#fff;font-size:.8rem;font-weight:700}
+.theme-control .theme-icon{font-size:1.1rem;line-height:1}
+.theme-control select{width:auto;min-width:112px;max-width:145px;min-height:40px;padding:.35rem 1.7rem .35rem .55rem;border:1px solid rgba(255,255,255,.35);border-radius:9px;background:#fff;color:#14213d;font-family:inherit;font-size:.82rem;font-weight:600;line-height:1.2}
+@media(max-width:520px){.bar{gap:.45rem}.logo{font-size:.92rem;gap:.4rem}.logo i{width:32px;height:32px}.theme-control{gap:.2rem}.theme-control select{min-width:100px;max-width:112px;font-size:.78rem;padding-left:.4rem}#instalar{width:auto;min-width:40px;padding:.35rem .5rem;font-size:0}#instalar .i{width:20px;height:20px}}
+
+/* Tema escuro global — preserva a identidade azul/vermelha e os contrastes */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --az:#a9c5ff;--az2:#8eb2ff;--vm:#e34b60;--vm2:#c9364b;
+  --bg:#101827;--ink:#e7edf8;--mut:#aab7cc;--bd:#344258;--card:#1b2638;
+  --sh:0 6px 18px rgba(0,0,0,.24);--sh-hover:0 12px 25px rgba(0,0,0,.34);
+  --borda:#344258;--superficie:#1b2638;--texto-secundario:#aab7cc;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,
+html[data-theme="dark"] label,html[data-theme="dark"] summary{color:var(--az)}
+html[data-theme="dark"] .hero{background:radial-gradient(1200px 400px at 85% -10%,#294b83 0,transparent 60%),#101f3d}
+html[data-theme="dark"] .pull>.chips,html[data-theme="dark"] .tile,html[data-theme="dark"] .step,
+html[data-theme="dark"] .norm,html[data-theme="dark"] details,html[data-theme="dark"] form.calc,
+html[data-theme="dark"] .res,html[data-theme="dark"] .cc-report,html[data-theme="dark"] .cc-setup,
+html[data-theme="dark"] .cc-defaults,html[data-theme="dark"] .tool-discovery,
+html[data-theme="dark"] .dependentes-campos,html[data-theme="dark"] .situacao-funcional{background:var(--card);color:var(--ink);border-color:var(--bd)}
+html[data-theme="dark"] .chip{background:#26354c;color:#e5edff;border-color:#455873}
+html[data-theme="dark"] .chip:hover{background:#31435e}
+html[data-theme="dark"] .chip[aria-pressed="true"]{background:var(--vm);color:#fff;border-color:var(--vm)}
+html[data-theme="dark"] .t-main,html[data-theme="dark"] .t-main .t-tx b,
+html[data-theme="dark"] .norm,html[data-theme="dark"] .norm b{color:var(--ink)}
+html[data-theme="dark"] .t-ic.c-az{background:#263b5c;color:#a9c5ff}
+html[data-theme="dark"] .t-ic.c-vm{background:#4a2935;color:#ff9aaa}
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{
+  background:#111c2d;color:var(--ink);border-color:#455873
+}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#91a0b8}
+html[data-theme="dark"] .tabs{background:#172235;border-color:var(--bd)}
+html[data-theme="dark"] .tabs a{color:#b5c2d8}
+html[data-theme="dark"] .tabs a.on{color:#ff8091}
+html[data-theme="dark"] .calc-row,html[data-theme="dark"] .cc-report .tbl tr.tot,
+html[data-theme="dark"] .cc-report-receitas .tbl tr.tot,html[data-theme="dark"] .calc-subtotal{background:#243249;color:var(--ink)}
+html[data-theme="dark"] .cc-report .tbl td,html[data-theme="dark"] .cc-report .tbl th,
+html[data-theme="dark"] .tbl td,html[data-theme="dark"] .tbl th{border-color:var(--bd)}
+html[data-theme="dark"] .profile-notice{background:#1d3455;border-color:#3e5c89;color:var(--ink)}
+html[data-theme="dark"] .profile-notice strong,html[data-theme="dark"] .calc-subtotal strong{color:#b8d0ff}
+html[data-theme="dark"] .warn,html[data-theme="dark"] .situacao-aviso{background:#3a3221;color:#ffe5a6;border-color:#b78a35}
+html[data-theme="dark"] .situacao-aviso.situacao-inativo{background:#40272b;color:#ffc4c4}
+html[data-theme="dark"] .nores{background:#1b2638;color:var(--mut);border-color:var(--bd)}
+html[data-theme="dark"] .cta{background:#172b50}
+html[data-theme="dark"] footer.bot{background:#0a1322}
+html[data-theme="dark"] .remove-row{background:#1b2638;color:#ff9aaa;border-color:var(--bd)}
+html[data-theme="dark"] .cc-summary>div,html[data-theme="dark"] .cc-live-summary>div{background:var(--card);border-color:var(--bd)}
+html[data-theme="dark"] .cc-live-summary>div strong{color:#dce8ff}
+html[data-theme="dark"] .mov-calc .mov-demonstrativo .mov-financial-table th,
+html[data-theme="dark"] .mov-calc .mov-demonstrativo .mov-financial-table td:last-child{background:#243249;color:var(--ink)}
+@media(prefers-color-scheme:dark){html[data-theme="system"]{color-scheme:dark}}
+@media(max-width:640px){.pull>.chips .chip{width:auto}}
+html[data-theme="dark"] .cc-defaults,html[data-theme="dark"] .cc-catalog-panel,
+html[data-theme="dark"] .cc-event-control,html[data-theme="dark"] .cc-param-card,
+html[data-theme="dark"] .cc-advanced,html[data-theme="dark"] .tool-search input,
+html[data-theme="dark"] .cc-catalog-item,html[data-theme="dark"] .cc-icon-action,
+html[data-theme="dark"] .cc-live-summary>div,html[data-theme="dark"] .res-ready .note,
+html[data-theme="dark"] .mov-calc #comparacao-destinos{background:#1b2638;color:var(--ink);border-color:var(--bd)}
+html[data-theme="dark"] .cc-receitas,html[data-theme="dark"] .res-ready .tbl th,
+html[data-theme="dark"] .res-ready .tbl tr.tot td{background:#243249;color:var(--ink)}
+html[data-theme="dark"] .cc-descontos,html[data-theme="dark"] .cc-live-summary>div:nth-child(2),
+html[data-theme="dark"] .cc-report-descontos .tbl tr.tot{background:#392832;color:var(--ink)}
+html[data-theme="dark"] .cc-live-summary>div:nth-child(4){background:#263044}
+html[data-theme="dark"] .profile-notice button,html[data-theme="dark"] .res-edit{background:#26354c;color:#e7edf8;border-color:#526987}
+html[data-theme="dark"] .cc-catalog-item:focus-visible{background:#2b3c53}
+html[data-theme="dark"] .cc-icon-action{color:#d9e5f7}

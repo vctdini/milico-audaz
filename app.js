@@ -54,6 +54,8 @@ function comp(p,o){const s=p.soldo,d=(o.dispPercent!=null&&Number.isFinite(Numbe
  return{p,s,am,hab,ats,dp,dd,co,coPosto,pm,gle,gr,disp:d,atsMaior:ats>=dp,base:s+am+hab+dd+co+pm+gle,total:s+am+hab+dd+co+pm+gle+gr}}
 const prm=()=>({qe:C('qe'),smi:C('smi'),hab:N('hab'),ats:N('ats'),dispPercent:$('acdm-percentual')?.value==='auto'?null:Number($('acdm-percentual')?.value),co:N('co'),coPosto:$('co-posto')?.value||$('posto')?.value,pm:N('pm'),gle:N('gle'),gr:document.querySelector('.mov-calc')&&C('cmd')?10:0});
 function perfil(){const p=P('posto'),o=prm();return comp(p,o)}
+// Art. 21, I, das IG FuSEx (Portaria C Ex nº 1.742/2022): soldados do Efetivo Variável não são contribuintes. O perfil sd_rec identifica expressamente Soldado/Recruta não engajado.
+function isentoFusexPorEnquadramento(p){return p?.id==='sd_rec'}
 const linhasRem=f=>[['Soldo',f.s],['Adicional militar',f.am],['Adicional de habilitação',f.hab],[f.atsMaior?'Adicional de tempo de serviço':'Adicional de compensação por disponibilidade militar',f.dd],[`Compensação orgânica (${f.co}% sobre ${f.coPosto.nome})`,f.co],['Adicional de permanência',f.pm],['Gratificação de localidade especial',f.gle],['Gratificação de representação (mensal)',f.gr]];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function normalizarLancamentos(items){return (Array.isArray(items)?items:[]).map(r=>({nome:String(r.nome||'').trim(),valor:Math.max(0,Number(String(r.valor??0).replace(',','.'))||0),irTributavel:!!r.irTributavel,baseContribuicao:!!r.baseContribuicao,irDedutivel:!!r.irDedutivel,margemPermanente:!!r.margemPermanente})).filter(r=>r.nome&&r.valor>0)}
@@ -197,8 +199,9 @@ function atualizarDescontosPreview(){
   const extras=readRows('receitas-extras'),extrasDesc=readRows('descontos-extras');
   const quantidadeSalarioFamilia=Math.max(0,Math.trunc(N('dep-salario-familia'))),creditoSalarioFamilia=Math.round(quantidadeSalarioFamilia*0.16*100)/100;
   const base=f.base+extras.filter(r=>r.baseContribuicao).reduce((s,r)=>s+r.valor,0);
-  const rawQuota=$('fusex-quota')?.value||'0',quotaPercent=parseFloat(rawQuota)||0;
-  const d=calcularDescontosObrigatorios(base,quotaPercent,{pensaoAuto:C('pensao-auto'),optou15:C('pensao-15'),fusexNao:C('fusex-nao')});
+  const fusexIsento=C('fusex-nao')||isentoFusexPorEnquadramento(f.p);
+  const rawQuota=$('fusex-quota')?.value||'0',quotaPercent=fusexIsento?0:(parseFloat(rawQuota)||0);
+  const d=calcularDescontosObrigatorios(base,quotaPercent,{pensaoAuto:C('pensao-auto'),optou15:C('pensao-15'),fusexNao:fusexIsento});
   const feriasAtivo=C('ferias-ativo')&&!$('cc-evento-ferias')?.hidden;
   const feriasBase=feriasAtivo?f.total:0,feriasValor=feriasAtivo?calcularAdicionalFerias(feriasBase):0;
   const natalinoAtivo=C('natalino-ativo')&&!$('cc-evento-natalino')?.hidden;
@@ -212,7 +215,7 @@ function atualizarDescontosPreview(){
   const ir=calcularIRRF((feriasAtivo?0:f.total)+tributaveis,{dependentes:N('dep-ir'),pensao:d.pensao,fusex:d.fusex,quota:d.quota,alimenticia:pensaoAlimenticia});
   const money=(label,value,sub='')=>`<div class="cc-preview-row"><div><strong>${label}</strong>${sub?`<small>${sub}</small>`:''}</div><b>${R(value)}</b></div>`;
   const receitaRows=[money('Soldo',f.s,'Tabela vigente'),money('Adicional militar',f.am,`${D.CIRC[f.p.circ]}% do soldo de ${f.p.nome}`),money('Adicional de habilitação',f.hab,`${N('hab')}% do soldo`),money(f.atsMaior?'Adicional de tempo de serviço':'Adicional de compensação por disponibilidade militar',f.dd,`${f.disp}% do soldo`),...(f.co?[money('Compensação orgânica',f.co,`${f.co}% sobre ${f.coPosto.nome}`)]:[]),...(f.pm?[money('Adicional de permanência',f.pm,`${N('pm')}% do soldo`)]:[]),...(f.gle?[money('Gratificação de localidade especial',f.gle)]:[]),money('Salário-família',creditoSalarioFamilia,`${quantidadeSalarioFamilia} dependente(s) × R$ 0,16`),money('Assistência pré-escolar',calcularAssistenciaPreEscolar(N('dep-pre-escolar'),base,1927,526.64).total,`${N('dep-pre-escolar')} dependente(s)`),...(feriasAtivo?[money('Adicional de férias (1/3)',feriasValor,'Decreto nº 4.307/2002, art. 80')]:[]),...(natalinoAtivo?[money(parcelaNatal===1?'Adicional natalino — 1ª parcela':'Adicional natalino — 2ª parcela (13º integral)',natalinoCredito,parcelaNatal===1?'50% do valor proporcional; sem IR na antecipação':'Valor integral do 13º antes do abatimento da 1ª parcela')]:[]),...extras.map(r=>money(esc(r.nome),r.valor,r.irTributavel?'Tributável no IR mensal':'Incidência de IR não marcada'))];
-  const descontoRows=[money('Pensão militar',d.pensao,`${C('pensao-auto')?(C('pensao-15')?'12% total (10,5% + 1,5%)':'10,5% da base'):'Desativada'}`),money('FuSEx',d.fusex,'3% da base'),money('FuSEx — dependentes',d.quota,`${quotaPercent}% da base`),money('Imposto de Renda mensal',ir.imposto,`Alíquota efetiva ${ir.aliquotaEfetiva.toFixed(2).replace('.',',')}%`),...(feriasAtivo?[money('IR sobre férias',irFerias.imposto,'Apuração separada sobre remuneração de férias + 1/3')]:[]),...(natalinoAtivo&&parcelaNatal===2?[money('Adiantamento da 1ª parcela do 13º',adiantamentoNatal,'Abatimento da antecipação já recebida'),money('IR sobre 13º',irNatalino.imposto,'Tributação exclusiva sobre o valor integral')]:[]),...extrasDesc.map(r=>money(esc(r.nome),r.valor,r.irDedutivel?'Dedutível no IR (marcação do usuário)':''))];
+  const descontoRows=[money('Pensão militar',d.pensao,`${C('pensao-auto')?(C('pensao-15')?'12% total (10,5% + 1,5%)':'10,5% da base'):'Desativada'}`),money('FuSEx',d.fusex,fusexIsento?'Isento — Cabo/Soldado do Efetivo Variável':'3% da base'),money('FuSEx — dependentes',d.quota,`${quotaPercent}% da base`),money('Imposto de Renda mensal',ir.imposto,`Alíquota efetiva ${ir.aliquotaEfetiva.toFixed(2).replace('.',',')}%`),...(feriasAtivo?[money('IR sobre férias',irFerias.imposto,'Apuração separada sobre remuneração de férias + 1/3')]:[]),...(natalinoAtivo&&parcelaNatal===2?[money('Adiantamento da 1ª parcela do 13º',adiantamentoNatal,'Abatimento da antecipação já recebida'),money('IR sobre 13º',irNatalino.imposto,'Tributação exclusiva sobre o valor integral')]:[]),...extrasDesc.map(r=>money(esc(r.nome),r.valor,r.irDedutivel?'Dedutível no IR (marcação do usuário)':''))];
   if(areaR)areaR.innerHTML=receitaRows.join('');if(areaD)areaD.innerHTML=descontoRows.join('');
   if($('ferias-base'))$('ferias-base').value=feriasBase.toFixed(2);if($('ferias-valor'))$('ferias-valor').value=feriasValor.toFixed(2);if($('ferias-summary-value'))$('ferias-summary-value').textContent=R(feriasValor);
   if($('natalino-valor'))$('natalino-valor').value=natalino.total.toFixed(2);if($('natalino-summary-value'))$('natalino-summary-value').textContent=R(natalinoCredito);
@@ -260,6 +263,18 @@ function atualizarResumoItensMov(){
  const itens=itensMovimentacaoSelecionados();
  status.textContent=itens.length?`${itens.length} item(ns) selecionado(s): ${itens.join(', ')}.`:'Nenhum item adicional selecionado.';
 }
+// Os campos de dependentes são informados uma única vez e também alimentam
+// a condição de dependente usada no cálculo da ajuda de custo.
+function sincronizarDependentesMov(){
+ const total=['mov-dependentes-adultos','mov-dependentes-menores2','mov-dependentes-maiores2']
+  .reduce((s,id)=>s+Math.max(0,Math.trunc(Number($(id)?.value)||0)),0);
+ const dep=$('dep');if(dep)dep.checked=total>0;
+}
+['mov-dependentes-adultos','mov-dependentes-menores2','mov-dependentes-maiores2'].forEach(id=>{
+ $(id)?.addEventListener('input',sincronizarDependentesMov);
+ $(id)?.addEventListener('change',sincronizarDependentesMov);
+});
+sincronizarDependentesMov();
 const TARIFA_PASSAGEM_KM_PESSOA = 0.50;
 function distanciaTotalDestinoMov(nomeDestino){
  const normalizar=s=>String(s||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').replace(/\s+/g,' ');
@@ -303,7 +318,7 @@ function renderPassagensMov(){
 }
 function renderMovDestinos(ajuda){
  const itens=[...document.querySelectorAll('input[name="mov-item"]:checked')].map(el=>el.value),postoId=$('posto')?.value||'';
- const linhas=[...document.querySelectorAll('#mov-destinos-lista .mov-destino')].map(el=>({nome:el.querySelector('.mov-destino-nome')?.value?.trim()||'',km:Math.round(Number(String(el.querySelector('.mov-destino-km')?.value||'').replace(',','.'))),kmIda:Math.round(Number(String(el.querySelector('.mov-destino-km-ida')?.value||'').replace(',','.')))})).filter(x=>x.nome);
+ const linhas=[...document.querySelectorAll('#mov-destinos-lista .mov-destino')].map(el=>({nome:el.querySelector('.mov-destino-nome')?.value?.trim()||'',kmIda:Math.round(Number(String(el.querySelector('.mov-destino-km-ida')?.value||'').replace(',','.')))})).filter(x=>x.nome);
  if(!linhas.length)return '';const chave=s=>String(s||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
  const pass={itens:[],total:0};if(itens.includes('passagens')){for(const d of linhas){const km=distanciaTotalDestinoMov(d.nome);if(km)pass.itens.push({destino:d.nome,tipo:'Militar',quantidade:1,km,tarifa:TARIFA_PASSAGEM_KM_PESSOA,valor:Math.round(km*TARIFA_PASSAGEM_KM_PESSOA*100)/100});for(const [id,nome] of [['adultos','Adultos'],['menores2','Crianças menores de 2 anos'],['maiores2','Crianças maiores de 2 anos']]){const q=Math.max(0,Math.trunc(Number($('mov-dependentes-'+id)?.value)||0));if(q&&km)pass.itens.push({destino:d.nome,tipo:nome,quantidade:q,km,tarifa:TARIFA_PASSAGEM_KM_PESSOA,valor:Math.round(km*TARIFA_PASSAGEM_KM_PESSOA*q*100)/100});}}pass.total=pass.itens.reduce((a,x)=>a+x.valor,0);}
  let html='<section class="result-block mov-demonstrativo"><h3>Demonstrativo financeiro da movimentação</h3><div class="mov-financial-table-wrap"><table class="tbl mov-financial-table"><thead><tr><th>Destino</th><th>Ajuda de custo</th><th>Bagagem</th><th>Carro</th><th>Moto</th><th>Empregado</th><th>Passagens</th><th>Total estimado</th></tr></thead><tbody>';
@@ -322,8 +337,9 @@ contracheque(){
  if(lancamentoInvalido){atualizarResumoTopo(0,0,0);return show('<div class="warn">Preencha a descrição de cada receita ou desconto que tenha valor maior que zero.</div>',false);}
  atualizarSubtotaisExtras();
  const quantidadeSalarioFamilia=Math.max(0,Math.trunc(N('dep-salario-familia'))),creditoSalarioFamilia=Math.round(quantidadeSalarioFamilia*0.16*100)/100;
- const base=f.base+receitasExtras.filter(r=>r.baseContribuicao).reduce((s,r)=>s+r.valor,0),preEscolar=calcularAssistenciaPreEscolar(quantidadePre,base,vbPre,valorPreUnit),creditoPre=preEscolar.total,quotaPercent=C('fusex-nao')?0:parseFloat(String($('fusex-quota')?.value||'0').replace(',','.'))||0;
- const descObrigatorios=calcularDescontosObrigatorios(base,quotaPercent,{pensaoAuto:C('pensao-auto'),optou15:C('pensao-15'),fusexNao:C('fusex-nao')});
+ const fusexIsento=C('fusex-nao')||isentoFusexPorEnquadramento(f.p);
+ const base=f.base+receitasExtras.filter(r=>r.baseContribuicao).reduce((s,r)=>s+r.valor,0),preEscolar=calcularAssistenciaPreEscolar(quantidadePre,base,vbPre,valorPreUnit),creditoPre=preEscolar.total,quotaPercent=fusexIsento?0:parseFloat(String($('fusex-quota')?.value||'0').replace(',','.'))||0;
+ const descObrigatorios=calcularDescontosObrigatorios(base,quotaPercent,{pensaoAuto:C('pensao-auto'),optou15:C('pensao-15'),fusexNao:fusexIsento});
  const fusex=descObrigatorios.fusex,quota=descObrigatorios.quota,pensao=descObrigatorios.pensao;
  if($('pensao-auto-valor'))$('pensao-auto-valor').value=R(pensao);
  if($('fusex-auto-valor'))$('fusex-auto-valor').value=R(fusex);
@@ -333,12 +349,12 @@ contracheque(){
  const totalRemuneracao=f.total;
  const rendimentoMensalTributavel=(feriasAtivo?0:totalRemuneracao)+receitasTributaveis;
  const depIR=Math.max(0,Math.trunc(N('dep-ir')));
- const irMensal=calcularIRRF(rendimentoMensalTributavel,{dependentes:depIR,pensao,fusex:C('fusex-nao')?0:fusex,quota:C('fusex-nao')?0:quota,alimenticia:pensaoAlimenticia});
+ const irMensal=calcularIRRF(rendimentoMensalTributavel,{dependentes:depIR,pensao,fusex:fusexIsento?0:fusex,quota:fusexIsento?0:quota,alimenticia:pensaoAlimenticia});
  // Eventos de férias e 13º são apurados em separado da remuneração mensal, sem duplicar os créditos no demonstrativo.
  const remuneracaoFeriasEvento=feriasAtivo?f.total:0;
-  const irFerias=feriasAtivo?calcularIRRF(remuneracaoFeriasEvento+ferias,{dependentes:depIR,pensao,fusex:C('fusex-nao')?0:fusex,quota:C('fusex-nao')?0:quota,alimenticia:pensaoAlimenticia}):calcularIRRF(0);
+  const irFerias=feriasAtivo?calcularIRRF(remuneracaoFeriasEvento+ferias,{dependentes:depIR,pensao,fusex:fusexIsento?0:fusex,quota:fusexIsento?0:quota,alimenticia:pensaoAlimenticia}):calcularIRRF(0);
  const irNatalino=natalinoAtivo&&natalinoParcela===2?calcularIRRF(natalinoCalc.total,{modo:'simplificado'}):calcularIRRF(0,{modo:'simplificado'});
- const descontosAuto=[['Pensão militar (10,5%)',descObrigatorios.pensaoBase],['Contribuição adicional histórica (1,5%)',descObrigatorios.pensaoHistorica],['FuSEx padrão (3%)',fusex],['FuSEx — quota complementar ('+(quotaPercent*1).toLocaleString('pt-BR')+'%)',quota],['Imposto de Renda mensal',irMensal.imposto],['IR sobre férias',irFerias.imposto],['IR sobre adicional natalino / 13º',irNatalino.imposto]];
+ const descontosAuto=[['Pensão militar (10,5%)',descObrigatorios.pensaoBase],['Contribuição adicional histórica (1,5%)',descObrigatorios.pensaoHistorica],['FuSEx padrão (3%)'+(fusexIsento?' — isento por enquadramento EV':''),fusex],['FuSEx — quota complementar ('+(quotaPercent*1).toLocaleString('pt-BR')+'%)',quota],['Imposto de Renda mensal',irMensal.imposto],['IR sobre férias',irFerias.imposto],['IR sobre adicional natalino / 13º',irNatalino.imposto]];
  const outrosDescontos=[['Adiantamento da 1ª parcela do 13º',adiantamentoNatal],...descontosExtras.map(r=>[esc(r.nome),r.valor])];
  const totais=calcularTotaisSimulacao({remuneracao:totalRemuneracao,preEscolar:creditoPre,salarioFamilia:creditoSalarioFamilia,ferias,natalino,receitasExtras,descontosAutomaticos:descontosAuto.map(r=>r[1]),adiantamentoNatal,descontosExtras});
  const totalCreditos=totais.totalReceitas,totalDescontos=totais.totalDescontos,liquido=totais.liquido;
