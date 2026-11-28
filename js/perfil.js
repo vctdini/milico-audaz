@@ -224,7 +224,7 @@
           const field = document.getElementById(id);
           if (field) field.textContent = 'R$ 0,00';
         });
-        ['cc-live-receitas','cc-live-descontos','cc-live-liquido','cc-live-margem'].forEach(id => {
+        ['cc-live-receitas','cc-live-descontos','cc-live-liquido','cc-live-margem','cc-total-receitas-bloco','cc-total-descontos-bloco'].forEach(id => {
           const field = document.getElementById(id);
           if (field) field.textContent = 'R$ 0,00';
         });
