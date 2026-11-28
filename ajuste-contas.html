@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ajuste de contas | Milico Audaz</title>
+<meta name="description" content="Simule créditos e descontos estimados no ajuste de contas do militar.">
+<meta name="theme-color" content="#0b2a6b">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="stylesheet" href="style.css"><script src="tema.js"></script>
+</head>
+<body><a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+<header class="top"><div class="bar"><a class="logo" href="index.html"><i>★</i>Milico Audaz</a><nav class="dn" aria-label="Principal"><a href="index.html">Início</a><a href="ferramentas.html" class="on" aria-current="page">Ferramentas</a><a href="legislacao.html">Legislação</a><a href="sobre.html">Sobre</a></nav><button id="instalar" type="button" hidden>Instalar app</button></div></header>
+<main class="page aj-page" id="conteudo">
+  <div class="ph"><span class="t-ic c-vm" aria-hidden="true">▤</span><div><h1>Ajuste de contas militar</h1><p>Organize uma estimativa de créditos e descontos no desligamento ou na passagem para a reserva.</p></div></div>
+  <div class="warn"><strong>Simulação informativa:</strong> os valores dependem do motivo, da data, dos assentamentos e do reconhecimento da Administração. Confira os dados e os critérios aplicáveis ao seu caso.</div>
+  <form class="calc aj-form" id="ajusteForm" data-fn="ajuste" novalidate>
+    <section class="aj-card" aria-labelledby="aj-saida-title"><h2 id="aj-saida-title">Dados do desligamento</h2><div class="aj-grid">
+      <label>Motivo do desligamento<select id="ajMotivo"><option value="reserva">Passagem para a reserva remunerada</option><option value="termino">Licenciamento ex officio por término de prorrogação</option><option value="pedido">Licenciamento a pedido</option><option value="conveniencia">Licenciamento por conveniência do serviço</option><option value="demissao">Demissão</option><option value="desincorporacao">Desincorporação</option><option value="outro">Outro motivo</option></select></label>
+      <label>Data do desligamento<input id="ajData" type="date" required></label>
+      <label>Dias com direito à remuneração no mês<input id="ajDias" type="number" min="0" max="31" step="1" inputmode="numeric" placeholder="Informe os dias"><small>Informe conforme a data e os critérios confirmados pela sua unidade.</small></label>
+    </div><p class="aj-note" id="ajMotivoNota" aria-live="polite"></p></section>
+    <section class="aj-card" aria-labelledby="aj-base-title"><div class="aj-heading"><div><h2 id="aj-base-title">Contracheque e remuneração</h2><p>Base remuneratória importada do perfil salvo neste dispositivo.</p></div><a class="btn btn-sec aj-edit" href="contracheque.html?retorno=ajuste-contas.html">Editar contracheque</a></div>
+      <div class="aj-profile" id="ajPerfil"><strong id="ajPosto">Perfil não encontrado</strong><span id="ajBase">Preencha o contracheque para importar a remuneração.</span></div>
+      <small class="aj-note">A base é a soma das rubricas remuneratórias do perfil. Confirme se corresponde à remuneração aplicável ao seu desligamento.</small>
+      <details class="aj-details"><summary>Revisar valores recebidos ou descontos no mês</summary><div class="aj-grid aj-grid-3">
+        <label>Pagamentos do mês já recebidos (R$)<input id="ajPago" type="number" min="0" step="0.01" inputmode="decimal" value="0"><small>Não inclua aqui a ajuda de custo ou o adiantamento natalino informado nos campos próprios.</small></label>
+        <label>Descontos do mês a considerar (R$)<input id="ajDescontos" type="number" min="0" step="0.01" inputmode="decimal" value="0"><small>Informe o total que ainda será descontado neste ajuste.</small></label>
+        <label>Outros créditos reconhecidos (R$)<input id="ajCreditos" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label>
+        <label>Outros descontos ou reposições (R$)<input id="ajOutrosDescontos" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label>
+      </div></details>
+    </section>
+    <section class="aj-card" id="ajFeriasCard" aria-labelledby="aj-ferias-title"><h2 id="aj-ferias-title">Férias pendentes</h2><p class="aj-note">Informe apenas períodos reconhecidos e ainda não pagos, gozados ou descontados.</p><div class="aj-grid aj-grid-3">
+      <label>Meses de férias adquiridos a apurar<input id="ajFeriasMeses" type="number" min="0" max="1200" step="1" inputmode="numeric" value="0"></label>
+      <label>Meses com adicional de 1/3 ainda a receber<input id="ajTercoMeses" type="number" min="0" max="1200" step="1" inputmode="numeric" value="0"></label>
+      <label>Dias de férias já gozados ou descontados<input id="ajFeriasDias" type="number" min="0" max="36500" step="1" inputmode="numeric" value="0"></label>
+    </div><p class="aj-formula" id="ajFeriasResumo">Saldo de férias estimado: —</p></section>
+    <section class="aj-card" id="ajNatalinoCard" aria-labelledby="aj-natalino-title"><h2 id="aj-natalino-title">Adicional natalino proporcional</h2><p class="aj-note">A fração igual ou superior a 15 dias conta como mês integral. Informe os meses reconhecidos e eventual adiantamento recebido.</p><div class="aj-grid">
+      <label>Meses computáveis no ano<input id="ajNatalinoMeses" type="number" min="0" max="12" step="1" inputmode="numeric" value="0"></label>
+      <label>Adiantamento de adicional natalino recebido (R$)<input id="ajNatalinoAdiantado" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label>
+    </div><p class="aj-formula" id="ajNatalinoResumo">Saldo estimado: —</p></section>
+    <section class="aj-card" id="ajReservaCard" aria-labelledby="aj-reserva-title"><h2 id="aj-reserva-title">Ajuda de custo para a inatividade</h2><p class="aj-note">Para a transferência remunerada à inatividade, o Anexo V da Lei nº 13.954/2019 prevê base de referência vinculada ao círculo hierárquico. Confirme com a unidade qual base se aplica.</p><div class="aj-grid">
+      <label>Base legal de referência informada pela unidade (R$)<input id="ajBaseReserva" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label>
+      <label>Ajuda de custo já recebida (R$)<input id="ajAjudaPaga" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label>
+    </div><p class="aj-formula">Estimativa normativa bruta: 8 vezes a base informada. A elegibilidade e a base precisam ser confirmadas.</p></section>
+    <section class="aj-card" id="ajCompCard" aria-labelledby="aj-comp-title"><h2 id="aj-comp-title">Compensação pecuniária</h2><p class="aj-note">Aplicável somente quando o motivo e os requisitos legais forem atendidos. Use a calculadora específica para simular o valor e informe-o abaixo.</p><div class="aj-grid"><label>Valor estimado na calculadora de compensação (R$)<input id="ajCompensacao" type="number" min="0" step="0.01" inputmode="decimal" value="0"></label><p class="aj-link-wrap"><a class="btn btn-sec" href="compensacao-pecuniaria.html?retorno=ajuste-contas.html">Abrir calculadora de compensação</a></p></div></section>
+    <details class="aj-details"><summary>Critérios e legislação utilizada</summary><div class="aj-legal"><p>Os campos manuais representam dados informados pelo usuário e não confirmam direito ou deferimento. O valor final pode divergir do demonstrativo oficial.</p><ul><li><a href="https://www.planalto.gov.br/ccivil_03/decreto/2002/d4307.htm" target="_blank" rel="noopener">Decreto nº 4.307/2002, arts. 80 a 82</a>: férias e adicional natalino.</li><li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13954.htm" target="_blank" rel="noopener">Lei nº 13.954/2019, Anexo V</a>: ajuda de custo na transferência para a inatividade.</li><li><a href="https://www.planalto.gov.br/ccivil_03/leis/1989_1994/l7963.htm" target="_blank" rel="noopener">Lei nº 7.963/1989</a>: compensação pecuniária em hipótese legal específica.</li></ul></div></details>
+    <div class="aj-actions"><button class="btn btn-primary" type="submit">Calcular ajuste estimado</button><button class="btn btn-sec" type="button" id="ajLimpar">Limpar cálculo</button><button class="btn btn-pdf" type="button" id="ajPdf">Baixar / imprimir PDF</button></div>
+    <div class="aj-error" id="ajErro" role="alert" hidden></div>
+  </form>
+  <section class="aj-result aj-card" id="ajResultado" aria-labelledby="aj-result-title" aria-live="polite" hidden><h2 id="aj-result-title">Resultado da simulação</h2><p class="aj-result-lead" id="ajResultadoIntro"></p><div id="ajLinhas" class="aj-lines"></div><div class="aj-totals"><div><span>Total estimado de créditos</span><strong id="ajTotalCreditos">—</strong></div><div><span>Total estimado de descontos</span><strong id="ajTotalDescontos">—</strong></div><div class="aj-net"><span>Saldo estimado do ajuste</span><strong id="ajSaldo">—</strong></div></div><p class="aj-note">Estimativa informativa, sujeita à conferência da unidade responsável, dos assentamentos e da legislação vigente na data de referência.</p></section>
+  <div class="ad" aria-label="Espaço publicitário"><!-- Cole aqui o bloco do AdSense --></div>
+</main>
+<footer class="bot"><div class="wrap"><a href="sobre.html">Sobre</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a><a href="contato.html">Contato</a><p>© 2026 Milico Audaz. Projeto independente, sem vínculo oficial com o Exército Brasileiro ou qualquer órgão governamental.</p></div></footer>
+<nav class="tabs" aria-label="Navegação"><a href="index.html"><span>Início</span></a><a href="ferramentas.html" class="on" aria-current="page"><span>Ferramentas</span></a><a href="legislacao.html"><span>Legislação</span></a><a href="sobre.html"><span>Sobre</span></a></nav>
+<script src="js/perfil.js" defer></script><script src="js/ajuste-contas.js" defer></script><script src="pwa.js"></script>
+</body></html>

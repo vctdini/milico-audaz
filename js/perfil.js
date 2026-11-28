@@ -157,7 +157,8 @@
       'gratificacao-representacao.html': 'gratificação de representação',
       'movimentacao.html': 'movimentação',
       'pensao-alimenticia.html': 'pensão alimentícia',
-      'compensacao-pecuniaria.html': 'compensação pecuniária'
+      'compensacao-pecuniaria.html': 'compensação pecuniária',
+      'ajuste-contas.html': 'ajuste de contas'
     };
     const currentPage = window.location.pathname.split('/').pop();
     const currentReturn = Object.prototype.hasOwnProperty.call(returnPages, currentPage) ? currentPage : '';
@@ -404,7 +405,7 @@
       }
     }
     const noticeText = document.querySelector('[data-profile-notice] small');
-    const applicable = ['transporte','diarias','gr','ajuda','pensao'].includes(fn);
+    const applicable = ['transporte','diarias','gr','ajuda','pensao','ajuste'].includes(fn);
     if (noticeText && applicable && posto && ['reserva','reformado'].includes(String(existing.situacao || ''))) noticeText.textContent = `Posto/graduação importado: ${posto.nome}. Como o perfil está na ${existing.situacao === 'reserva' ? 'reserva' : 'reforma'}, adicionais da ativa não foram importados para evitar cálculo indevido.`;
     else if (noticeText && applicable && posto) noticeText.textContent = `Dados do contracheque importados: ${posto.nome}. Você pode alterar qualquer campo nesta calculadora.`;
     else if (noticeText && !applicable) noticeText.textContent = 'Esta ferramenta não utiliza dados remuneratórios do contracheque; preencha seus próprios campos.';
