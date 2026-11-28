@@ -1221,3 +1221,7 @@ html[data-theme="dark"] .cp-form-errors{background:#3d2226;color:#ffdede;border-
 @media(max-width:760px){.cp-form .cp-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cp-form .cp-row label:first-child{grid-column:1/-1}.cp-form .cp-row label.chk{grid-column:1/-1}.cp-form .cp-row .remove-row{grid-column:2;justify-self:end}.cp-form .cp-actions .btn{width:100%}}
 @media(max-width:760px){.cp-form .cp-indemnity-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cp-form .cp-indemnity-row label:first-child{grid-column:1/-1}.cp-form .cp-indemnity-row .remove-row{grid-column:2;justify-self:end}}
 @media(max-width:760px){.cp-profile-actions .btn{width:100%;min-width:0}}
+
+.mov-calc .mov-advanced{margin:.4rem 0 .9rem}
+.mov-calc .mov-advanced>summary{font-weight:700;cursor:pointer;padding:.35rem 0}
+.mov-calc .mov-rule-note{display:block;color:var(--mut);font-size:.78rem;margin-top:.2rem;white-space:normal}
