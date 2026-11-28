@@ -1380,3 +1380,46 @@ html[data-theme="dark"] .cp-form-errors{background:#3d2226;color:#ffdede;border-
 /* O botão de inclusão de descontos usa a cor de destaque; receita permanece azul. */
 body.pagina-contracheque button.cc-add-rubrica[data-open-catalog="descontos"]{background:var(--vm);border-color:var(--vm);color:#fff}
 body.pagina-contracheque button.cc-add-rubrica[data-open-catalog="descontos"]:hover{background:var(--vm2);border-color:var(--vm2)}
+
+/* Calculadora de tempo de serviço */
+.ts-page{max-width:1040px}
+.ts-card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:1.1rem;margin:1rem 0;min-width:0;box-shadow:var(--sh)}
+.ts-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;margin:0 0 .85rem}
+.ts-section-heading h2{font-size:1.15rem;margin:0}
+.ts-section-heading p,.ts-help{color:var(--mut);margin:.25rem 0 0;line-height:1.5}
+.ts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.ts-field{display:grid;gap:.35rem;min-width:0}
+.ts-field small,.ts-period-info small{color:var(--mut);line-height:1.45;font-weight:400}
+.ts-field input,.ts-field select{width:100%;min-width:0}
+.ts-period-list{display:grid;gap:.6rem;min-width:0}
+.ts-period-empty{padding:.85rem 1rem;margin:0;border:1px dashed var(--bd);border-radius:12px;color:var(--mut);background:var(--card)}
+.ts-period-card{display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-width:0;padding:.8rem 1rem;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.ts-period-info{display:grid;gap:.15rem;min-width:0}.ts-period-info strong{color:var(--az)}.ts-period-info span,.ts-period-info small{color:var(--mut);overflow-wrap:anywhere}
+.ts-period-tags{display:flex;flex-wrap:wrap;gap:.35rem}.ts-period-tags span{padding:.08rem .5rem;border-radius:99px;background:#e5edff;color:var(--az);font-size:.78rem;font-weight:700}
+.ts-actions,.ts-buttons{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:.6rem;margin-top:.85rem}
+.ts-actions .btn,.ts-buttons .btn{width:auto}
+.ts-advanced{background:var(--card);border:1px solid var(--bd);border-radius:16px;margin:1rem 0;padding:.25rem 1rem;box-shadow:var(--sh)}
+.ts-advanced>summary{display:flex;align-items:center;justify-content:space-between;gap:.7rem;padding:.8rem 0;color:var(--az)}
+.ts-advanced>summary span{font-size:.82rem;color:var(--mut);font-weight:500}
+.ts-advanced-body{display:grid;gap:.8rem;padding:0 0 1rem}.ts-historical-credit{margin-top:.15rem}
+.ts-result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.ts-metric{padding:.85rem;border:1px solid var(--bd);border-radius:12px;min-width:0;background:var(--card)}
+.ts-metric span{display:block;color:var(--mut);font-size:.9rem;line-height:1.4}
+.ts-metric strong{display:block;margin-top:.35rem;font-size:clamp(.95rem,2vw,1.1rem);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ts-metric.total{background:#eef3fb;border-color:#cbd8f3}.ts-error{color:var(--vm);padding:.65rem 0;line-height:1.45}
+.ts-dialog{width:min(850px,calc(100vw - 2rem));max-width:none;max-height:calc(100dvh - 2rem);padding:1.25rem;border:1px solid var(--bd);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:auto}
+.ts-dialog::backdrop{background:rgba(15,27,61,.42);backdrop-filter:blur(2px)}
+.ts-dialog form{display:grid;gap:.85rem}.ts-dialog-header{display:flex;align-items:center;justify-content:space-between;gap:.8rem}.ts-dialog-header h2{font-size:1.2rem}
+.ts-dialog-header .ts-icon-button{width:44px;min-width:44px;padding:.4rem;background:var(--bg);color:var(--az);border-color:var(--bd);font-size:1.35rem}
+.ts-dialog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.ts-check{display:flex;align-items:flex-start;gap:.55rem;min-width:0;color:var(--ink);font-weight:600;line-height:1.4}
+.ts-check input{margin-top:.2rem}.ts-dialog-category span{display:grid;gap:.15rem;min-width:0}
+.ts-dialog-category strong{color:var(--az);font-size:.92rem}.ts-dialog-actions{display:flex;justify-content:flex-end;gap:.6rem;flex-wrap:wrap}
+.ts-dialog-actions .btn{width:auto}
+.ts-remove-period{min-height:38px;padding:.4rem .75rem;font-size:.88rem;flex:none}
+@media(max-width:700px){.ts-result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.ts-card{padding:.9rem}.ts-grid,.ts-dialog-grid,.ts-result-grid{grid-template-columns:1fr}.ts-period-card{align-items:flex-start;flex-direction:column}.ts-period-card .btn{width:100%}.ts-actions,.ts-buttons,.ts-dialog-actions{display:grid;grid-template-columns:1fr}.ts-actions .btn,.ts-buttons .btn,.ts-dialog-actions .btn{width:100%}.ts-dialog{padding:1rem}.ts-advanced{padding-left:.8rem;padding-right:.8rem}}
+@media print{.ts-inputs,.ts-advanced,.ts-actions,.ts-buttons,.ts-dialog{display:none!important}.ts-card{break-inside:avoid;border:1px solid #888;box-shadow:none}.ts-period-empty{display:none}.page{max-width:none;padding:0}}
+html[data-theme="dark"] .ts-card,html[data-theme="dark"] .ts-period-card,html[data-theme="dark"] .ts-period-empty,html[data-theme="dark"] .ts-advanced,html[data-theme="dark"] .ts-metric{background:var(--card);color:var(--ink);border-color:var(--bd)}
+html[data-theme="dark"] .ts-metric.total{background:#24344e;border-color:#435674}
+html[data-theme="dark"] .ts-period-tags span{background:#263b5c;color:#c8d8ff}
