@@ -1,140 +1,168 @@
-/* Etapa 57 — consulta assistida de distância rodoviária entre guarnições.
-   Usa Nominatim (geocodificação) e OSRM público (rota de carro). A distância é estimativa,
-   requer conferência do usuário e pode ser substituída manualmente. */
+/* Estimativa automática de rota rodoviária por Nominatim/OSRM.
+   Os quilômetros são exibidos como resumo, sem edição manual na interface. */
 (() => {
   'use strict';
-  const $ = (s, r=document) => r.querySelector(s);
-  const cacheGeo = new Map();
-  const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLocaleLowerCase('pt-BR');
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const geoCache = new Map();
+  const geoPending = new Map();
+  const timers = new WeakMap();
+  const requests = new WeakMap();
+  let geoQueue = Promise.resolve();
+  let lastGeoRequest = 0;
+  let nextRouteId = 1;
+  const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLocaleLowerCase('pt-BR');
   const parsePlace = raw => {
     const value = String(raw || '').trim();
-    const m = value.match(/^(.+?)\s*[-,/]\s*([A-Z]{2})$/i);
-    if (m) return `${m[1].trim()}, ${m[2].toUpperCase()}, Brasil`;
+    const match = value.match(/^(.+?)\s*[-,/ ]\s*([A-Z]{2})$/i);
+    if (match) return `${match[1].trim()}, ${match[2].toUpperCase()}, Brasil`;
     return /brasil/i.test(value) ? value : `${value}, Brasil`;
   };
+  const summaryList = () => $('.mov-distance-summary-list');
+  function ensureSummaryItem(row) {
+    const list = summaryList();
+    if (!row || !list) return null;
+    const allRows = [...document.querySelectorAll('#mov-destinos-lista .mov-destino')];
+    if (!row.dataset.distanceId || allRows.some(other => other !== row && other.dataset.distanceId === row.dataset.distanceId)) {
+      row.dataset.distanceId = `mov-route-${nextRouteId++}`;
+    }
+    let item = [...list.children].find(child => child.dataset.routeId === row.dataset.distanceId);
+    if (!item) {
+      item = document.createElement('div');
+      item.className = 'mov-distance-summary-item';
+      item.dataset.routeId = row.dataset.distanceId;
+      const destination = document.createElement('span');
+      destination.className = 'mov-distance-summary-destination';
+      const value = document.createElement('strong');
+      value.className = 'mov-distance-status';
+      item.append(destination, value);
+      list.appendChild(item);
+    }
+    const input = $('.mov-destino-nome', row);
+    const label = input?.value.trim() || `Destino ${allRows.indexOf(row) + 1}`;
+    $('.mov-distance-summary-destination', item).textContent = label;
+    const empty = $('.mov-distance-summary-empty', list);
+    if (empty) empty.remove();
+    return item;
+  }
+  function setStatus(row, message, state = '') {
+    const item = ensureSummaryItem(row);
+    const element = $('.mov-distance-status', item);
+    if (!element) return;
+    element.textContent = message;
+    element.className = `mov-distance-status ${state}`.trim();
+  }
   async function geocode(place) {
     const query = parsePlace(place);
     const key = norm(query);
-    if (cacheGeo.has(key)) return cacheGeo.get(key);
-    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q=${encodeURIComponent(query)}`;
-    const response = await fetch(url, {headers:{'Accept':'application/json'}});
-    if (!response.ok) throw new Error('Não foi possível localizar a cidade agora.');
-    const data = await response.json();
-    if (!data.length) throw new Error(`Localidade não encontrada: ${place}. Confira cidade e UF.`);
-    const point = {lat:Number(data[0].lat), lon:Number(data[0].lon), label:data[0].display_name};
-    cacheGeo.set(key, point);
-    return point;
+    if (geoCache.has(key)) return geoCache.get(key);
+    if (geoPending.has(key)) return geoPending.get(key);
+    const pending = geoQueue.then(async () => {
+      const wait = Math.max(0, 1100 - (Date.now() - lastGeoRequest));
+      if (wait) await new Promise(resolve => setTimeout(resolve, wait));
+      lastGeoRequest = Date.now();
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q=${encodeURIComponent(query)}`, { headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error('Não foi possível localizar a cidade agora.');
+      const data = await response.json();
+      if (!data.length) throw new Error(`Localidade não encontrada: ${place}. Confira cidade e UF.`);
+      const point = { lat: Number(data[0].lat), lon: Number(data[0].lon) };
+      geoCache.set(key, point);
+      return point;
+    });
+    geoPending.set(key, pending);
+    geoQueue = pending.catch(() => {});
+    try { return await pending; }
+    finally { geoPending.delete(key); }
   }
   async function routeKm(origin, destination) {
     const a = await geocode(origin);
-    if (!cacheGeo.has(norm(parsePlace(destination)))) await new Promise(resolve => setTimeout(resolve, 1100));
     const b = await geocode(destination);
-    const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false&alternatives=false&steps=false`;
-    const response = await fetch(url, {headers:{'Accept':'application/json'}});
+    const response = await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false&alternatives=false&steps=false`, { headers: { Accept: 'application/json' } });
     if (!response.ok) throw new Error('Serviço de rotas indisponível no momento.');
     const data = await response.json();
     if (data.code !== 'Ok' || !data.routes?.length) throw new Error('Não foi encontrada uma rota rodoviária entre as localidades.');
     return Math.round(data.routes[0].distance / 1000);
   }
-  function setStatus(row, message, state='') {
-    const el = $('.mov-distance-status', row);
-    if (el) { el.textContent = message; el.className = `mov-distance-status ${state}`.trim(); }
-  }
   function enhanceRow(row) {
-    if (!row || $('.mov-distance-actions', row)) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'mov-distance-actions';
-    wrap.innerHTML = '<button type="button" class="btn btn-sec mov-distance-btn">Calcular distância automaticamente</button><small class="mov-distance-status" aria-live="polite">Informe origem e destino para consultar a rota.</small>';
-    const remove = $('.mov-remover', row);
-    if (remove) row.insertBefore(wrap, remove);
-    else row.appendChild(wrap);
+    if (!row) return;
+    ensureSummaryItem(row);
   }
-  function enhanceAll() {
-    document.querySelectorAll('#mov-destinos-lista .mov-destino').forEach(enhanceRow);
-  }
-  async function calculate(button) {
-    const row = button.closest('.mov-destino');
+  function schedule(row, delay = 500) {
+    if (!row) return;
+    clearTimeout(timers.get(row));
+    requests.set(row, (requests.get(row) || 0) + 1);
+    const distance = $('.mov-destino-km-ida', row);
     const origin = $('#mov-origem')?.value.trim();
     const destination = $('.mov-destino-nome', row)?.value.trim();
-    const ida = $('.mov-destino-km-ida', row);
+    if (distance?.dataset.source === 'auto') distance.value = '';
+    delete distance?.dataset.source;
     if (!origin || !destination) {
-      setStatus(row, 'Preencha a guarnição de origem e o destino.', 'is-error');
+      setStatus(row, 'Informe a origem e o destino para estimar a distância.');
       return;
     }
-    button.disabled = true;
-    button.textContent = 'Consultando rota…';
-    setStatus(row, 'Localizando as cidades e calculando a rota rodoviária…');
+    setStatus(row, 'Preparando a estimativa automática…', 'is-loading');
+    timers.set(row, setTimeout(() => calculate(row, origin, destination), delay));
+  }
+  async function calculate(row, origin, destination) {
+    const token = requests.get(row) || 0;
+    const distance = $('.mov-destino-km-ida', row);
+    setStatus(row, 'Consultando as guarnições e a rota rodoviária…', 'is-loading');
     try {
-      const kmIda = await routeKm(origin, destination);
-      if (!(kmIda > 0)) throw new Error('A rota retornou uma distância inválida.');
-      if (ida) ida.value = String(Math.round(kmIda));
-      [ida].forEach(input => input?.dispatchEvent(new Event('input',{bubbles:true})));
-      [ida].forEach(input => input?.dispatchEvent(new Event('change',{bubbles:true})));
-      document.querySelector('#mov-passagens-lista')?.dispatchEvent(new Event('input',{bubbles:true}));
-      setStatus(row, `Estimativa de ida: ${kmIda.toLocaleString('pt-BR')} km. Confira antes de usar.`, 'is-success');
+      const km = await routeKm(origin, destination);
+      if (requests.get(row) !== token) return;
+      if (!(km > 0)) throw new Error('A rota retornou uma distância inválida.');
+      distance.value = String(km);
+      distance.dataset.source = 'auto';
+      distance.dispatchEvent(new Event('change', { bubbles: true }));
+      $('#mov-passagens-lista')?.dispatchEvent(new Event('input', { bubbles: true }));
+      setStatus(row, `${km.toLocaleString('pt-BR')} km de ida`, 'is-success');
     } catch (error) {
-      setStatus(row, error.message || 'Falha ao consultar a rota. Informe a distância manualmente.', 'is-error');
-    } finally {
-      button.disabled = false;
-      button.textContent = 'Calcular distância automaticamente';
+      if (requests.get(row) === token) setStatus(row, `${error.message || 'Falha na consulta.'} Confira e selecione novamente as guarnições para tentar outra vez.`, 'is-error');
     }
   }
-  document.addEventListener('click', event => {
-    const button = event.target.closest('.mov-distance-btn');
-    if (button) calculate(button);
-  });
-  document.addEventListener('input', event => {
-    if (event.target.id === 'mov-origem' || event.target.classList.contains('mov-destino-nome')) {
-      const row = event.target.closest('.mov-destino');
-      if (row && $('.mov-distance-status', row)?.classList.contains('is-error')) setStatus(row, 'Altere os dados e consulte novamente.');
+  function handlePlaceEvent(event) {
+    const target = event.target;
+    const delay = event.type === 'input' ? 500 : 0;
+    if (target.id === 'mov-origem') {
+      document.querySelectorAll('#mov-destinos-lista .mov-destino').forEach(row => schedule(row, delay));
+    } else if (target.matches?.('.mov-destino-nome')) {
+      const row = target.closest('.mov-destino');
+      ensureSummaryItem(row);
+      schedule(row, delay);
     }
-  });
-
-  // Distâncias aceitam casas decimais durante a digitação/colagem; ao sair do campo,
-  // arredondamos para o quilômetro inteiro mais próximo para uso consistente nos cálculos.
-  document.addEventListener('blur', event => {
-    const input = event.target;
-    if (!input.matches?.('.mov-destino-km-ida')) return;
-    const raw = String(input.value || '').trim().replace(',', '.');
-    if (!raw) return;
-    const value = Number(raw);
-    if (!Number.isFinite(value) || value < 0) return;
-    input.value = String(Math.round(value));
-    input.dispatchEvent(new Event('input', {bubbles:true}));
-    input.dispatchEvent(new Event('change', {bubbles:true}));
-    const row = input.closest('.mov-destino');
-    if (row) setStatus(row, `Distância ajustada automaticamente para ${Number(input.value).toLocaleString('pt-BR')} km (quilômetro inteiro mais próximo).`, 'is-success');
-  }, true);
-  enhanceAll();
+  }
+  document.addEventListener('input', handlePlaceEvent, true);
+  document.addEventListener('change', handlePlaceEvent, true);
+  document.addEventListener('focusout', handlePlaceEvent, true);
   const list = $('#mov-destinos-lista');
   if (list && 'MutationObserver' in window) new MutationObserver(records => {
-  
-  // Distâncias aceitam casas decimais durante a digitação/colagem; ao sair do campo,
-  // arredondamos para o quilômetro inteiro mais próximo para uso consistente nos cálculos.
-  document.addEventListener('blur', event => {
-    const input = event.target;
-    if (!input.matches?.('.mov-destino-km-ida')) return;
-    const raw = String(input.value || '').trim().replace(',', '.');
-    if (!raw) return;
-    const value = Number(raw);
-    if (!Number.isFinite(value) || value < 0) return;
-    input.value = String(Math.round(value));
-    input.dispatchEvent(new Event('input', {bubbles:true}));
-    input.dispatchEvent(new Event('change', {bubbles:true}));
-    const row = input.closest('.mov-destino');
-    if (row) setStatus(row, `Distância ajustada automaticamente para ${Number(input.value).toLocaleString('pt-BR')} km (quilômetro inteiro mais próximo).`, 'is-success');
-  }, true);
-  enhanceAll();
     records.flatMap(record => [...record.addedNodes]).filter(node => node.nodeType === 1).forEach(node => {
-      const rows = node.matches?.('.mov-destino') ? [node] : [...(node.querySelectorAll?.('.mov-destino') || [])];
-      rows.forEach(row => {
-        const button = $('.mov-distance-btn', row);
-        if (button) { button.disabled = false; button.textContent = 'Calcular distância automaticamente'; }
-        setStatus(row, 'Informe origem e destino para consultar a rota.');
-      });
+      const row = node.matches?.('.mov-destino') ? node : $('.mov-destino', node);
+      if (!row) return;
+      delete row.dataset.distanceId;
+      const distance = $('.mov-destino-km-ida', row);
+      if (distance) { distance.value = ''; delete distance.dataset.source; }
+      enhanceRow(row);
+      setStatus(row, 'Informe a origem e o destino para estimar a distância.');
     });
-  }).observe(list,{childList:true});
+    const activeIds = new Set([...list.querySelectorAll('.mov-destino')].map(row => row.dataset.distanceId));
+    summaryList()?.querySelectorAll('[data-route-id]').forEach(item => {
+      if (!activeIds.has(item.dataset.routeId)) item.remove();
+    });
+    const summary = summaryList();
+    if (summary && !summary.querySelector('[data-route-id]')) {
+      summary.innerHTML = '<p class="mov-distance-summary-empty">Informe a origem e o destino para consultar uma estimativa.</p>';
+    }
+  }).observe(list, { childList: true });
+  document.querySelectorAll('#mov-destinos-lista .mov-destino').forEach(row => {
+    enhanceRow(row);
+    if ($('#mov-origem')?.value.trim() && $('.mov-destino-nome', row)?.value.trim()) schedule(row);
+    else setStatus(row, 'Informe a origem e o destino para estimar a distância.');
+  });
   $('#mov-limpar')?.addEventListener('click', () => setTimeout(() => {
-    document.querySelectorAll('#mov-destinos-lista .mov-destino').forEach(row => setStatus(row,'Informe origem e destino para consultar a rota.'));
-  },0));
+    document.querySelectorAll('#mov-destinos-lista .mov-destino').forEach(row => {
+      const distance = $('.mov-destino-km-ida', row);
+      if (distance) delete distance.dataset.source;
+      setStatus(row, 'Informe a origem e o destino para estimar a distância.');
+    });
+  }, 0));
 })();

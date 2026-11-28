@@ -17,8 +17,8 @@ form button[type="submit"],.btn-primary{background:var(--vm);border-color:var(--
 form button[type="submit"]:hover,.btn-primary:hover{background:var(--vm2);border-color:var(--vm2)}
 .btn-sec,.btn-secundario{background:var(--az2);border-color:var(--az2);color:#fff}
 .btn-sec:hover,.btn-secundario:hover{background:var(--az);border-color:var(--az)}
-.btn-pdf{background:#6b7280;border-color:#6b7280;color:#fff}
-.btn-pdf:hover{background:#4b5563;border-color:#4b5563}
+.btn-pdf{background:var(--az);border-color:var(--az);color:#fff}
+.btn-pdf:hover{background:var(--az2);border-color:var(--az2)}
 :focus-visible{outline:3px solid var(--az2);outline-offset:2px}
 .hero{background:radial-gradient(1200px 400px at 85% -10%,#2a5fd0 0,transparent 60%),var(--az);color:#fff;padding:2rem 0 4.2rem}
 .hero h1{color:#fff;font-size:clamp(1.7rem,5vw,2.6rem);max-width:640px}.hero h1 span{color:#ff6b7f}
@@ -1270,6 +1270,112 @@ html[data-theme="dark"] .cp-form-errors{background:#3d2226;color:#ffdede;border-
 .mov-calc .mov-advanced{margin:.4rem 0 .9rem}
 .mov-calc .mov-advanced>summary{font-weight:700;cursor:pointer;padding:.35rem 0}
 .mov-calc .mov-rule-note{display:block;color:var(--mut);font-size:.78rem;margin-top:.2rem;white-space:normal}
+
+/* Refinamento da movimentação: cartão compacto, rota agrupada e resultado principal */
+.mov-calc .mov-profile-card{
+  display:grid;align-content:start;align-self:start;justify-self:stretch;
+  height:auto;min-height:0;gap:.7rem;overflow:visible;
+}
+.mov-calc .mov-profile-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin:0}
+.mov-calc .mov-profile-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin:0}
+.mov-calc .mov-profile-grid>div:last-child{grid-column:auto}
+.mov-calc .mov-profile-grid>div{padding:.55rem .7rem}
+.mov-calc .mov-profile-actions{margin:0}
+.mov-calc .mov-profile-feedback{margin:0;line-height:1.45}
+.mov-calc .mov-profile-card.is-missing{border-color:#bed0f1;background:var(--surface,#fff)}
+.mov-calc .mov-profile-card.is-missing .mov-edit-profile{background:var(--az,#17459f);border-color:var(--az,#17459f);color:#fff;font-weight:700}
+.mov-calc #comparacao-destinos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:.7rem 1rem}
+.mov-calc #comparacao-destinos>h2,.mov-calc #comparacao-destinos>p.note,
+.mov-calc #comparacao-destinos>.mov-add-destination,.mov-calc #comparacao-destinos>button[type="submit"]{grid-column:1/-1}
+.mov-calc #comparacao-destinos>.grid{grid-column:1;grid-template-columns:minmax(0,1fr);align-self:stretch}
+.mov-calc #mov-destinos-lista{grid-column:2;min-width:0;margin:0;padding:.6rem;background:var(--soft,#f7f9fc)}
+.mov-calc #mov-destinos-lista .mov-destino{grid-template-columns:minmax(0,1fr);gap:.55rem;margin:0;padding:.2rem;border:0;background:transparent;box-shadow:none}
+.mov-calc .mov-destino>label:first-child{grid-column:auto}
+.mov-calc .mov-destino .mov-distance-actions{grid-column:auto}
+.mov-calc .mov-destino .mov-distance-actions .btn{display:none}
+.mov-calc .mov-destino .mov-remover{grid-column:auto;justify-self:start;width:auto;min-height:32px;padding:.35rem .65rem}
+.mov-calc .mov-distance-status{margin-top:.3rem;font-size:.75rem;line-height:1.4}
+.mov-calc .mov-add-destination{justify-self:start;width:auto;min-height:34px;padding:.4rem .7rem;font-size:.82rem}
+.mov-calc #comparacao-destinos>button[type="submit"]{justify-self:center}
+.mov-calc .mov-item-option{min-height:34px;padding:.45rem .58rem;gap:.45rem}
+.mov-calc .mov-item-option strong{font-size:.8rem;line-height:1.3}
+#res .mov-demonstrativo{order:-1;border-width:2px}
+#res .mov-demonstrativo h3{font-size:1.18rem}
+#res .mov-demonstrativo .mov-financial-table td:nth-child(2),
+#res .mov-demonstrativo .mov-financial-table th:nth-child(2),
+#res .mov-demonstrativo .mov-financial-table td:nth-child(7),
+#res .mov-demonstrativo .mov-financial-table th:nth-child(7){font-weight:500;color:var(--mut)}
+#res .mov-demonstrativo .mov-financial-table td:last-child{font-weight:900}
+#res .mov-calculation-details{margin:.75rem 0;padding:.8rem 1rem;border:1px solid var(--bd);border-radius:11px;background:var(--surface,#fff)}
+#res .mov-calculation-details>summary{cursor:pointer;font-weight:700;color:var(--az,#17459f)}
+#res .mov-calculation-details[open]>summary{margin-bottom:.8rem}
+#res .mov-passagens-resumo .big{font-size:1rem;font-weight:650;color:var(--mut);margin:.45rem 0}
+@media(max-width:760px){
+  .mov-calc .mov-profile-card{gap:.55rem}
+  .mov-calc .mov-profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mov-calc .mov-profile-grid>div:last-child{grid-column:1/-1}
+}
+@media(max-width:620px){
+  .mov-calc #comparacao-destinos{grid-template-columns:minmax(0,1fr);gap:.65rem}
+  .mov-calc #comparacao-destinos>h2,.mov-calc #comparacao-destinos>p.note,
+  .mov-calc #comparacao-destinos>.mov-add-destination,.mov-calc #comparacao-destinos>button[type="submit"],
+  .mov-calc #comparacao-destinos>.grid,.mov-calc #mov-destinos-lista{grid-column:1}
+  .mov-calc #mov-destinos-lista{padding:.65rem}
+  .mov-calc .mov-profile-heading{flex-direction:row;align-items:flex-start}
+  .mov-calc .mov-profile-state{white-space:normal;text-align:center}
+  .mov-calc .mov-add-destination{justify-self:start;width:auto}
+}
+@media(max-width:390px){
+  .mov-calc .mov-profile-grid{grid-template-columns:minmax(0,1fr)}
+  .mov-calc .mov-profile-grid>div:last-child{grid-column:auto}
+  .mov-calc .mov-profile-heading{flex-direction:column}
+  .mov-calc .mov-profile-actions{display:flex;justify-content:stretch}
+  .mov-calc .mov-profile-actions .btn{width:100%}
+}
+
+/* Origem e destino permanecem lado a lado; a rota fica em uma legenda própria. */
+.mov-calc #comparacao-destinos{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mov-calc #comparacao-destinos>.grid{grid-column:1;min-width:0}
+.mov-calc #mov-destinos-lista{grid-column:2;min-width:0}
+.mov-calc #mov-distance-summary{grid-column:1/-1;min-width:0;margin:0;padding:.7rem .85rem;border:1px solid var(--bd);border-radius:10px;background:var(--soft,#f6f8fc)}
+.mov-calc #mov-distance-summary h3{margin:0 0 .4rem;font-size:.82rem;font-weight:700;color:var(--mut)}
+.mov-calc .mov-distance-summary-list{display:grid;gap:.35rem}
+.mov-calc .mov-distance-summary-empty{margin:0;color:var(--mut);font-size:.82rem;line-height:1.4}
+.mov-calc .mov-distance-summary-item{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;min-width:0;padding:.4rem 0;border-top:1px solid var(--bd)}
+.mov-calc .mov-distance-summary-destination{min-width:0;font-size:.84rem;font-weight:650;overflow-wrap:anywhere}
+.mov-calc .mov-distance-status{min-width:0;margin:0;text-align:right;font-size:.82rem;line-height:1.4;overflow-wrap:anywhere}
+.mov-calc .mov-distance-status.is-success{color:#23623a}
+.mov-calc .mov-distance-status.is-error{color:#a32626}
+.mov-calc .mov-distance-status.is-loading{color:var(--mut)}
+@media(max-width:620px){
+  .mov-calc #comparacao-destinos{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem .45rem}
+  .mov-calc #comparacao-destinos>.grid{grid-column:1;grid-template-columns:minmax(0,1fr)}
+  .mov-calc #mov-destinos-lista{grid-column:2;padding:.45rem}
+  .mov-calc #comparacao-destinos>.grid label,.mov-calc #mov-destinos-lista label{font-size:.76rem;line-height:1.3}
+  .mov-calc #comparacao-destinos input[list]{min-height:40px;padding:.5rem;font-size:.78rem}
+  .mov-calc .mov-distance-summary-item{gap:.45rem}
+  .mov-calc .mov-distance-summary-destination,.mov-calc .mov-distance-status{font-size:.76rem}
+}
+@media(max-width:360px){
+  .mov-calc #comparacao-destinos{gap:.5rem .35rem}
+  .mov-calc #mov-destinos-lista{padding:.35rem}
+  .mov-calc #comparacao-destinos input[list]{padding:.4rem;font-size:.73rem}
+}
+/* Os cartões de origem e destino compartilham altura, alinhamento superior e bordas. */
+.mov-calc #comparacao-destinos>.grid,
+.mov-calc #mov-destinos-lista{
+  align-self:stretch;min-width:0;min-height:0;
+  padding:.75rem;border:1px solid var(--bd);border-radius:12px;
+  background:var(--surface,#fff);box-sizing:border-box;
+}
+.mov-calc #comparacao-destinos>.grid{align-items:start}
+.mov-calc #mov-destinos-lista{display:flex;flex-direction:column;justify-content:flex-start}
+@media(max-width:620px){
+  .mov-calc #comparacao-destinos>.grid,.mov-calc #mov-destinos-lista{padding:.55rem}
+}
+@media(max-width:360px){
+  .mov-calc #comparacao-destinos>.grid,.mov-calc #mov-destinos-lista{padding:.4rem}
+}
 
 /* O botão de inclusão de descontos usa a cor de destaque; receita permanece azul. */
 body.pagina-contracheque button.cc-add-rubrica[data-open-catalog="descontos"]{background:var(--vm);border-color:var(--vm);color:#fff}

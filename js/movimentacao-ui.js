@@ -10,6 +10,7 @@
   document.querySelector('[data-profile-notice]')?.remove();
   const items = $('mov-itens');
   const destinations = $('comparacao-destinos');
+  $('mov-adicionar-destino')?.classList.add('mov-add-destination');
   const passages = $('mov-passagens-grupo');
   const hint = form.querySelector('.mov-form-hint');
   const shortcuts = form.querySelector('.mov-atalhos');
@@ -87,7 +88,9 @@
     const dependentes = $('mov-profile-dependentes');
     const feedback = $('mov-profile-feedback');
     const button = $('mov-utilizar-contracheque');
+    const panel = $('mov-profile-card');
     if (result) {
+      panel?.classList.remove('is-missing');
       posto.textContent = result.posto;
       base.textContent = money(result.base);
       dependentes.textContent = String(Math.max(0, Number(data['dep-total']) || 0));
@@ -97,6 +100,7 @@
       form.querySelector('.mov-edit-profile').textContent = 'Editar contracheque';
       feedback.textContent = 'Os dados do contracheque foram carregados neste navegador. Se precisar alterar algo, edite e retorne para confirmar.';
     } else {
+      panel?.classList.add('is-missing');
       posto.textContent = 'Não informado';
       base.textContent = 'Preencha o contracheque';
       dependentes.textContent = '—';
